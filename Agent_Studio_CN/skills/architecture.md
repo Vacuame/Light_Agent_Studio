@@ -29,7 +29,7 @@
 3. 提出 2-3 个架构方案或调整方案。
 4. 用户选择。
 5. 起草架构更新。
-6. 通过架构门检查。
+6. 读取 `rules/gates/architecture-gate.md`，通过架构门检查。
 7. 用户确认后更新正式产物。
 8. 更新 `state/active.md` 和必要的 `state/handoff.md`。
 
@@ -38,4 +38,3 @@
 - `docs/architecture.md`
 - `docs/module-map.md`
 - `docs/decisions/decision-xxx.md`
-

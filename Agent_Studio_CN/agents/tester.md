@@ -23,6 +23,7 @@
 - 相关代码变更说明
 - `state/handoff.md`
 - `rules/project-config.md`
+- `rules/gates/test-gate.md`
 
 ## 输出产物
 
@@ -33,5 +34,8 @@
 
 ## 质量门
 
-任务关闭前，必须通过测试门。
+任务关闭前，必须通过：
 
+```text
+rules/gates/test-gate.md
+```

@@ -35,5 +35,8 @@
 
 ## 质量门
 
-修改前必须通过管理门。
+修改前必须读取并通过：
 
+```text
+rules/gates/administration-gate.md
+```

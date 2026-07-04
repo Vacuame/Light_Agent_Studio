@@ -25,6 +25,7 @@
 - `docs/architecture.md`
 - `rules/project-config.md`
 - `state/active.md`
+- `rules/gates/development-gate.md`
 
 ## 输出产物
 
@@ -34,5 +35,8 @@
 
 ## 质量门
 
-代码交给 Tester 前，必须通过开发门。
+代码交给 Tester 前，必须通过：
 
+```text
+rules/gates/development-gate.md
+```

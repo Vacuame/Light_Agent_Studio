@@ -25,6 +25,7 @@
 - `docs/decisions/`
 - `state/active.md`
 - `rules/project-config.md`
+- `rules/gates/architecture-gate.md`
 
 ## 输出产物
 
@@ -35,5 +36,8 @@
 
 ## 质量门
 
-架构设计交给模块设计前，必须通过架构门。
+架构设计交给模块设计前，必须通过：
 
+```text
+rules/gates/architecture-gate.md
+```

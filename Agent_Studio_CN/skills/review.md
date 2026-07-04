@@ -18,9 +18,16 @@
 
 1. 明确要 review 的对象。
 2. 读取上游权威文件。
-3. 对照质量门检查。
-4. 输出问题列表。
-5. 给出结论。
+3. 根据 review 对象只读取对应质量门：
+   - 规则/角色/技能变更：`rules/gates/administration-gate.md`
+   - 架构产物：`rules/gates/architecture-gate.md`
+   - 模块设计：`rules/gates/module-gate.md`
+   - 代码实现：`rules/gates/development-gate.md`
+   - 测试产物：`rules/gates/test-gate.md`
+   - Adviser 辅助材料：`rules/gates/adviser-output-gate.md`
+4. 对照对应质量门检查。
+5. 输出问题列表。
+6. 给出结论。
 
 ## 结论格式
 
@@ -35,4 +42,3 @@ BLOCKED：不能交接，必须先修
 - review 摘要
 - 风险列表
 - 修改建议
-

@@ -29,7 +29,7 @@
 5. 执行测试或说明需要用户手动执行的测试。
 6. 写测试报告。
 7. 记录 bug。
-8. 通过测试门判断任务是否可以关闭。
+8. 读取 `rules/gates/test-gate.md`，通过测试门判断任务是否可以关闭。
 
 ## 输出
 
@@ -37,4 +37,3 @@
 - `docs/tests/test-report.md`
 - `docs/tests/bug-list.md`
 - `state/handoff.md`
-

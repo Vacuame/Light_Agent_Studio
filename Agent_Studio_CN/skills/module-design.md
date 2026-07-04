@@ -30,7 +30,7 @@
 3. 判断模块边界和依赖。
 4. 向用户确认不清楚的点。
 5. 起草模块设计。
-6. 通过模块门检查。
+6. 读取 `rules/gates/module-gate.md`，通过模块门检查。
 7. 用户确认后写入 `docs/modules/<module-name>.md`。
 8. 写 `state/handoff.md` 给 Developer。
 
@@ -38,4 +38,3 @@
 
 - `docs/modules/<module-name>.md`
 - `state/handoff.md`
-

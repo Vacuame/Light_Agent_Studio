@@ -26,6 +26,7 @@
 - 相关 `docs/modules/*.md`
 - 相关 `docs/decisions/*.md`
 - `state/active.md`
+- `rules/gates/module-gate.md`
 
 ## 输出产物
 
@@ -34,5 +35,8 @@
 
 ## 质量门
 
-模块设计交给 Developer 前，必须通过模块门。
+模块设计交给 Developer 前，必须通过：
 
+```text
+rules/gates/module-gate.md
+```

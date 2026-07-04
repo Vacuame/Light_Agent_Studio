@@ -19,6 +19,12 @@
 
 只有用户明确要求时，Adviser 才写文件。
 
+写入 derived context 前，读取：
+
+```text
+rules/gates/adviser-output-gate.md
+```
+
 Adviser 写出的 derived context 必须标明：
 
 ```text
@@ -33,5 +39,8 @@ Adviser 写出的 derived context 必须标明：
 
 ## 质量门
 
-写入文件前，必须通过顾问产物门。
+写入文件前，必须通过：
 
+```text
+rules/gates/adviser-output-gate.md
+```
