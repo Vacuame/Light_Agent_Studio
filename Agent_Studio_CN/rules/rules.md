@@ -96,6 +96,7 @@ My Agent Studio 分为七层。每一层负责不同问题。
 主要文件：
 
 - `skills/understand.md`
+- `skills/start.md`
 - `skills/architecture.md`
 - `skills/module-design.md`
 - `skills/implement.md`
