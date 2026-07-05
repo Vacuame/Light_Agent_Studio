@@ -32,6 +32,12 @@
 7. 读取 `rules/gates/development-gate.md`，通过开发门检查。
 8. 写交接给 Tester。
 
+## 启动条件
+
+只有当前窗口角色是 Developer，或用户明确要求“切换到 Developer 并开始实现”时，才能使用本 skill 修改项目代码。
+
+如果当前窗口是 Architect、Module Designer，或“架构+模块”组合角色，应停止并回到模块设计或 handoff，不得调用本 skill。
+
 ## 输出
 
 - 代码

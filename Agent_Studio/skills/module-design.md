@@ -34,6 +34,13 @@
 7. 用户确认后写入 `docs/modules/<module-name>.md`。
 8. 写 `state/handoff.md` 给 Developer。
 
+## 角色边界
+
+- 本 skill 不允许修改项目代码、配置、资源、测试代码或构建脚本。
+- 本 skill 不允许运行用于验证代码改动的构建或测试。
+- “功能很简单”不代表可以跳过模块设计直接实现。
+- 需要实现时，必须请求用户明确切换到 Developer。
+
 ## 输出
 
 - `docs/modules/<module-name>.md`
