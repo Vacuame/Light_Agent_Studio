@@ -20,14 +20,14 @@
 3. 列出未完成内容。
 4. 列出权威文件。
 5. 列出临时假设。
-6. 列出下一步。
-7. 更新 `state/active.md`。
-8. 更新 `state/handoff.md`。
-9. 必要时追加到 `state/session-log.md`。
+6. 如果交接给 Developer，列出实现落点摘要。
+7. 列出下一步。
+8. 更新 `state/active.md`。
+9. 更新 `state/handoff.md`。
+10. 必要时追加到 `state/session-log.md`。
 
 ## 输出
 
 - `state/active.md`
 - `state/handoff.md`
 - `state/session-log.md`
-
