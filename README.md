@@ -1,4 +1,4 @@
-# My Agent Studio CN
+# My Agent Studio
 
 这是一个轻量级 Agent 工作流框架，用来把一个通用 AI 助手拆成几个清晰角色，并通过文件完成协作、交接、记忆和质量检查。
 
@@ -35,11 +35,11 @@
 
 ## 启动提示词
 
-把 `Agent_Studio_CN` 放入某个项目后，可以在新会话中直接复制这段话：
+把 `Agent_Studio` 放入某个项目后，可以在新会话中直接复制这段话：
 
 ```text
 你现在在这个项目中工作。
-请先阅读 rules/rules.md，并按 rules 中定义的 /start 启动流程开始。
+请先阅读 Agent_Studio/rules/rules.md，并按 rules 中定义的 /start 启动流程开始。
 
 启动后请告诉我：
 1. 当前状态是什么
@@ -58,7 +58,7 @@
 
 ```text
 你现在是 [角色名]。
-请先阅读 rules/rules.md，并按 rules 中定义的角色、skill、状态层和质量门流程开始工作。
+请先阅读 Agent_Studio/rules/rules.md，并按 rules 中定义的角色、skill、状态层和质量门流程开始工作。
 
 本次任务：
 [写清楚你要它做什么]
@@ -116,7 +116,7 @@ docs/
 
 ## 使用原则
 
-1. 开始任务前，先读 `rules/rules.md`，再按 rules 指引读取状态、角色、skill、质量门和产物文件。
+1. 开始任务前，先读 `Agent_Studio/rules/rules.md`，再按 rules 指引读取状态、角色、skill、质量门和产物文件。
 2. 不清楚就问，不允许用猜测替代决策。
 3. 临时信息写到 `state/`。
 4. 已确认的长期事实写到 `docs/`。
