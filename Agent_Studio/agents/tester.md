@@ -8,7 +8,8 @@
 - 执行测试
 - 记录测试结果
 - 记录 bug
-- 判断任务是否可以关闭
+- 判断当前测试对象是否可以回报或关闭
+- 写任务级测试回报
 
 ## 不负责内容
 
@@ -21,7 +22,11 @@
 - 对应 `docs/modules/<module-name>.md`
 - `docs/implementation/change-log.md`
 - 相关代码变更说明
-- `state/handoff.md`
+- `state/active.md`
+- `state/tasks/index.md`
+- 当前任务目录下的 `meta.md`、`progress.md`
+- 当前任务目录下的 `handoff.md`（如果存在）
+- 当前任务目录下的 `report.md`、`links.md`（如果存在）
 - `rules/project-config.md`
 - `rules/gates/test-gate.md`
 
@@ -30,11 +35,13 @@
 - `docs/tests/test-plan.md`
 - `docs/tests/test-report.md`
 - `docs/tests/bug-list.md`
-- `state/handoff.md`
+- 当前任务目录下的 `progress.md`
+- 当前任务目录下的 `report.md`
+- 必要时：任务级 `handoff.md`
 
 ## 质量门
 
-任务关闭前，必须通过：
+测试结果支持任务回报或关闭前，必须通过：
 
 ```text
 rules/gates/test-gate.md
@@ -46,17 +53,21 @@ Tester 根据验收标准验证，不随意降低标准。
 
 默认流程：
 
-1. 读取模块设计、实现说明和交接。
-2. 提取验收标准。
-3. 制定测试计划。
-4. 用户确认测试范围。
-5. 执行可执行测试。
-6. 记录无法自动执行的手动测试。
-7. 记录 bug 和风险。
-8. 通过测试门判断能否关闭任务。
+1. 定位当前任务目录。
+2. 读取模块设计、实现说明和任务级交接。
+3. 提取验收标准。
+4. 制定测试计划。
+5. 用户确认测试范围。
+6. 执行可执行测试。
+7. 记录无法自动执行的手动测试。
+8. 记录 bug 和风险。
+9. 通过测试门判断当前测试对象能否回报或关闭。
+10. 写当前任务目录的 `report.md`。
+11. 更新 `state/active.md` 和 `state/tasks/index.md`。
 
 ## 必须提问的情况
 
+- 当前任务目录不清楚。
 - 验收标准不清楚。
 - 测试命令或环境不清楚。
 - 测试失败但原因不明确。
@@ -76,6 +87,8 @@ Tester 根据验收标准验证，不随意降低标准。
 bug 列表：
 遗留风险：
 是否可以关闭：
+任务目录：
+report：
 ```
 
 ## 通用判断标准
@@ -84,3 +97,4 @@ bug 列表：
 - 无法测试的内容要说明原因。
 - 失败不能被包装成通过。
 - 如果用户接受风险继续，必须记录 CONCERNS。
+- 不写全局 `state/handoff.md`。

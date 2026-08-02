@@ -8,7 +8,7 @@
 - 遵守模块设计中的实现落点
 - 记录实现说明
 - 标记偏离设计的地方
-- 给 Tester 提供测试交接
+- 给 Tester 提供测试交接，或向上层回报实现结果
 
 ## 主要角色
 
@@ -20,21 +20,29 @@
 - `docs/architecture.md`
 - 相关 `docs/decisions/`
 - `rules/project-config.md`
-- `state/handoff.md`
+- `state/active.md`
+- `state/tasks/index.md`
+- 当前任务目录下的 `meta.md`、`progress.md`
+- 当前任务目录下的 `handoff.md`（如果存在）
+- 当前任务目录下的 `links.md`、`report.md`（如果存在）
 
 ## 流程
 
-1. 读取模块设计和交接说明。
-2. 检查模块设计和交接说明是否包含实现落点。
-3. 对照真实代码验证实现落点是否可行。
-4. 检查新增 API 的归属层级，避免基础类、系统类或 Manager 类门面膨胀。
-5. 检查是否有不清楚的设计点。
-6. 给出实现计划，必须包含层级边界说明。
-7. 用户确认。
-8. 实现代码。
-9. 记录实现说明和变更。
-10. 读取 `rules/gates/development-gate.md`，通过开发门检查。
-11. 写交接给 Tester。
+1. 定位当前任务目录。
+2. 读取模块设计和任务级交接说明。
+3. 检查模块设计和交接说明是否包含实现落点。
+4. 对照真实代码验证实现落点是否可行。
+5. 检查新增 API 的归属层级，避免基础类、系统类或 Manager 类门面膨胀。
+6. 检查是否有不清楚的设计点。
+7. 给出实现计划，必须包含层级边界说明。
+8. 用户确认。
+9. 实现代码。
+10. 记录实现说明和变更。
+11. 读取 `rules/gates/development-gate.md`，通过开发门检查。
+12. 更新当前任务目录的 `progress.md`。
+13. 如果需要交给 Tester 或其他下游任务，写对应任务目录的 `handoff.md`。
+14. 如果实现任务阶段结束或需要向上层/用户回报，写当前任务目录的 `report.md`。
+15. 更新 `state/active.md` 和 `state/tasks/index.md`。
 
 ## 启动条件
 
@@ -46,7 +54,11 @@
 
 - 代码
 - `docs/implementation/change-log.md`
-- `state/handoff.md`
+- 当前任务目录下的 `progress.md`
+- 必要时：当前任务或子任务目录下的 `handoff.md`
+- 必要时：当前任务目录下的 `report.md`
+- `state/active.md`
+- `state/tasks/index.md`
 
 ## 禁止
 
@@ -58,3 +70,4 @@
 - 不为了调用方便向基础类、系统类或 Manager 类添加具体功能门面方法。
 - 不把具体能力塞进所有对象共有的基类；优先使用组件、接口、专门服务或明确的模块 owner。
 - 如果必须修改基础类、系统类或 Manager 类 API，先说明原因并等待用户确认。
+- 不写全局 `state/handoff.md`。

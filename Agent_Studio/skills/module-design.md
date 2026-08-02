@@ -11,6 +11,7 @@
 - 写清实现落点
 - 写清边界情况
 - 写清验收标准
+- 必要时写任务级 handoff 或 report
 
 ## 主要角色
 
@@ -22,20 +23,29 @@
 - `docs/architecture.md`
 - `docs/module-map.md`
 - 相关 `docs/decisions/`
-- 项目源码和目录结构，仅用于定位现有职责归属
+- 项目源码和目录结构，仅用于定位已有职责归属
 - `state/active.md`
+- `state/tasks/index.md`
+- 当前任务目录下的 `meta.md`、`progress.md`
+- 当前任务目录下的 `handoff.md`、`report.md`、`links.md`（如果存在）
 
 ## 流程
 
-1. 明确要设计哪个模块。
-2. 读取架构和模块地图。
-3. 判断模块边界和依赖。
-4. 读取相关源码入口和项目结构，定位现有职责 owner。
-5. 向用户确认不清楚的点。
-6. 起草模块设计，必须包含 `实现落点`。
-7. 读取 `rules/gates/module-gate.md`，通过模块门检查。
-8. 用户确认后写入 `docs/modules/<module-name>.md`。
-9. 写 `state/handoff.md` 给 Developer，必须包含实现落点摘要。
+1. 定位当前任务目录。
+2. 明确要设计哪个模块或工作单元。
+3. 读取架构和模块地图。
+4. 判断模块边界和依赖。
+5. 读取相关源码入口和项目结构，定位现有职责 owner。
+6. 向用户确认不清楚的点。
+7. 起草模块设计，必须包含 `实现落点`。
+8. 读取 `rules/gates/module-gate.md`，通过模块门检查。
+9. 用户确认后写入 `docs/modules/<module-name>.md`。
+10. 更新当前任务目录的 `progress.md`。
+11. 如果需要交给 Developer 或其他下游任务，写对应任务目录的 `handoff.md`，必须包含实现落点摘要。
+12. 如果模块设计任务阶段结束或需要向上层/用户回报，写当前任务目录的 `report.md`。
+13. 更新 `state/active.md` 和 `state/tasks/index.md`。
+
+任务是否拆分、拆几个子任务、由哪些角色接手，由用户或当前任务 owner 决定。本 skill 不强制创建实现子任务。
 
 ## 角色边界
 
@@ -48,4 +58,8 @@
 ## 输出
 
 - `docs/modules/<module-name>.md`
-- `state/handoff.md`
+- 当前任务目录下的 `progress.md`
+- 必要时：当前任务或子任务目录下的 `handoff.md`
+- 必要时：当前任务目录下的 `report.md`
+- `state/active.md`
+- `state/tasks/index.md`

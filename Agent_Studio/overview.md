@@ -10,9 +10,9 @@
 规则层：规定怎么工作
 角色层：规定谁来工作
 技能层：规定某类任务怎么做
-状态层：记录现在做到哪
+状态层：记录任务目录、进展、交接和回报
 产物层：保存已经确认的项目事实
-质量门层：检查关键产物能否交给下一环节
+质量门层：检查关键产物能否交接、回报或关闭
 自动护栏层：提醒、检查、防止忘记重要步骤
 ```
 
@@ -36,20 +36,46 @@ understand
 -> implement
 -> review
 -> test
--> handoff
+-> report / handoff
 ```
 
-小任务可以跳过某些阶段，但必须说明为什么跳过。
+任务结构由用户或当前任务 owner 决定。框架不判断任务是大、中、小，也不强制完整架构-模块-程序-测试链路。
+
+```text
+handoff.md = 向下交接
+report.md  = 向上回报
+```
+
+任务可以是单目录任务，也可以拆成多个子任务；一个 Agent 可以兼任多个角色。框架只要求交接、进展、回报、归档路径清楚，避免覆盖和丢上下文。
+
+## 状态层结构
+
+```text
+state/
+  active.md              全局任务面板
+  tasks/index.md         任务索引
+  tasks/active/<task-id>/
+    meta.md              任务元信息
+    progress.md          任务进展
+    report.md            向上回报
+    handoff.md           向下交接，按需存在
+    links.md             相关链接，按需存在
+    children/            子任务，按需存在
+  tasks/archived/        归档任务
+  session-log.md         重要历史摘要
+```
 
 ## 最小启动步骤
 
 1. 填写 `docs/project-overview.md`
 2. 填写 `rules/project-config.md`
-3. 需要架构时使用 `skills/architecture.md`
-4. 需要模块设计时使用 `skills/module-design.md`
-5. 需要实现时使用 `skills/implement.md`
-6. 需要测试时使用 `skills/test.md`
-7. 每次结束前使用 `skills/handoff.md`
+3. 读取 `state/active.md` 和 `state/tasks/index.md`
+4. 选择或创建当前任务目录
+5. 需要架构时使用 `skills/architecture.md`
+6. 需要模块设计时使用 `skills/module-design.md`
+7. 需要实现时使用 `skills/implement.md`
+8. 需要测试时使用 `skills/test.md`
+9. 需要交接、回报、关闭、归档或删除任务时使用 `skills/handoff.md`
 
 ## 权威来源顺序
 
@@ -63,7 +89,10 @@ understand
 > docs/modules/
 > docs/implementation/
 > docs/tests/
-> state/
+> state/tasks/active/<task-id>/report.md
+> state/tasks/active/<task-id>/handoff.md
+> state/tasks/active/<task-id>/progress.md
+> state/active.md
 > Adviser 的 derived context
 ```
 

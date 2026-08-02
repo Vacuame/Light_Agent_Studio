@@ -2,25 +2,39 @@
 
 本文件定义角色之间如何通过文件协作。
 
-## 角色交接顺序
+## 协作模型
 
-默认流程：
+Agent Studio 不替用户判断任务应该如何拆分，也不规定固定的大/中/小任务结构。
+
+任务结构由用户或当前任务 owner 决定。框架只保证：
+
+- 每个任务有独立目录。
+- 交接写入任务级 `handoff.md`。
+- 完成或阶段结论写入任务级 `report.md`。
+- 多个任务不会覆盖同一个全局 handoff。
+- 删除和归档有明确路径。
+
+任务可以是单目录任务，也可以有多个子任务。一个 Agent 可以兼任多个角色，但应在任务状态中说明。
+
+## 交接与回报方向
 
 ```text
-Adviser/用户问题 -> Architect -> Module Designer -> Developer -> Tester -> Handoff
+handoff.md = 向下交接
+report.md  = 向上回报
 ```
 
-不是所有任务都需要走完整流程。小任务可以跳过架构或模块设计，但跳过原因要写入 `state/active.md`。
+### 向下交接
 
-## 交接方式
+当一个任务要交给另一个角色、Agent 或子任务时，写入对应任务目录的 `handoff.md`。
 
-所有角色交接时，必须写清楚：
+交接必须写清楚：
 
 - 交接给谁
 - 接手什么
 - 需要读取哪些文件
 - 哪些内容已经确定
 - 哪些内容只是临时假设
+- 风险
 - 下一步建议
 
 如果交接给 Developer，还必须写清楚：
@@ -32,10 +46,48 @@ Adviser/用户问题 -> Architect -> Module Designer -> Developer -> Tester -> H
 - 不应放置的位置
 - 需要 Developer 验证的不确定点
 
-临时交接写入：
+### 向上回报
+
+当一个任务完成、阶段结束、阻塞、放弃或需要上层判断时，写入当前任务目录的 `report.md`。
+
+回报必须写清楚：
+
+- 回报给谁
+- 本任务结论：PASS / CONCERNS / BLOCKED / DROPPED
+- 完成内容
+- 修改或产出文件
+- 验证结果
+- 未完成项
+- 风险与注意事项
+- 对上层任务的影响
+- 建议下一步
+
+父任务 owner 或上层汇总者读取子任务的 `report.md`，决定继续、返工、关闭、归档或再拆任务。
+
+## 状态写入位置
+
+全局任务面板写入：
 
 ```text
-state/handoff.md
+state/active.md
+```
+
+任务索引写入：
+
+```text
+state/tasks/index.md
+```
+
+任务正文写入：
+
+```text
+state/tasks/active/<task-id>/
+```
+
+归档任务写入：
+
+```text
+state/tasks/archived/<task-id>/
 ```
 
 长期事实写入：
@@ -57,11 +109,25 @@ docs/
 - 测试结果确认
 - 任务准备进入下一阶段
 
+任务过程、交接、回报、阻塞、临时假设写入 `state/`。
+
 ## 状态层清理
 
-任务关闭后，可以把 `state/handoff.md` 清空或归档到 `state/session-log.md`。
+任务关闭后，不再清空全局 handoff。新版没有全局 `state/handoff.md`。
 
-`state/active.md` 不删除，只更新为新的当前任务或空闲状态。
+任务关闭后的处理方式：
+
+1. 保留在 `state/tasks/active/<task-id>/` 并标记为 `done`。
+2. 归档到 `state/tasks/archived/<task-id>/`。
+3. 在用户明确确认后删除任务目录。
+
+删除或归档后，必须同步更新：
+
+- `state/tasks/index.md`
+- `state/active.md`
+- 必要时追加 `state/session-log.md`
+
+`state/active.md` 不删除，只更新为新的当前任务面板或空闲状态。
 
 ## 冲突处理
 
@@ -72,13 +138,18 @@ docs/
 > docs/decisions/
 > docs/architecture.md
 > docs/modules/
-> state/
+> state/tasks/active/<task-id>/report.md
+> state/tasks/active/<task-id>/handoff.md
+> state/tasks/active/<task-id>/progress.md
+> state/active.md
 > Adviser 的 derived context
 ```
 
 如果冲突影响实现，必须先问用户，不得自行选择。
 
 如果模块设计中的实现落点与真实代码冲突，Developer 必须反馈给 Module Designer 或用户确认，不得自行改变模块边界或代码层级。
+
+如果两个任务需要修改同一文件或同一职责边界，必须在相关任务的 `links.md` 或 `progress.md` 中标明冲突，并由用户或共同上层 owner 决定如何处理。
 
 ## 角色责任边界
 
@@ -100,7 +171,7 @@ Adviser：解释、问答、辅助理解，不产出权威设计
 读取范围应遵循：
 
 ```text
-总规则 + 当前状态 + 当前角色 + 当前技能 + 相关产物 + 对应质量门
+总规则 + 当前全局面板 + 任务索引 + 当前任务目录 + 当前角色 + 当前技能 + 相关产物 + 对应质量门
 ```
 
 如果某个文件只是背景知识，先判断是否必要。避免把无关上下文塞给 Agent。
@@ -113,7 +184,20 @@ Adviser：解释、问答、辅助理解，不产出权威设计
 - 风险是否写清楚
 - 临时假设是否标明
 - 下一个角色需要读哪些文件
+- 要写入哪个任务目录的 `handoff.md`
 - 是否需要用户确认
+
+## 回报前检查
+
+回报前必须确认：
+
+- 本任务结论是否清楚
+- 完成内容是否写清楚
+- 修改或产出文件是否列出
+- 验证结果是否写清楚
+- 未完成项和风险是否写清楚
+- 上层任务或用户下一步是否清楚
+- 要写入哪个任务目录的 `report.md`
 
 ## 用户确认机制
 
@@ -122,6 +206,7 @@ Adviser：解释、问答、辅助理解，不产出权威设计
 - 写入正式产物
 - 修改规则、角色、技能
 - 删除或移动文件
+- 删除任务目录
 - 引入依赖
 - 接受 CONCERNS 风险继续推进
 - 关闭任务

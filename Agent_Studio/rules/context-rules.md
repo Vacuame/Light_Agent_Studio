@@ -8,42 +8,131 @@
 
 重要信息不要只留在聊天里。只要会影响后续工作，就要写入 `state/` 或 `docs/`。
 
-## active.md 应包含
+`state/` 是当前怎么接着干；`docs/` 是已确认的项目事实。
 
-`state/active.md` 至少记录：
+## 全局状态与任务状态
 
-- 当前任务
-- 当前角色
-- 当前阶段
-- 正在处理的文件
-- 已完成内容
-- 下一步
-- 阻塞问题
-- 最近一次交接摘要
+`state/active.md` 是全局任务面板，至少记录：
+
+- 当前聚焦任务
+- 活跃任务列表
+- 阻塞任务列表
+- 最近交接/回报摘要
+- `state/tasks/index.md` 入口
+
+`state/tasks/index.md` 是任务索引，至少记录：
+
+- 任务 ID
+- 标题
+- 父任务
+- 状态
+- 当前角色/负责人
+- 路径
+- 最近更新
+
+每个任务目录至少包含：
+
+```text
+meta.md
+progress.md
+report.md
+```
+
+按需包含：
+
+```text
+handoff.md
+links.md
+children/
+```
+
+框架不判断任务大小，也不强制任务层级。任务目录、子任务和角色分配由用户或当前任务 owner 决定。
 
 ## 压缩前
 
 如果会话将被压缩或任务很长，先更新：
 
 1. `state/active.md`
-2. `state/handoff.md`
+2. `state/tasks/index.md`
+3. 当前任务目录下的 `progress.md`
+4. 必要时更新当前任务目录下的 `handoff.md` 或 `report.md`
 
 并写清楚：
 
 - 已经做完什么
 - 还没做什么
 - 哪些文件是权威来源
-- 下个角色应该从哪里继续
+- 下个角色或上层 owner 应该从哪里继续
+- 当前任务目录路径
 
 ## 压缩后
 
 压缩或换窗口后，第一步必须读取：
 
 1. `state/active.md`
-2. `state/handoff.md`
-3. 当前任务相关的正式产物文件
+2. `state/tasks/index.md`
+3. 当前任务目录下的 `meta.md`
+4. 当前任务目录下的 `progress.md`
+5. 当前任务目录下的 `handoff.md` 或 `report.md`（如果存在）
+6. 当前任务相关的正式产物文件
 
 不要根据压缩摘要直接继续做复杂决策。
+
+如果当前任务目录不明确，先从 `state/active.md` 和 `state/tasks/index.md` 定位；仍不明确时询问用户。
+
+## handoff 与 report
+
+### handoff.md 推荐格式
+
+`handoff.md` 是向下交接文件。只有需要交给另一个角色、Agent 或子任务时才需要。
+
+```markdown
+# 任务交接
+
+## 交接给谁
+
+## 接手什么
+
+## 必读文件
+
+## 已确认内容
+
+## 临时假设
+
+## 风险
+
+## 实现落点摘要
+
+## 下一步
+```
+
+### report.md 推荐格式
+
+`report.md` 是向上回报文件。任务完成、阶段结束、阻塞、放弃或需要上层判断时填写。
+
+```markdown
+# 任务完成报告
+
+## 回报给谁
+
+## 本任务结论
+
+PASS / CONCERNS / BLOCKED / DROPPED
+
+## 完成内容
+
+## 修改或产出文件
+
+## 验证结果
+
+## 未完成项
+
+## 风险与注意事项
+
+## 对上层任务的影响
+
+## 建议下一步
+```
 
 ## derived context
 
@@ -63,41 +152,69 @@ docs/modules/xxx-derived-context.md
 ## active.md 推荐格式
 
 ```markdown
-# 当前任务状态
+# 当前任务面板
 
-## 当前任务
+## 当前聚焦任务
 
-## 当前角色
+## 活跃任务
 
-## 当前阶段
+## 阻塞任务
 
-## 正在处理的文件
+## 最近交接/回报摘要
+
+## 任务索引
+
+## 下一步
+```
+
+## 任务目录推荐格式
+
+```text
+state/tasks/active/<task-id>/
+  meta.md
+  progress.md
+  report.md
+  handoff.md   # 按需
+  links.md     # 按需
+  children/    # 按需
+```
+
+`meta.md` 推荐包含：
+
+```markdown
+# 任务元信息
+
+## 任务 ID
+
+## 标题
+
+## 父任务
+
+## 子任务
+
+## 状态
+
+created / active / handoff / reported / done / blocked / dropped / archived
+
+## 当前角色/负责人
+
+## 关联正式产物
+
+## 关闭或归档策略
+```
+
+`progress.md` 推荐包含：
+
+```markdown
+# 任务进展
+
+## 当前进展
 
 ## 已完成
 
-## 下一步
+## 未完成
 
 ## 阻塞问题
-
-## 最近一次交接摘要
-```
-
-## handoff.md 推荐格式
-
-```markdown
-# 临时交接说明
-
-## 交接给谁
-
-## 接手什么
-
-## 必读文件
-
-## 已确认内容
-
-## 临时假设
-
-## 风险
 
 ## 下一步
 ```
@@ -113,6 +230,9 @@ docs/modules/xxx-derived-context.md
 - 修改规则、角色、技能
 - 发生一次重要返工
 - 发现一个长期风险
+- 任务归档或删除摘要
+
+完整任务正文保存在对应任务目录，不写入 `session-log.md`。
 
 ## 长任务更新频率
 
@@ -120,8 +240,10 @@ docs/modules/xxx-derived-context.md
 
 建议：
 
-- 每完成一个小阶段，更新 `state/active.md`
-- 每次交接，更新 `state/handoff.md`
+- 每完成一个小阶段，更新当前任务目录下的 `progress.md`
+- 每次向下交接，更新对应任务目录下的 `handoff.md`
+- 每次向上回报，更新对应任务目录下的 `report.md`
+- 每次任务状态变化，更新 `state/tasks/index.md` 和 `state/active.md`
 - 每次用户确认长期结论，再更新 `docs/`
 
 ## 状态层与产物层
@@ -131,6 +253,6 @@ state/ = 当前怎么接着干
 docs/  = 已确认的项目事实
 ```
 
-如果只是临时进度、阻塞、下一步，写入 `state/`。
+如果只是临时进度、阻塞、下一步、交接或回报，写入 `state/`。
 
 如果是长期会被后续角色依赖的事实，写入 `docs/`。
