@@ -66,6 +66,8 @@ handoff/report 的方向、写入位置和确认机制见 `rules/collaboration-r
 
 `handoff.md` 推荐格式见 `rules/context-rules.md`。
 
+起草 `handoff.md` 的“必读文件”时，只列当前交接任务的直接输入；不要复制通用 rules、角色文件、skill、质量门或项目配置清单。
+
 ## 流程：向上回报
 
 需要向父级、上层汇总者、任务 owner 或用户说明当前结果、阻塞、风险或请求判断时：
