@@ -10,52 +10,90 @@
 
 `state/` 是当前怎么接着干；`docs/` 是已确认的项目事实。
 
-## 全局状态与任务状态
+## 状态层组织
 
-`state/tasks/<task-id>/overview.md` 是顶层任务总览，至少记录：
-
-- 当前顶层任务
-- 活跃任务列表
-- 阻塞任务列表
-- 最近交接/回报摘要
-- `state/tasks/README.md` 入口
-
-`state/tasks/README.md` 是任务目录说明，至少记录：
-
-- 任务 ID
-- 标题
-- 父任务
-- 状态
-- 当前角色/负责人
-- 路径
-- 最近更新
-
-每个任务目录至少包含：
+状态层采用轻量树形任务工作区：
 
 ```text
-overview.md
-report.md
-report.md
+state/tasks/<task-id>/
+  overview.md
+  <agent-workspace>/
+    handoff.md
+    report.md
+    <child-agent-workspace>/
+      handoff.md
+      report.md
 ```
 
-按需包含：
+说明：
+
+- `state/tasks/<task-id>/` 是用户明确开启的顶层任务目录。
+- `overview.md` 是顶层任务总览，记录任务背景、目标、当前进展、重要文件、疑点、共识和会影响后续 Agent 的稳定结论。
+- `<agent-workspace>/` 是某个 Agent 窗口的工作区，每个 Agent 窗口都必须定位或创建自己的工作区。
+- `handoff.md` 是父级或上游写给当前工作区的交接。
+- `report.md` 是当前工作区写给父级、上层汇总者或用户的回报。
+- 嵌套工作区表示父子关系；同级工作区表示并列或旁支关系。
+- 目录树就是定位线索，不额外维护任务索引或状态面板。
+
+## 顶层任务 overview.md
+
+`overview.md` 推荐包含：
+
+```markdown
+# 任务总览
+
+## 任务目标
+
+## 背景
+
+## 当前进展
+
+## 重要文件
+
+## 已确认共识
+
+## 疑点与阻塞
+
+## 重要关系说明
+
+## 最终结论
+```
+
+`overview.md` 只写跨角色、稳定、会影响后续工作的内容。不要复制完整 `handoff.md` 或 `report.md`，不要写成聊天流水账。
+
+子级 Agent 写 `report.md` 时不自动更新 `overview.md`。父级、汇总者或任务 owner 读取 report 后，再决定哪些稳定结论进入 `overview.md`。
+
+## Agent 工作区
+
+每个 Agent 窗口必须有自己的工作区。
+
+工作区目录名应表达角色组合和职责，例如：
 
 ```text
-handoff.md
-相关工作区 report
-嵌套 Agent 工作区
+01-architecture-module-login/
+02-developer-login-api/
+03-adviser-context/
 ```
 
-框架不判断任务大小，也不强制任务层级。任务目录、子任务和角色分配由用户或当前任务 owner 决定。
+角色可以组合，目录名不依赖固定角色枚举。
+
+如果当前顶层任务目录或 Agent 工作区不明确，先根据：
+
+- 用户当前任务描述
+- 顶层任务目录名
+- 顶层任务 `overview.md`
+- 工作区目录名
+- 当前工作区或父级工作区的 `handoff.md` / `report.md`
+
+自行定位。仍无法唯一定位时，列出候选并询问用户。
 
 ## 压缩前
 
-如果会话将被压缩或任务很长，先更新：
+如果会话将被压缩或任务很长，当前 Agent 应先更新自己的工作区状态：
 
-1. `state/tasks/<task-id>/overview.md`
-2. `state/tasks/README.md`
-3. 当前 Agent 工作区的 `report.md`
-4. 必要时更新当前 Agent 工作区的 `handoff.md` 或 `report.md`
+1. 更新当前工作区 `report.md`，写清楚已完成、未完成、风险和下一步。
+2. 如果需要交给下游 Agent，在子工作区写 `handoff.md`。
+3. 如果当前 Agent 是父级、汇总者或任务 owner，并且已经读取子级 report，必要时更新顶层任务 `overview.md`。
 
 并写清楚：
 
@@ -69,25 +107,24 @@ handoff.md
 
 压缩或换窗口后，第一步必须读取：
 
-1. `state/tasks/<task-id>/overview.md`
-2. `state/tasks/README.md`
-3. 当前顶层任务的 `overview.md`
-4. 当前 Agent 工作区的 `report.md`
-5. 当前 Agent 工作区的 `handoff.md` 或 `report.md`（如果存在）
-6. 当前任务相关的正式产物文件
+1. 当前顶层任务的 `overview.md`
+2. 当前 Agent 工作区的 `handoff.md`（如果存在）
+3. 当前 Agent 工作区的 `report.md`（如果存在）
+4. 必要的父级、子级或兄弟工作区 `report.md`
+5. 当前任务相关的正式产物文件
 
 不要根据压缩摘要直接继续做复杂决策。
-
-如果当前顶层任务目录和 Agent 工作区不明确，先从 `state/tasks/<task-id>/overview.md` 和 `state/tasks/README.md` 定位；仍不明确时询问用户。
 
 ## handoff 与 report
 
 ### handoff.md 推荐格式
 
-`handoff.md` 是向下交接文件。只有需要交给另一个角色、Agent 或子任务时才需要。
+`handoff.md` 是向下交接文件。只有需要交给另一个角色、Agent 或子工作区时才需要。
 
 ```markdown
 # 任务交接
+
+## 交接来源
 
 ## 交接给谁
 
@@ -108,14 +145,14 @@ handoff.md
 
 ### report.md 推荐格式
 
-`report.md` 是向上回报文件。任务完成、阶段结束、阻塞、放弃或需要上层判断时填写。
+`report.md` 是向上回报文件。当前工作区完成、阶段结束、阻塞、放弃或需要上层判断时填写。
 
 ```markdown
 # 任务完成报告
 
 ## 回报给谁
 
-## 本任务结论
+## 本工作区结论
 
 PASS / CONCERNS / BLOCKED / DROPPED
 
@@ -130,6 +167,8 @@ PASS / CONCERNS / BLOCKED / DROPPED
 ## 风险与注意事项
 
 ## 对上层任务的影响
+
+## 建议写入 overview.md
 
 ## 建议下一步
 ```
@@ -149,79 +188,9 @@ docs/modules/xxx-derived-context.md
 权威来源是 architecture.md、module-spec、decision records 和代码本身。
 ```
 
-## active.md 推荐格式
-
-```markdown
-# 当前任务面板
-
-## 当前顶层任务
-
-## 活跃任务
-
-## 阻塞任务
-
-## 最近交接/回报摘要
-
-## 任务目录说明
-
-## 下一步
-```
-
-## 任务目录推荐格式
-
-```text
-state/tasks/<task-id>/
-  overview.md
-  report.md
-  report.md
-  handoff.md   # 按需
-  相关工作区 report     # 按需
-  嵌套 Agent 工作区    # 按需
-```
-
-`overview.md` 推荐包含：
-
-```markdown
-# 任务元信息
-
-## 任务 ID
-
-## 标题
-
-## 父任务
-
-## 子任务
-
-## 状态
-
-created / active / handoff / reported / done / blocked / dropped / 完成记录d
-
-## 当前角色/负责人
-
-## 关联正式产物
-
-## 关闭或完成记录策略
-```
-
-`report.md` 推荐包含：
-
-```markdown
-# 任务进展
-
-## 当前进展
-
-## 已完成
-
-## 未完成
-
-## 阻塞问题
-
-## 下一步
-```
-
 ## session-log.md 使用规则
 
-`state/session-log.md` 用于记录重要历史摘要，不要写成聊天流水账。
+`state/session-log.md` 用于记录少量重要历史摘要，不要写成聊天流水账，也不要当成任务定位入口。
 
 适合记录：
 
@@ -230,9 +199,9 @@ created / active / handoff / reported / done / blocked / dropped / 完成记录d
 - 修改规则、角色、技能
 - 发生一次重要返工
 - 发现一个长期风险
-- 任务完成记录或删除摘要
+- 任务完成或删除摘要
 
-完整任务正文保存在对应任务目录，不写入 `session-log.md`。
+完整任务正文保存在对应任务目录和 Agent 工作区，不写入 `session-log.md`。
 
 ## 长任务更新频率
 
@@ -241,9 +210,9 @@ created / active / handoff / reported / done / blocked / dropped / 完成记录d
 建议：
 
 - 每完成一个小阶段，更新当前 Agent 工作区的 `report.md`
-- 每次向下交接，更新对应任务目录下的 `handoff.md`
-- 每次向上回报，更新对应任务目录下的 `report.md`
-- 每次任务状态变化，更新 `state/tasks/README.md` 和 `state/tasks/<task-id>/overview.md`
+- 每次向下交接，更新接手 Agent 工作区的 `handoff.md`
+- 每次向上回报，更新当前 Agent 工作区的 `report.md`
+- 每次用户确认会影响后续 Agent 的任务级结论，父级或汇总者更新顶层任务 `overview.md`
 - 每次用户确认长期结论，再更新 `docs/`
 
 ## 状态层与产物层

@@ -22,7 +22,6 @@ report.md  = 向上回报
 ## 必读文件
 
 - `state/tasks/<task-id>/overview.md`
-- `state/tasks/README.md`
 - 当前顶层任务的 `overview.md`
 - 当前 Agent 工作区的 `report.md`
 - 当前任务相关产物
@@ -40,7 +39,7 @@ report.md  = 向上回报
 5. 写 `report.md`。
 6. 必要时写 `handoff.md`。
 7. 必要时写 `相关工作区 report`。
-8. 更新 `state/tasks/README.md`。
+8. 更新顶层任务 `overview.md`。
 9. 更新 `state/tasks/<task-id>/overview.md`。
 
 任务如何拆分由用户或当前任务 owner 决定。本 skill 不判断任务是大、中、小，也不强制创建子任务。
@@ -57,7 +56,7 @@ report.md  = 向上回报
 8. 列出下一步。
 9. 写入接手任务目录的 `handoff.md`。
 10. 更新接手任务的 `overview.md` 和 `report.md`。
-11. 更新 `state/tasks/README.md` 和 `state/tasks/<task-id>/overview.md`。
+11. 更新顶层任务 `overview.md`。
 
 ## 流程：向上回报
 
@@ -71,7 +70,7 @@ report.md  = 向上回报
 8. 给出建议下一步。
 9. 写入当前顶层任务目录和 Agent 工作区的 `report.md`。
 10. 更新当前任务的 `overview.md` 和 `report.md`。
-11. 更新 `state/tasks/README.md` 和 `state/tasks/<task-id>/overview.md`。
+11. 更新顶层任务 `overview.md`。
 12. 必要时追加到 `state/session-log.md`。
 
 ## 流程：关闭任务
@@ -81,7 +80,7 @@ report.md  = 向上回报
 3. 检查是否通过相关质量门。
 4. 检查是否存在未解决风险或 CONCERNS。
 5. 用户确认关闭后，标记任务为 `done` 或 `dropped`。
-6. 更新 `state/tasks/README.md` 和 `state/tasks/<task-id>/overview.md`。
+6. 更新顶层任务 `overview.md`。
 7. 必要时追加到 `state/session-log.md`。
 
 ## 流程：完成记录任务
@@ -90,7 +89,7 @@ report.md  = 向上回报
 2. 确认用户同意完成记录。
 3. 在任务目录写或更新 `overview.md`。
 4. 将任务目录移动到 `state/tasks/<task-id>/（完成后不默认移动）`。
-5. 更新 `state/tasks/README.md`。
+5. 更新顶层任务 `overview.md`。
 6. 更新 `state/tasks/<task-id>/overview.md`。
 7. 追加完成记录摘要到 `state/session-log.md`。
 
@@ -102,7 +101,7 @@ report.md  = 向上回报
 2. 确认任务没有需要保留的长期价值。
 3. 如果有子任务，先处理子任务。
 4. 用户确认后删除任务目录。
-5. 更新 `state/tasks/README.md`。
+5. 更新顶层任务 `overview.md`。
 6. 更新 `state/tasks/<task-id>/overview.md`。
 7. 必要时追加摘要到 `state/session-log.md`。
 
@@ -116,7 +115,6 @@ report.md  = 向上回报
 - `state/tasks/<task-id>/report.md`
 - `state/tasks/<task-id>/相关工作区 report`
 - `state/tasks/<task-id>/overview.md`
-- `state/tasks/README.md`
 - `state/session-log.md`
 
 ## 禁止

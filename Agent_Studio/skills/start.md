@@ -28,16 +28,13 @@
 - `rules/project-config.md`
 - `rules/quality-gates.md`
 - `rules/automation-guards.md`
-- `state/tasks/<task-id>/overview.md`
-- `state/tasks/README.md`
 
-如果已经确定当前顶层任务目录和 Agent 工作区，再读取该任务目录下的：
+如果已经确定当前顶层任务目录和 Agent 工作区，再读取：
 
-- `overview.md`
-- `report.md`
-- `handoff.md`（如果存在）
-- `report.md`（如果存在）
-- `相关工作区 report`（如果存在）
+- 顶层任务 `overview.md`
+- 当前 Agent 工作区 `handoff.md`（如果存在）
+- 当前 Agent 工作区 `report.md`（如果存在）
+- 必要的父级、子级或兄弟工作区 `report.md`
 
 如果用户给出了具体任务，再读取对应角色和技能：
 
@@ -52,7 +49,7 @@
 
 1. 确认 Agent Studio 根目录和项目根目录。
 2. 读取启动必读文件。
-3. 摘要顶层任务总览：当前顶层任务、活跃任务、阻塞任务、任务目录说明。
+3. 摘要顶层任务总览：当前顶层任务、进展、阻塞、重要文件和下一步。
 4. 如果用户指定任务，定位对应任务目录。
 5. 如果任务目录不明确，列出可选任务或询问用户。
 6. 检查 `rules/project-config.md` 是否已填写关键配置。
@@ -85,7 +82,7 @@ Agent Studio 目录：
 建议角色：
 建议技能：
 下一步需要读取：
-是否需要更新 state/tasks/<task-id>/overview.md 或 state/tasks/README.md：
+是否需要更新顶层任务 overview.md：
 等待用户确认：
 ```
 
@@ -105,7 +102,6 @@ Administrator 先检查规则、状态和配置是否可用；Architect 再建�
 - `docs/project-overview.md`
 - `docs/module-map.md`
 - `state/tasks/<task-id>/overview.md`
-- `state/tasks/README.md`
 
 这些文件不要自动填写为事实。缺信息时先向用户提问，或把内容标为“待确认”。
 
@@ -114,6 +110,6 @@ Administrator 先检查规则、状态和配置是否可用；Architect 再建�
 - 不要在启动阶段直接修改项目代码。
 - 不要在没有用户确认时更新正式产物。
 - 不要把猜测写入 `docs/`。
-- 不要跳过 `state/tasks/<task-id>/overview.md` 和 `state/tasks/README.md`。
+- 不要跳过顶层任务 `overview.md` 和当前 Agent 工作区。
 - 不要因为缺少配置就自行假设运行命令、测试命令或技术栈。
 - 不要替用户判断任务应该拆成大/中/小结构；任务分配由用户或任务 owner 决定。

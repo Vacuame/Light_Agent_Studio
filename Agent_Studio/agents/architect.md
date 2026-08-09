@@ -27,7 +27,6 @@
 - `docs/architecture.md`
 - `docs/module-map.md`
 - `docs/decisions/`
-- `state/tasks/README.md`
 - 当前顶层任务目录下的 `overview.md`
 - 当前 Agent 工作区下的 `handoff.md`、`report.md`（如果存在）
 - 必要的父级、子级或兄弟工作区 `report.md`

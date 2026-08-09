@@ -30,7 +30,6 @@
 - 相关 `docs/decisions/*.md`
 - `docs/architecture.md`
 - `rules/project-config.md`
-- `state/tasks/README.md`
 - 当前顶层任务目录下的 `overview.md`
 - 当前 Agent 工作区下的 `handoff.md`（如果存在）
 - 当前 Agent 工作区下的 `report.md`（如果存在）

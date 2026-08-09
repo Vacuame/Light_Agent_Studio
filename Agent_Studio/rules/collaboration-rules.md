@@ -8,27 +8,76 @@ Agent Studio 不替用户判断任务应该如何拆分，也不规定固定的�
 
 任务结构由用户或当前任务 owner 决定。框架只保证：
 
-- 每个任务有独立目录。
-- 交接写入Agent 工作区 `handoff.md`。
-- 完成或阶段结论写入Agent 工作区 `report.md`。
+- 每个顶层任务有独立目录。
+- 每个 Agent 窗口有自己的工作区。
+- 交接写入接手 Agent 工作区的 `handoff.md`。
+- 完成或阶段结论写入当前 Agent 工作区的 `report.md`。
+- 顶层任务总览写入 `overview.md`。
 - 多个任务或多个 Agent 不会覆盖同一个交接文件。
-- 删除和完成记录有明确路径。
+- 删除任务目录或 Agent 工作区前必须获得用户确认。
 
-任务可以是单目录任务，也可以有多个子任务。一个 Agent 可以兼任多个角色，但应在任务状态中说明。
+任务可以只有一个 Agent 工作区，也可以有多个嵌套或并列工作区。一个 Agent 可以兼任多个角色，但应在工作区目录名或 handoff 中说明职责。
+
+## 目录关系
+
+状态层目录结构：
+
+```text
+state/tasks/<task-id>/
+  overview.md
+  <agent-workspace>/
+    handoff.md
+    report.md
+    <child-agent-workspace>/
+      handoff.md
+      report.md
+```
+
+判断关系：
+
+- `state/tasks/<task-id>/` 是顶层任务，不是 Agent 工作区。
+- 直接位于顶层任务目录下的文件夹，是该任务的一级 Agent 工作区。
+- 位于某个 Agent 工作区里面的文件夹，是该工作区的子 Agent 工作区。
+- 同一层级的工作区是兄弟、并列或旁支关系。
+- Adviser、Reviewer、Researcher 等辅助角色可以作为同级旁支，也可以挂在某个局部分支下。
+
+示例：
+
+```text
+state/tasks/login-refactor/
+  overview.md
+  01-architecture-module-login/
+    handoff.md
+    report.md
+    01-developer-login-api/
+      handoff.md
+      report.md
+  02-adviser-context/
+    handoff.md
+    report.md
+```
+
+这里：
+
+- `01-architecture-module-login/` 是一级 Agent 工作区。
+- `01-developer-login-api/` 是 `01-architecture-module-login/` 的子 Agent 工作区。
+- `02-adviser-context/` 与 `01-architecture-module-login/` 同级，是旁支工作区。
 
 ## 交接与回报方向
 
 ```text
 handoff.md = 向下交接
 report.md  = 向上回报
+overview.md = 顶层任务总览
 ```
 
 ### 向下交接
 
-当一个任务要交给另一个角色、Agent 或子任务时，写入对应任务目录的 `handoff.md`。
+当一个任务要交给另一个角色、Agent 或子工作区时，父级或上游在接手 Agent 工作区写入 `handoff.md`。
 
 交接必须写清楚：
 
+- 交接来源
 - 交接给谁
 - 接手什么
 - 需要读取哪些文件
@@ -48,12 +97,12 @@ report.md  = 向上回报
 
 ### 向上回报
 
-当一个任务完成、阶段结束、阻塞、放弃或需要上层判断时，写入当前顶层任务目录和 Agent 工作区的 `report.md`。
+当一个 Agent 工作区完成、阶段结束、阻塞、放弃或需要上层判断时，写入当前 Agent 工作区的 `report.md`。
 
 回报必须写清楚：
 
 - 回报给谁
-- 本任务结论：PASS / CONCERNS / BLOCKED / DROPPED
+- 本工作区结论：PASS / CONCERNS / BLOCKED / DROPPED
 - 完成内容
 - 修改或产出文件
 - 验证结果
@@ -62,7 +111,13 @@ report.md  = 向上回报
 - 对上层任务的影响
 - 建议下一步
 
-父任务 owner 或上层汇总者读取子任务的 `report.md`，决定继续、返工、关闭、完成记录或再拆任务。
+父级 Agent、任务 owner 或上层汇总者读取子工作区的 `report.md`，决定继续、返工、关闭、记录完成或再拆工作区。
+
+### overview 更新
+
+顶层任务 `overview.md` 只记录跨角色、稳定、会影响后续 Agent 的任务级结论。
+
+子级 Agent 写 report 时不自动更新 overview。父级、汇总者或任务 owner 读取 report 后，决定是否把其中的稳定结论写入 overview。
 
 ## 状态写入位置
 
@@ -72,22 +127,18 @@ report.md  = 向上回报
 state/tasks/<task-id>/overview.md
 ```
 
-任务目录说明写入：
+Agent 交接和回报写入：
 
 ```text
-state/tasks/README.md
+state/tasks/<task-id>/<agent-workspace>/handoff.md
+state/tasks/<task-id>/<agent-workspace>/report.md
 ```
 
-任务正文写入：
+子 Agent 交接和回报写入：
 
 ```text
-state/tasks/<task-id>/
-```
-
-完成记录任务写入：
-
-```text
-state/tasks/<task-id>/（完成后不默认移动）
+state/tasks/<task-id>/<agent-workspace>/<child-agent-workspace>/handoff.md
+state/tasks/<task-id>/<agent-workspace>/<child-agent-workspace>/report.md
 ```
 
 长期事实写入：
@@ -117,17 +168,10 @@ docs/
 
 任务关闭后的处理方式：
 
-1. 保留在 `state/tasks/<task-id>/` 并标记为 `done`。
-2. 完成记录到 `state/tasks/<task-id>/（完成后不默认移动）`。
-3. 在用户明确确认后删除任务目录。
+1. 保留在 `state/tasks/<task-id>/`，在 `overview.md` 标记结论。
+2. 在用户明确确认后删除任务目录。
 
-删除或完成记录后，必须同步更新：
-
-- `state/tasks/README.md`
-- `state/tasks/<task-id>/overview.md`
-- 必要时追加 `state/session-log.md`
-
-`state/tasks/<task-id>/overview.md` 不删除，只更新为新的当前任务面板或空闲状态。
+删除前必须确认任务没有需要保留的长期价值。删除顶层任务目录或 Agent 工作区是破坏性操作。
 
 ## 冲突处理
 
@@ -138,10 +182,10 @@ docs/
 > docs/decisions/
 > docs/architecture.md
 > docs/modules/
-> state/tasks/<task-id>/report.md
-> state/tasks/<task-id>/handoff.md
-> state/tasks/<task-id>/report.md
 > state/tasks/<task-id>/overview.md
+> 父级 Agent 工作区 report.md
+> 当前 Agent 工作区 handoff.md
+> 当前 Agent 工作区 report.md
 > Adviser 的 derived context
 ```
 
@@ -149,7 +193,7 @@ docs/
 
 如果模块设计中的实现落点与真实代码冲突，Developer 必须反馈给 Module Designer 或用户确认，不得自行改变模块边界或代码层级。
 
-如果两个任务需要修改同一文件或同一职责边界，必须在相关任务的 `相关工作区 report` 或 `report.md` 中标明冲突，并由用户或共同上层 owner 决定如何处理。
+如果两个任务需要修改同一文件或同一职责边界，必须在相关工作区的 `report.md` 中标明冲突，并由用户或共同上层 owner 决定如何处理。
 
 ## 角色责任边界
 
@@ -171,7 +215,7 @@ Adviser：解释、问答、辅助理解，不产出权威设计
 读取范围应遵循：
 
 ```text
-总规则 + 当前全局面板 + 任务目录说明 + 当前顶层任务目录和 Agent 工作区 + 当前角色 + 当前技能 + 相关产物 + 对应质量门
+总规则 + 当前顶层任务 overview + 当前 Agent 工作区 + 当前角色 + 当前技能 + 相关产物 + 对应质量门
 ```
 
 如果某个文件只是背景知识，先判断是否必要。避免把无关上下文塞给 Agent。
@@ -184,20 +228,20 @@ Adviser：解释、问答、辅助理解，不产出权威设计
 - 风险是否写清楚
 - 临时假设是否标明
 - 下一个角色需要读哪些文件
-- 要写入哪个任务目录的 `handoff.md`
+- 要写入哪个 Agent 工作区的 `handoff.md`
 - 是否需要用户确认
 
 ## 回报前检查
 
 回报前必须确认：
 
-- 本任务结论是否清楚
+- 本工作区结论是否清楚
 - 完成内容是否写清楚
 - 修改或产出文件是否列出
 - 验证结果是否写清楚
 - 未完成项和风险是否写清楚
 - 上层任务或用户下一步是否清楚
-- 要写入哪个任务目录的 `report.md`
+- 要写入哪个 Agent 工作区的 `report.md`
 
 ## 用户确认机制
 
@@ -206,7 +250,7 @@ Adviser：解释、问答、辅助理解，不产出权威设计
 - 写入正式产物
 - 修改规则、角色、技能
 - 删除或移动文件
-- 删除任务目录
+- 删除任务目录或 Agent 工作区
 - 引入依赖
 - 接受 CONCERNS 风险继续推进
 - 关闭任务

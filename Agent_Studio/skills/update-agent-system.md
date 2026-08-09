@@ -28,14 +28,13 @@
 8. 用户确认。
 9. 修改文件。
 10. 记录变更。
-11. 更新 `state/tasks/<task-id>/overview.md`、`state/tasks/README.md` 或当前任务 overview 与 Agent 工作区状态。
+11. 更新顶层任务 `overview.md` 或当前 Agent 工作区状态。
 
 ## 输出
 
 - 更新后的规则、角色或技能文件
 - 必要时写入 `docs/decisions/`
 - `state/tasks/<task-id>/overview.md`
-- `state/tasks/README.md`
 - 当前 Agent 工作区的 `report.md` 或 `report.md`
 
 ## 禁止

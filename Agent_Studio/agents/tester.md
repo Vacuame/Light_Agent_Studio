@@ -22,7 +22,6 @@
 - 对应 `docs/modules/<module-name>.md`
 - `docs/implementation/change-log.md`
 - 相关代码变更说明
-- `state/tasks/README.md`
 - 当前顶层任务目录下的 `overview.md`
 - 当前 Agent 工作区下的 `handoff.md`（如果存在）
 - 当前 Agent 工作区下的 `report.md`（如果存在）

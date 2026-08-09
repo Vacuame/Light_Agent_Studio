@@ -9,36 +9,36 @@
 开始新会话时，应提醒读取：
 
 ```text
-state/tasks/<task-id>/overview.md
-state/tasks/README.md
+rules/rules.md
+rules/context-rules.md
+rules/collaboration-rules.md
 rules/project-config.md
 ```
 
-如果已经确定要接手的任务，还应读取该任务目录下的：
+如果已经确定要接手的任务，还应读取：
 
 ```text
-overview.md
-report.md
-handoff.md   # 如果存在
-report.md    # 如果存在
-相关工作区 report     # 如果存在
+state/tasks/<task-id>/overview.md
+当前 Agent 工作区/handoff.md   # 如果存在
+当前 Agent 工作区/report.md    # 如果存在
+必要的父级、子级或兄弟工作区 report
 ```
+
+如果顶层任务目录或 Agent 工作区不明确，必须先定位或询问用户。
 
 ## 压缩前保存
 
 压缩或长任务中断前，应提醒更新：
 
 ```text
-state/tasks/<task-id>/overview.md
-state/tasks/README.md
-state/tasks/<task-id>/report.md
+当前 Agent 工作区/report.md
 ```
 
 必要时更新：
 
 ```text
-state/tasks/<task-id>/handoff.md
-state/tasks/<task-id>/report.md
+接手 Agent 工作区/handoff.md
+state/tasks/<task-id>/overview.md
 ```
 
 ## 危险操作提醒
@@ -47,7 +47,8 @@ state/tasks/<task-id>/report.md
 
 - 删除文件
 - 删除任务目录
-- 完成记录或移动任务目录
+- 删除 Agent 工作区
+- 移动任务目录或 Agent 工作区
 - 大规模移动目录
 - 修改项目配置
 - 修改规则、角色、技能
@@ -78,37 +79,36 @@ state/tasks/<task-id>/report.md
 
 用户确认后，才可以：
 
-- 更新当前 Agent 工作区的 `handoff.md`
+- 更新接手 Agent 工作区的 `handoff.md`
 - 更新当前 Agent 工作区的 `report.md`
 - 更新正式产物
 - 标记当前阶段完成
-- 更新 `state/tasks/README.md` 和 `state/tasks/<task-id>/overview.md`
+- 作为父级、汇总者或任务 owner 更新顶层任务 `overview.md`
 
 ## 状态陈旧提醒
 
-如果 `state/tasks/<task-id>/overview.md`、`state/tasks/README.md` 或当前顶层任务目录和 Agent 工作区明显不一致，应先更新状态，再继续任务。
+如果顶层任务 `overview.md`、目录树或当前 Agent 工作区明显不一致，应先整理状态，再继续任务。
 
 常见情况：
 
-- `active.md` 记录的是旧任务
-- `active.md` 指向的任务目录不存在
-- `tasks/index.md` 记录的路径不存在
-- 任务目录存在但没有登记到 `tasks/index.md`
-- `handoff.md` 指向不存在的下一步
-- `report.md` 写了完成，但任务目录说明仍是 active
-- docs 已更新但 active.md 未更新
-- 测试失败但任务状态仍写“完成”
+- 顶层任务目录存在但缺少 `overview.md`
+- 当前 Agent 工作区职责不清楚
+- 同一职责出现多个相似工作区，无法判断接手哪一个
+- `handoff.md` 指向不存在的下一步或不存在的接手对象
+- `report.md` 写了完成，但父级没有读取或处理
+- docs 已更新但对应工作区 report 没有记录
+- 测试失败但 report 写“完成”
 
 ## 任务目录一致性提醒
 
 更新任务目录时，提醒检查：
 
-- 是否有 `overview.md`
-- 是否有 `report.md`
-- 闭环时是否有 `report.md`
-- 有交接时是否有 `handoff.md`
-- 如果有子任务，父任务是否链接了子任务
-- 删除或完成记录后，`active.md` 和 `tasks/index.md` 是否仍残留旧路径
+- 顶层任务目录是否有 `overview.md`
+- 当前 Agent 是否有自己的工作区
+- 闭环时当前工作区是否有 `report.md`
+- 有交接时接手工作区是否有 `handoff.md`
+- 如果有子 Agent，子工作区是否嵌套在父工作区下
+- 任务完成后是否已在 `overview.md` 或相关 `report.md` 中记录结论
 
 ## 正式产物写入提醒
 
@@ -129,8 +129,8 @@ state/tasks/<task-id>/report.md
 
 以后如果需要自动化，可以增加：
 
-- 会话开始时打印 `state/tasks/<task-id>/overview.md` 和 `state/tasks/README.md`
-- 压缩前提醒更新当前顶层任务目录和 Agent 工作区
+- 会话开始时打印顶层任务 `overview.md` 和当前 Agent 工作区路径
+- 压缩前提醒更新当前 Agent 工作区
 - 写入 `docs/` 前提醒检查质量门
-- 检查任务目录说明中的路径是否存在
+- 检查工作区路径是否存在
 - 检查 TODO/FIXME 是否有说明

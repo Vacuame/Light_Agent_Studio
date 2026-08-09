@@ -47,7 +47,6 @@ Agent Studio 支持按任务需要裁剪流程。常见链路是：
 请先阅读：
 1. Agent_Studio/rules/rules.md
 2. Agent_Studio/overview.md
-3. Agent_Studio/state/tasks/README.md
 
 然后按 rules 中定义的 /start 启动流程开始。
 
@@ -80,7 +79,6 @@ Agent Studio 支持按任务需要裁剪流程。常见链路是：
 请先阅读：
 1. Agent_Studio/rules/rules.md
 2. 根据你现在的角色名，在 Agent_Studio/agents/ 中自行找到对应角色文件并阅读
-3. Agent_Studio/state/tasks/README.md
 
 然后根据“当前任务”的描述，在 Agent_Studio/state/tasks/ 中自行定位最匹配的顶层任务目录和 Agent 工作区。
 

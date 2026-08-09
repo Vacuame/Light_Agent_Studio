@@ -21,7 +21,6 @@
 - 相关 `docs/decisions/`
 - `rules/project-config.md`
 - `state/tasks/<task-id>/overview.md`
-- `state/tasks/README.md`
 - 当前顶层任务的 `overview.md` 和当前 Agent 工作区的 `handoff.md` / `report.md`
 - 当前 Agent 工作区的 `handoff.md`（如果存在）
 - 当前 Agent 工作区的 `report.md`（如果存在）
@@ -42,7 +41,7 @@
 12. 更新当前顶层任务目录和 Agent 工作区的 `report.md`。
 13. 如果需要交给 Tester 或其他下游任务，写对应任务目录的 `handoff.md`。
 14. 如果实现任务阶段结束或需要向上层/用户回报，写当前顶层任务目录和 Agent 工作区的 `report.md`。
-15. 更新 `state/tasks/<task-id>/overview.md` 和 `state/tasks/README.md`。
+15. 更新顶层任务 `overview.md`。
 
 ## 启动条件
 
@@ -58,7 +57,6 @@
 - 必要时：当前任务或子任务目录下的 `handoff.md`
 - 必要时：当前 Agent 工作区的 `report.md`
 - `state/tasks/<task-id>/overview.md`
-- `state/tasks/README.md`
 
 ## 禁止
 

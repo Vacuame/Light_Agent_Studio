@@ -25,7 +25,6 @@
 - 相关 `docs/decisions/`
 - 项目源码和目录结构，仅用于定位已有职责归属
 - `state/tasks/<task-id>/overview.md`
-- `state/tasks/README.md`
 - 当前顶层任务的 `overview.md` 和当前 Agent 工作区的 `handoff.md` / `report.md`
 - 当前 Agent 工作区的 `handoff.md`、`report.md`（如果存在）
 
@@ -43,7 +42,7 @@
 10. 更新当前顶层任务目录和 Agent 工作区的 `report.md`。
 11. 如果需要交给 Developer 或其他下游任务，写对应任务目录的 `handoff.md`，必须包含实现落点摘要。
 12. 如果模块设计任务阶段结束或需要向上层/用户回报，写当前顶层任务目录和 Agent 工作区的 `report.md`。
-13. 更新 `state/tasks/<task-id>/overview.md` 和 `state/tasks/README.md`。
+13. 更新顶层任务 `overview.md`。
 
 任务是否拆分、拆几个子任务、由哪些角色接手，由用户或当前任务 owner 决定。本 skill 不强制创建实现子任务。
 
@@ -62,4 +61,3 @@
 - 必要时：当前任务或子任务目录下的 `handoff.md`
 - 必要时：当前 Agent 工作区的 `report.md`
 - `state/tasks/<task-id>/overview.md`
-- `state/tasks/README.md`

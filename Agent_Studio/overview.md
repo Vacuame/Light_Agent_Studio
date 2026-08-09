@@ -77,7 +77,7 @@ state/
 
 1. 填写 `docs/project-overview.md`
 2. 填写 `rules/project-config.md`
-3. 读取 `state/tasks/README.md`
+3. 读取 `rules/context-rules.md` 和 `rules/collaboration-rules.md`
 4. 根据用户描述匹配或请示创建顶层任务目录
 5. 读取该任务的 `overview.md`
 6. 定位或创建当前 Agent 工作区
