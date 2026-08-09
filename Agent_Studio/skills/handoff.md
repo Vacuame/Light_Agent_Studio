@@ -11,7 +11,7 @@
 
 ## 权限
 
-本 skill 不授予额外权限；执行者必须遵守当前角色文件和角色加载清单中的权限边界。
+本 skill 不授予额外权限；执行者必须遵守当前角色文件的职责和权限边界。
 
 handoff/report 的方向、写入位置和确认机制见 `rules/collaboration-rules.md`；格式模板见 `rules/context-rules.md`。
 
@@ -48,7 +48,7 @@ handoff/report 的方向、写入位置和确认机制见 `rules/collaboration-r
 - 必要的父级、子级或兄弟工作区 `report.md`
 - 当前任务相关产物
 
-如果要给下游写交接，先确认接手者工作区。
+如果要给下游写交接，先按 `rules/collaboration-rules.md` 判断接手者工作区应是当前工作区的子级、同级还是旁支。下游继续当前工作区范围内的工作时，默认使用当前工作区下的子工作区。
 
 如果要向上回报，先确认当前 Agent 工作区和回报对象。
 
@@ -58,10 +58,11 @@ handoff/report 的方向、写入位置和确认机制见 `rules/collaboration-r
 
 1. 明确交接给谁。
 2. 明确接手什么。
-3. 定位或创建接手者 Agent 工作区。
-4. 按 `rules/collaboration-rules.md` 做交接前检查。
-5. 说明拟写文件、写入原因和交接摘要，并询问用户是否写入。
-6. 用户确认后，在接手者 Agent 工作区写 `handoff.md`。
+3. 按 `rules/collaboration-rules.md` 判断接手者与当前工作区的关系：子级、同级或旁支。
+4. 定位或创建接手者 Agent 工作区；如果是下游继续当前工作区范围内的工作，创建或使用当前工作区下的子工作区。
+5. 按 `rules/collaboration-rules.md` 做交接前检查。
+6. 说明拟写文件、写入原因和交接摘要，并询问用户是否写入。
+7. 用户确认后，在接手者 Agent 工作区写 `handoff.md`。
 
 `handoff.md` 推荐格式见 `rules/context-rules.md`。
 
@@ -83,7 +84,7 @@ handoff/report 的方向、写入位置和确认机制见 `rules/collaboration-r
 
 1. 创建 `state/tasks/<task-id>/`。
 2. 创建或更新 `overview.md`，记录任务目标、背景、当前状态和重要关系。
-3. 如果已有明确接手 Agent，创建对应 Agent 工作区。
+3. 如果已有明确接手 Agent，按 `rules/collaboration-rules.md` 判断接手工作区位置；没有当前父级工作区时，通常创建为顶层任务下的一级工作区。
 4. 如果需要交给接手 Agent，先询问用户是否写 `handoff.md`，确认后在接手者工作区写入。
 
 不要在顶层任务目录直接创建 `handoff.md` 或 `report.md`。
@@ -92,7 +93,8 @@ handoff/report 的方向、写入位置和确认机制见 `rules/collaboration-r
 
 按实际交流需要输出：
 
-- 接手 Agent 工作区的 `handoff.md`（用户明确要求或确认后）
+- 向子 Agent 交接：`state/tasks/<task-id>/<current-agent-workspace>/<child-agent-workspace>/handoff.md`（用户明确要求或确认后）
+- 同级或旁支 Agent 交接：`state/tasks/<task-id>/<sibling-or-branch-workspace>/handoff.md`（用户明确要求或确认后）
 - 当前 Agent 工作区的 `report.md`（用户明确要求或确认后）
 - 顶层任务 `overview.md`（任务 owner、父级或汇总者需要整理稳定任务级结论，且用户确认后）
 

@@ -32,6 +32,37 @@ Agent Studio 不替用户判断任务应该如何拆分，也不规定固定的�
 - 同一层级的工作区是兄弟、并列或旁支关系。
 - Adviser、Reviewer、Researcher 等辅助角色可以作为同级旁支，也可以挂在某个局部分支下。
 
+示例：
+
+```text
+state/tasks/login-refactor/
+  overview.md
+  01-architecture-module-login/
+    handoff.md
+    report.md
+    01-developer-login-api/
+      handoff.md
+      report.md
+  02-adviser-context/
+    handoff.md
+    report.md
+```
+
+这里：
+
+- `01-architecture-module-login/` 是一级 Agent 工作区。
+- `01-developer-login-api/` 是 `01-architecture-module-login/` 的子 Agent 工作区。
+- `02-adviser-context/` 与 `01-architecture-module-login/` 同级，是旁支工作区。
+
+创建接手 Agent 工作区前，必须先判断接手者与当前 Agent 工作区的关系：
+
+- 如果接手者是在当前工作区拆出的下游执行者、验证者、研究者、实现者或子任务承担者，创建为当前 Agent 工作区的子工作区。
+- 如果接手者与当前工作区并列承担同一顶层任务的另一条独立分支，创建为同级工作区。
+- 如果接手者只是辅助理解、旁路审查或临时咨询，且不属于当前工作区的下游链路，可以创建为同级旁支，或在用户指定的位置创建。
+- 如果无法判断是子级、同级还是旁支，必须列出候选位置并询问用户，不得默认放到顶层任务目录下。
+
+默认原则：从当前 Agent 工作区发出的向下交接，接手工作区应创建为当前 Agent 工作区的子工作区；只有用户明确要求同级、旁支、顶层工作区，或当前工作区不是交接来源时，才创建为顶层任务下的一级工作区。
+
 ## 交接与回报方向
 
 `handoff.md` 和 `report.md` 只是上下级或接手关系中的工作交流文件，不是状态机、流程引擎或阶段判定器。
@@ -97,10 +128,11 @@ report.md  = 写给上级、上层汇总者、任务 owner 或用户，放在当
 ## 状态写入位置
 
 - 顶层任务总览：`state/tasks/<task-id>/overview.md`
-- Agent 交接：`state/tasks/<task-id>/<receiver-agent-workspace>/handoff.md`
-- Agent 回报：`state/tasks/<task-id>/<current-agent-workspace>/report.md`
-- 子 Agent 交接：`state/tasks/<task-id>/<agent-workspace>/<child-agent-workspace>/handoff.md`
-- 子 Agent 回报：`state/tasks/<task-id>/<agent-workspace>/<child-agent-workspace>/report.md`
+- 当前 Agent 回报：`state/tasks/<task-id>/<current-agent-workspace>/report.md`
+- 向子 Agent 交接：`state/tasks/<task-id>/<current-agent-workspace>/<child-agent-workspace>/handoff.md`
+- 子 Agent 回报：`state/tasks/<task-id>/<current-agent-workspace>/<child-agent-workspace>/report.md`
+- 同级或旁支 Agent 交接：`state/tasks/<task-id>/<sibling-or-branch-workspace>/handoff.md`
+- 同级或旁支 Agent 回报：`state/tasks/<task-id>/<sibling-or-branch-workspace>/report.md`
 - 任务级公共认知：`state/tasks/<task-id>/docs/*.md`，按 `rules/context-rules.md` 和用户确认执行
 - 长期事实：全局 `docs/`
 
@@ -179,7 +211,9 @@ rules.md 通用基线 + context-rules 状态读取规则 + 当前角色 + 当前
 - 风险是否写清楚
 - 临时假设是否标明
 - 下一个角色需要读哪些文件
+- 接手工作区与当前工作区的关系是否已判断清楚：子级、同级或旁支
 - 要写入哪个 Agent 工作区的 `handoff.md`
+- 拟写入的 `handoff.md` 完整路径是否已向用户说明
 - 是否已有用户明确要求或确认写入该 `handoff.md`
 
 ## 回报前检查
@@ -209,6 +243,8 @@ rules.md 通用基线 + context-rules 状态读取规则 + 当前角色 + 当前
 - 引入依赖
 - 接受 CONCERNS 风险继续推进
 - 关闭任务
+
+创建或修改 `handoff.md` / `report.md` 前，必须说明拟写入的完整路径。
 
 用户确认必须是明确文字，例如：
 
