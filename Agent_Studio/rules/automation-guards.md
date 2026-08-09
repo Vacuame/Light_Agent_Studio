@@ -17,7 +17,7 @@ handoff/report 协作和确认机制 -> rules/collaboration-rules.md
 
 ## 会话开始提醒
 
-开始新会话时，应提醒读取 `rules/rules.md` 的通用必读基线，并按当前任务组合读取角色、skill、状态层、项目配置和质量门。
+开始新会话时，应先确认当前角色并读取对应 `agents/<role>.md` 的 `## 角色加载清单`。角色不明确时，按 `rules/rules.md` 和 `skills/start.md` 的启动规则判断或询问用户。
 
 如果顶层任务目录或 Agent 工作区不明确，按 `rules/context-rules.md` 定位；仍不明确时询问用户。
 

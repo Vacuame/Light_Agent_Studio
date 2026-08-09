@@ -66,14 +66,11 @@ understand
 
 ## 最小启动步骤
 
-1. 读取 `rules/rules.md`
-2. 读取 `rules/context-rules.md`
-3. 读取 `rules/collaboration-rules.md`
-4. 读取 `rules/project-config.md`
-5. 根据用户描述匹配或请示创建顶层任务目录
-6. 定位当前 Agent 工作区
-7. 读取当前角色文件和当前任务需要的 skill
-8. 按任务需要读取对应质量门和正式产物
+1. 如果角色不明确，读取 `rules/rules.md`、`skills/start.md` 和本导览来判断或询问当前角色
+2. 角色明确后，读取对应 `agents/<role>.md`
+3. 按角色文件里的 `## 角色加载清单` 加载核心规则、默认 skill、必要质量门、状态层文件和正式产物
+4. 如果是组合角色，合并所有参与角色的加载清单，去重后读取；权限冲突时采用更严格权限
+5. 按当前任务选择额外 skill 或质量门
 
 ## 冲突处理
 

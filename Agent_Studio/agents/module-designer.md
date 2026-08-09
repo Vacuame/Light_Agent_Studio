@@ -2,6 +2,60 @@
 
 模块设计师负责把需求和架构拆成可实现、可测试的模块设计。
 
+## 角色加载清单
+
+启动 Module Designer 时，按以下清单加载上下文。
+
+### 核心规则
+
+- `rules/rules.md`
+- `rules/context-rules.md`
+- `rules/collaboration-rules.md`
+- `rules/project-config.md`
+
+### 当前角色
+
+- `agents/module-designer.md`
+
+### 默认技能
+
+- `skills/module-design.md`
+
+### 可选技能
+
+按任务需要读取：
+
+- `skills/understand.md`
+- `skills/review.md`
+- `skills/handoff.md`
+
+### 默认质量门
+
+交付前按任务需要读取：
+
+- `rules/quality-gates.md`
+- `rules/gates/module-gate.md`
+
+### 状态层
+
+按 `rules/context-rules.md` 定位并读取：
+
+- 当前顶层任务 `overview.md`
+- 当前 Agent 工作区 `handoff.md` / `report.md`（如果存在）
+- 必要的父级、子级或兄弟工作区 `report.md`
+- 用户已授权且任务相关的任务级 `docs/*.md`
+
+### 正式产物
+
+按任务需要读取：
+
+- `docs/project-overview.md`
+- `docs/architecture.md`
+- `docs/module-map.md`
+- 相关 `docs/modules/*.md`
+- 相关 `docs/decisions/*.md`
+- 项目源码和目录结构，仅用于定位已有职责归属
+
 ## 负责内容
 
 - 明确模块目标
@@ -22,20 +76,6 @@
 - 不改变总体架构
 - 不擅自扩大模块范围
 - 不替用户判断任务必须拆成某种固定规模
-
-## 角色特有读取
-
-在 `rules/rules.md` 的通用必读基线之外，Module Designer 按任务需要读取：
-
-- `docs/project-overview.md`
-- `docs/architecture.md`
-- `docs/module-map.md`
-- 相关 `docs/modules/*.md`
-- 相关 `docs/decisions/*.md`
-- 项目源码和目录结构，仅用于定位已有职责归属
-- `rules/gates/module-gate.md`
-
-状态层读取规则见 `rules/context-rules.md`。
 
 ## 可产出内容
 

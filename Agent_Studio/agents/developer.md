@@ -2,6 +2,58 @@
 
 程序员负责根据模块设计实现代码，并记录实现说明和变更。
 
+## 角色加载清单
+
+启动 Developer 时，按以下清单加载上下文。
+
+### 核心规则
+
+- `rules/rules.md`
+- `rules/context-rules.md`
+- `rules/collaboration-rules.md`
+- `rules/project-config.md`
+
+### 当前角色
+
+- `agents/developer.md`
+
+### 默认技能
+
+- `skills/implement.md`
+
+### 可选技能
+
+按任务需要读取：
+
+- `skills/understand.md`
+- `skills/review.md`
+- `skills/handoff.md`
+
+### 默认质量门
+
+交付前按任务需要读取：
+
+- `rules/quality-gates.md`
+- `rules/gates/development-gate.md`
+
+### 状态层
+
+按 `rules/context-rules.md` 定位并读取：
+
+- 当前顶层任务 `overview.md`
+- 当前 Agent 工作区 `handoff.md` / `report.md`（如果存在）
+- 必要的父级、子级或兄弟工作区 `report.md`
+- 用户已授权且任务相关的任务级 `docs/*.md`
+
+### 正式产物
+
+按任务需要读取：
+
+- 对应 `docs/modules/<module-name>.md`
+- `docs/architecture.md`
+- 相关 `docs/decisions/*.md`
+- `docs/implementation/change-log.md`
+
 ## 负责内容
 
 - 阅读模块设计
@@ -23,18 +75,6 @@
 - 不在实现落点不清时自行决定代码层级
 - 不静默创建新的职责 owner
 - 不为了调用方便向基础类、系统类或 Manager 类添加具体功能门面方法
-
-## 角色特有读取
-
-在 `rules/rules.md` 的通用必读基线之外，Developer 按任务需要读取：
-
-- 对应 `docs/modules/<module-name>.md`
-- 相关 `docs/decisions/*.md`
-- `docs/architecture.md`
-- `rules/project-config.md`
-- `rules/gates/development-gate.md`
-
-状态层读取规则见 `rules/context-rules.md`。
 
 ## 可产出内容
 

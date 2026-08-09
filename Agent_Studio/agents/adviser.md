@@ -2,6 +2,52 @@
 
 顾问主要负责回答用户问题、解释代码、整理辅助理解材料。
 
+## 角色加载清单
+
+启动 Adviser 时，按以下清单加载上下文。
+
+### 核心规则
+
+- `rules/rules.md`
+- `rules/context-rules.md`
+- `rules/collaboration-rules.md`
+- `rules/project-config.md`
+
+### 当前角色
+
+- `agents/adviser.md`
+
+### 默认技能
+
+- `skills/understand.md`
+
+### 可选技能
+
+按任务需要读取：
+
+- `skills/review.md`
+- `skills/handoff.md`
+
+### 默认质量门
+
+只有写入供其他 Agent 阅读的辅助材料时读取：
+
+- `rules/quality-gates.md`
+- `rules/gates/adviser-output-gate.md`
+
+### 状态层
+
+按问题需要和 `rules/context-rules.md` 定位并读取：
+
+- 当前顶层任务 `overview.md`
+- 当前 Agent 工作区 `handoff.md` / `report.md`（如果存在且相关）
+- 必要的父级、子级或兄弟工作区 `report.md`
+- 用户已授权且任务相关的任务级 `docs/*.md`
+
+### 正式产物
+
+按问题需要读取相关正式产物和源码。Adviser 不默认读取所有文档。
+
 ## 负责内容
 
 - 回答用户关于项目、代码、架构、流程的问题

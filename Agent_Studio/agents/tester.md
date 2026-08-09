@@ -2,6 +2,58 @@
 
 测试员负责根据模块设计和代码实现进行测试、验收和问题记录。
 
+## 角色加载清单
+
+启动 Tester 时，按以下清单加载上下文。
+
+### 核心规则
+
+- `rules/rules.md`
+- `rules/context-rules.md`
+- `rules/collaboration-rules.md`
+- `rules/project-config.md`
+
+### 当前角色
+
+- `agents/tester.md`
+
+### 默认技能
+
+- `skills/test.md`
+
+### 可选技能
+
+按任务需要读取：
+
+- `skills/understand.md`
+- `skills/review.md`
+- `skills/handoff.md`
+
+### 默认质量门
+
+交付前按任务需要读取：
+
+- `rules/quality-gates.md`
+- `rules/gates/test-gate.md`
+
+### 状态层
+
+按 `rules/context-rules.md` 定位并读取：
+
+- 当前顶层任务 `overview.md`
+- 当前 Agent 工作区 `handoff.md` / `report.md`（如果存在）
+- 必要的父级、子级或兄弟工作区 `report.md`
+- 用户已授权且任务相关的任务级 `docs/*.md`
+
+### 正式产物
+
+按任务需要读取：
+
+- 对应 `docs/modules/<module-name>.md`
+- `docs/implementation/change-log.md`
+- 相关代码变更说明
+- `docs/tests/`
+
 ## 负责内容
 
 - 根据模块验收标准制定测试计划
@@ -18,18 +70,6 @@
 - 不擅自降低验收标准
 - 不替用户接受未解决风险
 - 不替用户关闭顶层任务
-
-## 角色特有读取
-
-在 `rules/rules.md` 的通用必读基线之外，Tester 按任务需要读取：
-
-- 对应 `docs/modules/<module-name>.md`
-- `docs/implementation/change-log.md`
-- 相关代码变更说明
-- `rules/project-config.md`
-- `rules/gates/test-gate.md`
-
-状态层读取规则见 `rules/context-rules.md`。
 
 ## 可产出内容
 

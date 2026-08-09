@@ -21,49 +21,38 @@
 
 ## 必读文件
 
+启动阶段的目标是先确认角色，再按角色加载清单读取上下文。
+
+角色不明确时，先读取最小入口：
+
 - `overview.md`
 - `rules/rules.md`
-- `rules/context-rules.md`
-- `rules/collaboration-rules.md`
-- `rules/project-config.md`
-- `rules/quality-gates.md`
-- `rules/automation-guards.md`
+- `skills/start.md`
 
-如果已经确定当前顶层任务目录和 Agent 工作区，再读取：
+角色明确后，当前角色文件是启动加载入口；不要从 skill 中另行拼装全局规则读取清单。
 
-- 顶层任务 `overview.md`
-- 当前 Agent 工作区 `handoff.md`（如果存在）
-- 当前 Agent 工作区 `report.md`（如果存在）
-- 必要的父级、子级或兄弟工作区 `report.md`
+角色明确后：
 
-如果用户给出了具体任务，再读取对应角色和技能：
-
-- 修改 Agent 架构：`agents/administrator.md`、`skills/update-agent-system.md`
-- 理解项目整体：`agents/architect.md`、`skills/understand.md`、`skills/architecture.md`
-- 拆模块和任务：`agents/module-designer.md`、`skills/module-design.md`
-- 实现代码：`agents/developer.md`、`skills/implement.md`
-- 测试验收：`agents/tester.md`、`skills/test.md`
-- 解释问题或整理材料：`agents/adviser.md`
+1. 读取对应 `agents/<role>.md`。
+2. 按该角色文件的 `## 角色加载清单` 读取核心规则、默认 skill、必要质量门、状态层文件和正式产物。
+3. 如果是组合角色，合并所有参与角色的加载清单，去重后读取；权限冲突时采用更严格权限。
+4. 如果当前任务需要额外 skill 或质量门，再按任务需要读取。
 
 ## 流程
 
 1. 确认 Agent Studio 根目录和项目根目录。
-2. 读取启动必读文件。
-3. 摘要顶层任务总览：当前顶层任务、进展、阻塞、重要文件和下一步。
-4. 如果用户指定任务，定位对应任务目录。
-5. 如果任务目录不明确，列出可选任务或询问用户。
-6. 检查 `rules/project-config.md` 是否已填写关键配置。
-7. 判断本次任务类型：
-   - Agent 架构调整 → Administrator
-   - 项目整体理解或架构判断 → Architect
-   - 模块拆解和接口设计 → Module Designer
-   - 代码实现和修改 → Developer
-   - 测试、验收、bug 复现 → Tester
-   - 问答、解释、辅助理解材料 → Adviser
-8. 判断需要使用的技能 SOP。
-9. 列出下一步需要读取的文件。
-10. 如果状态层缺失、过期或任务目录不存在，提出更新建议，但先征求用户确认。
-11. 输出启动摘要和建议接手角色。
+2. 如果当前角色不明确，读取启动最小入口并判断本次建议角色。
+3. 如果无法唯一判断角色，先询问用户。
+4. 角色明确后，读取对应 `agents/<role>.md`。
+5. 按角色文件的 `## 角色加载清单` 加载上下文。
+6. 摘要顶层任务总览：当前顶层任务、进展、阻塞、重要文件和下一步。
+7. 如果用户指定任务，定位对应任务目录。
+8. 如果任务目录不明确，列出可选任务或询问用户。
+9. 检查 `rules/project-config.md` 是否已填写关键配置。
+10. 判断需要使用的技能 SOP。
+11. 列出当前最小下一步需要读取的额外文件。
+12. 如果状态层缺失、过期或任务目录不存在，提出更新建议，但先征求用户确认。
+13. 输出启动摘要和建议接手角色。
 
 ## 启动阶段收敛规则
 

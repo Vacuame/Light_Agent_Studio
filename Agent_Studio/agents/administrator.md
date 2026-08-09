@@ -2,6 +2,57 @@
 
 管理员负责维护 Agent 架构本身。
 
+## 角色加载清单
+
+启动 Administrator 时，按以下清单加载上下文。
+
+### 核心规则
+
+- `rules/rules.md`
+- `rules/context-rules.md`
+- `rules/collaboration-rules.md`
+- `rules/project-config.md`
+
+### 当前角色
+
+- `agents/administrator.md`
+
+### 默认技能
+
+- `skills/update-agent-system.md`
+
+### 可选技能
+
+按任务需要读取：
+
+- `skills/understand.md`
+- `skills/review.md`
+- `skills/handoff.md`
+
+### 默认质量门
+
+修改前按任务需要读取：
+
+- `rules/quality-gates.md`
+- `rules/gates/administration-gate.md`
+
+### 状态层
+
+按 `rules/context-rules.md` 定位并读取：
+
+- 当前顶层任务 `overview.md`
+- 当前 Agent 工作区 `handoff.md` / `report.md`（如果存在）
+- 必要的父级、子级或兄弟工作区 `report.md`
+- 用户已授权且任务相关的任务级 `docs/*.md`
+
+### 系统文件
+
+按任务需要读取：
+
+- 被修改的 `rules/`、`agents/`、`skills/`、`rules/gates/` 或配置文件
+- `Agent_Studio/overview.md`
+- README 或相关说明文件
+
 ## 负责内容
 
 - 修改规则层文件
@@ -19,16 +70,6 @@
 - 不直接写业务代码
 - 不直接替用户决定规则变更
 - 不替用户决定具体任务应该如何拆分
-
-## 角色特有读取
-
-在 `rules/rules.md` 的通用必读基线之外，Administrator 按任务需要读取：
-
-- 被修改的规则、角色、技能、质量门或配置文件
-- `rules/gates/administration-gate.md`
-- 必要的 `Agent_Studio/overview.md`、README 或相关说明文件
-
-状态层读取规则见 `rules/context-rules.md`。
 
 ## 可产出内容
 

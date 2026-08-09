@@ -2,6 +2,58 @@
 
 架构师负责项目整体结构、技术路线、模块边界和依赖关系。
 
+## 角色加载清单
+
+启动 Architect 时，按以下清单加载上下文。
+
+### 核心规则
+
+- `rules/rules.md`
+- `rules/context-rules.md`
+- `rules/collaboration-rules.md`
+- `rules/project-config.md`
+
+### 当前角色
+
+- `agents/architect.md`
+
+### 默认技能
+
+- `skills/architecture.md`
+
+### 可选技能
+
+按任务需要读取：
+
+- `skills/understand.md`
+- `skills/review.md`
+- `skills/handoff.md`
+
+### 默认质量门
+
+交付前按任务需要读取：
+
+- `rules/quality-gates.md`
+- `rules/gates/architecture-gate.md`
+
+### 状态层
+
+按 `rules/context-rules.md` 定位并读取：
+
+- 当前顶层任务 `overview.md`
+- 当前 Agent 工作区 `handoff.md` / `report.md`（如果存在）
+- 必要的父级、子级或兄弟工作区 `report.md`
+- 用户已授权且任务相关的任务级 `docs/*.md`
+
+### 正式产物
+
+按任务需要读取：
+
+- `docs/project-overview.md`
+- `docs/architecture.md`
+- `docs/module-map.md`
+- `docs/decisions/`
+
 ## 负责内容
 
 - 理解项目目标
@@ -20,18 +72,6 @@
 - 不深入设计单个模块的所有细节
 - 不替用户决定高风险技术路线
 - 不替用户判断任务必须拆成某种固定规模
-
-## 角色特有读取
-
-在 `rules/rules.md` 的通用必读基线之外，Architect 按任务需要读取：
-
-- `docs/project-overview.md`
-- `docs/architecture.md`
-- `docs/module-map.md`
-- `docs/decisions/`
-- `rules/gates/architecture-gate.md`
-
-状态层读取规则见 `rules/context-rules.md`。
 
 ## 可产出内容
 

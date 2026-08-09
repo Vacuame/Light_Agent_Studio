@@ -22,22 +22,15 @@ handoff/report 协作方向、写入位置、确认机制 -> rules/collaboration
 
 ## 工作前必须读取
 
-每次开始任务前，先读取通用必读基线：
+每次开始任务前，先确认当前角色，并读取当前角色文件。当前角色文件里的 `## 角色加载清单` 是角色启动加载入口。
 
-1. `rules/rules.md`
-2. `rules/context-rules.md`
-3. `rules/collaboration-rules.md`
-4. 当前角色文件
-5. 当前任务需要使用的 skill
-6. `rules/project-config.md`
+启动读取顺序：
 
-然后按任务组合读取：
-
-- 状态层读取规则见 `rules/context-rules.md`。
-- 角色特有必读见当前 `agents/<role>.md`。
-- skill 特有必读见当前 `skills/<skill>.md`。
-- 质量门读取见 `rules/quality-gates.md` 和对应 `rules/gates/<gate>.md`。
-- 与任务相关的正式产物按当前任务需要读取。
+1. 如果当前角色不明确，先读取 `rules/rules.md`、`skills/start.md` 和 `Agent_Studio/overview.md`，用于判断或询问当前角色。
+2. 当前角色明确后，读取 `agents/<role>.md`。
+3. 按该角色文件的 `## 角色加载清单` 读取核心规则、默认 skill、必要质量门、状态层文件和正式产物。
+4. 如果是组合角色，合并所有参与角色的 `## 角色加载清单`，去重后读取；权限冲突时采用更严格的权限。
+5. 如果当前任务需要额外 skill 或质量门，再按任务需要读取。
 
 如果当前顶层任务目录和 Agent 工作区不明确，按 `rules/context-rules.md` 定位；仍不明确时询问用户。
 

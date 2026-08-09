@@ -16,13 +16,11 @@
 
 ## 权限
 
-本 skill 不授予额外权限。执行者必须遵守当前角色文件、`rules/rules.md` 和 `rules/project-config.md` 的权限边界。
+本 skill 不授予额外权限；执行者必须遵守当前角色文件和角色加载清单中的权限边界。
 
-状态层结构和文件格式见 `rules/context-rules.md`；handoff/report 写入方向、位置和确认机制见 `rules/collaboration-rules.md`。
+## 任务输入
 
-## 必读文件
-
-在 `rules/rules.md` 的通用必读基线之外，本 skill 按任务需要读取：
+本 skill 按任务需要使用：
 
 - `docs/project-overview.md`
 - `docs/architecture.md`
