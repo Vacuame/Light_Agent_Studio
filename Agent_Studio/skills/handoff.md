@@ -1,121 +1,117 @@
 # Skill: handoff
 
-用于任务交接、任务回报、任务创建、任务关闭和会话结束前整理。
+用于在 Agent 之间写交接和回报。
 
 ## 目标
 
-- 防止断片
-- 告诉下一个角色或子任务从哪里继续
-- 告诉上层任务或用户当前任务结果
-- 区分临时状态和正式产物
-- 避免多个任务或多个 Agent 覆盖同一个交接文件
+- 让下级、下游或接手者知道如何继续
+- 让上级、上层汇总者、任务 owner 或用户知道当前结果、阻塞、风险或需要判断的问题
+- 避免多个 Agent 覆盖同一个交流文件
+- 区分状态层交流文件和正式产物
 
 ## 核心概念
 
+`handoff.md` 和 `report.md` 只是工作交流文件，不是状态机、流程引擎或阶段判定器。
+
 ```text
-handoff.md = 向下交接
-report.md  = 向上回报
+handoff.md = 写给下级、下游或接手者
+report.md  = 写给上级、上层汇总者、任务 owner 或用户
 ```
 
-所有交接和回报都写入对应 Agent 工作区。
+写入位置：
+
+```text
+handoff.md 写在接手者 Agent 工作区。
+report.md  写在当前 Agent 自己的工作区。
+```
+
+顶层任务目录 `state/tasks/<task-id>/` 不是 Agent 工作区，不直接放 `handoff.md` 或 `report.md`。
 
 ## 必读文件
 
 - `state/tasks/<task-id>/overview.md`
-- 当前顶层任务的 `overview.md`
-- 当前 Agent 工作区的 `report.md`
+- 当前 Agent 工作区的 `handoff.md`（如果存在）
+- 当前 Agent 工作区的 `report.md`（如果存在）
+- 必要的父级、子级或兄弟工作区 `report.md`
 - 当前任务相关产物
 
-如果要接手已有交接，读取当前 Agent 工作区的 `handoff.md`。
+如果要给下游写交接，先确认接手者工作区。
 
-如果要汇总子任务或关闭任务，读取相关子任务的 `report.md`。
-
-## 流程：创建任务或子任务
-
-1. 明确任务目标。
-2. 明确任务 owner 或接手角色。
-3. 创建任务目录：`state/tasks/<task-id>/`。
-4. 写 `overview.md`。
-5. 写 `report.md`。
-6. 必要时写 `handoff.md`。
-7. 必要时写 `相关工作区 report`。
-8. 更新顶层任务 `overview.md`。
-9. 更新 `state/tasks/<task-id>/overview.md`。
-
-任务如何拆分由用户或当前任务 owner 决定。本 skill 不判断任务是大、中、小，也不强制创建子任务。
+如果要向上回报，先确认当前 Agent 工作区和回报对象。
 
 ## 流程：向下交接
 
+需要下级、下游或接手者继续工作时：
+
 1. 明确交接给谁。
 2. 明确接手什么。
-3. 列出必读文件。
-4. 列出已确认内容。
-5. 列出临时假设。
-6. 列出风险。
-7. 如果交给 Developer，列出实现落点摘要。
-8. 列出下一步。
-9. 写入接手任务目录的 `handoff.md`。
-10. 更新接手任务的 `overview.md` 和 `report.md`。
-11. 更新顶层任务 `overview.md`。
+3. 定位或创建接手者 Agent 工作区。
+4. 在接手者 Agent 工作区写 `handoff.md`。
+
+`handoff.md` 应写清楚：
+
+- 交接来源
+- 交接给谁
+- 接手什么
+- 必读文件
+- 已确认内容
+- 临时假设
+- 风险
+- 下一步建议
+
+如果交给 Developer，还应写清楚实现落点摘要。
+
+写 `handoff.md` 不代表当前工作区自动结束，不自动要求写当前工作区 `report.md`，也不自动更新 `overview.md`。
 
 ## 流程：向上回报
 
-1. 总结当前任务。
-2. 列出已完成内容。
-3. 列出修改或产出文件。
-4. 列出验证结果。
-5. 列出未完成内容。
-6. 列出风险与注意事项。
-7. 说明对上层任务的影响。
-8. 给出建议下一步。
-9. 写入当前顶层任务目录和 Agent 工作区的 `report.md`。
-10. 更新当前任务的 `overview.md` 和 `report.md`。
-11. 更新顶层任务 `overview.md`。
+需要向父级、上层汇总者、任务 owner 或用户说明当前结果、阻塞、风险或请求判断时：
 
-## 流程：关闭任务
+1. 明确回报给谁。
+2. 明确本次回报说明什么。
+3. 在当前 Agent 工作区写 `report.md`。
 
-1. 读取当前任务的 `report.md`。
-2. 如果有子任务，读取必要子任务的 `report.md`。
-3. 检查是否通过相关质量门。
-4. 检查是否存在未解决风险或 CONCERNS。
-5. 用户确认关闭后，标记任务为 `done` 或 `dropped`。
-6. 更新顶层任务 `overview.md`。
+`report.md` 应写清楚：
 
-## 流程：完成记录任务
+- 回报给谁
+- 本工作区结论：PASS / CONCERNS / BLOCKED / DROPPED
+- 完成内容
+- 修改或产出文件
+- 验证结果
+- 未完成项
+- 风险与注意事项
+- 对上层任务的影响
+- 建议下一步
 
-1. 确认任务状态为 `done` 或 `dropped`。
-2. 确认用户同意完成记录。
-3. 在任务目录写或更新 `overview.md`。
-4. 将任务目录移动到 `state/tasks/<task-id>/（完成后不默认移动）`。
-5. 更新顶层任务 `overview.md`。
-6. 更新 `state/tasks/<task-id>/overview.md`。
+`report.md` 只表达当前工作区的回报内容，不代表顶层任务自动完成，不自动要求更新 `overview.md`。
 
-## 流程：删除任务
+## 任务创建
 
-删除任务目录是破坏性操作，必须先获得用户明确确认。
+如果用户或任务 owner 要开启新的顶层任务：
 
-1. 确认任务状态为 `done` 或 `dropped`。
-2. 确认任务没有需要保留的长期价值。
-3. 如果有子任务，先处理子任务。
-4. 用户确认后删除任务目录。
-5. 更新顶层任务 `overview.md`。
-6. 更新 `state/tasks/<task-id>/overview.md`。
+1. 创建 `state/tasks/<task-id>/`。
+2. 创建或更新 `overview.md`，记录任务目标、背景、当前状态和重要关系。
+3. 如果已有明确接手 Agent，创建对应 Agent 工作区。
+4. 如果需要交给接手 Agent，在接手者工作区写 `handoff.md`。
+
+不要在顶层任务目录直接创建 `handoff.md` 或 `report.md`。
 
 ## 输出
 
-按场景输出：
+按实际交流需要输出：
 
-- `state/tasks/<task-id>/overview.md`
-- `state/tasks/<task-id>/report.md`
-- `state/tasks/<task-id>/handoff.md`
-- `state/tasks/<task-id>/report.md`
-- `state/tasks/<task-id>/相关工作区 report`
-- `state/tasks/<task-id>/overview.md`
+- `state/tasks/<task-id>/<receiver-agent-workspace>/handoff.md`
+- `state/tasks/<task-id>/<current-agent-workspace>/report.md`
+- `state/tasks/<task-id>/<agent-workspace>/<child-agent-workspace>/handoff.md`
+- `state/tasks/<task-id>/<agent-workspace>/<child-agent-workspace>/report.md`
+- `state/tasks/<task-id>/overview.md`（只有任务 owner、父级或汇总者需要整理稳定任务级结论时）
 
 ## 禁止
 
-- 交接只写对应 Agent 工作区的 `handoff.md`。
-- 不替用户判断任务必须拆成大、中、小结构。
-- 不在没有用户确认时删除任务目录。
-- 不把临时状态写入 `docs/`。
-- 不把 `handoff.md` 当成完成报告；完成或阶段结论写 `report.md`。
+- 不在顶层任务目录直接写 `handoff.md`。
+- 不在顶层任务目录直接写 `report.md`。
+- 不把 `handoff.md` 当成完成报告。
+- 不把 `report.md` 当成顶层任务完成证明。
+- 不因为写了 `handoff.md` 就自动写 `report.md`。
+- 不因为写了 `report.md` 就自动更新 `overview.md`。
+- 不把临时状态写入全局 `docs/`。

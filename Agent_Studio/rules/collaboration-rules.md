@@ -67,11 +67,13 @@ state/tasks/login-refactor/
 
 ## 交接与回报方向
 
+`handoff.md` 和 `report.md` 只是上下级或接手关系中的工作交流文件，不是状态机、流程引擎或阶段判定器。
+
 交接和回报只传递接手者或上层继续当前下一步所需的信息。不要把未确认的后续分支、完整角色链路或猜测性任务拆分写成交接要求；如果协作路径依赖未确认选择，先标明 BLOCKED / CONCERNS，并请用户或上层 owner 判断。
 
 ```text
-handoff.md = 向下交接
-report.md  = 向上回报
+handoff.md = 写给下级、下游或接手者，放在接手者 Agent 工作区
+report.md  = 写给上级、上层汇总者、任务 owner 或用户，放在当前 Agent 工作区
 overview.md = 顶层任务总览
 ```
 
@@ -101,7 +103,7 @@ overview.md = 顶层任务总览
 
 ### 向上回报
 
-当一个 Agent 工作区完成、阶段结束、阻塞、放弃或需要上层判断时，写入当前 Agent 工作区的 `report.md`。
+当一个 Agent 需要向父级、上层汇总者、任务 owner 或用户说明当前结果、阻塞、风险或请求判断时，写入当前 Agent 工作区的 `report.md`。
 
 回报必须写清楚：
 
@@ -185,7 +187,7 @@ docs/
 
 ## 状态层清理
 
-任务关闭后，在顶层任务 `overview.md` 和相关 Agent 工作区 `report.md` 中记录结论。
+任务关闭需要留痕时，在顶层任务 `overview.md` 或相关 Agent 工作区 `report.md` 中记录结论。
 
 任务关闭后的处理方式：
 

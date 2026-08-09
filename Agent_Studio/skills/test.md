@@ -34,17 +34,15 @@
 7. 写测试报告。
 8. 记录 bug。
 9. 读取 `rules/gates/test-gate.md`，通过测试门判断当前测试对象是否可以回报或关闭。
-10. 更新当前顶层任务目录和 Agent 工作区的 `report.md`。
-11. 写当前顶层任务目录和 Agent 工作区的 `report.md`，说明测试结论、风险、是否可以关闭。
-12. 如需交给其他角色继续处理，写对应任务目录的 `handoff.md`。
-13. 更新顶层任务 `overview.md`。
+10. 如果需要向上层、owner 或用户留下测试结论，写当前 Agent 工作区的 `report.md`，说明测试结论、风险、是否建议关闭。
+11. 如需交给其他角色继续处理，写接手 Agent 工作区的 `handoff.md`。
+12. 父级、汇总者或任务 owner 读取 report 后，决定是否更新顶层任务 `overview.md`。
 
 ## 输出
 
-- `docs/tests/test-plan.md`
-- `docs/tests/test-report.md`
-- `docs/tests/bug-list.md`
-- 当前 Agent 工作区的 `report.md`
-- 当前 Agent 工作区的 `report.md`
-- 必要时：当前任务或子任务目录下的 `handoff.md`
-- `state/tasks/<task-id>/overview.md`
+- `docs/tests/test-plan.md`（用户确认后）
+- `docs/tests/test-report.md`（用户确认后）
+- `docs/tests/bug-list.md`（用户确认后）
+- 当前 Agent 工作区的 `report.md`（需要向上回报时）
+- 接手或下游 Agent 工作区的 `handoff.md`（需要交接时）
+- `state/tasks/<task-id>/overview.md`（父级、汇总者或任务 owner 需要整理稳定任务级结论时）

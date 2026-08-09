@@ -82,8 +82,8 @@ docs/modules/<module-name>.md
 
 ## 给 Developer 的交接说明
 
-待填写。如需要交给 Developer 或实现子任务，正式交接写入对应任务目录的 `handoff.md`。
+待填写。如需要交给 Developer 或实现子任务，正式交接写入接手 Agent 工作区的 `handoff.md`。
 
 ## 给 Tester 的测试提示
 
-待填写。如测试完成或阶段结束，测试结论写入对应任务目录的 `report.md`。
+待填写。如需要向上级、owner 或用户回报测试结论，写入测试 Agent 自己工作区的 `report.md`。

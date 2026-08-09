@@ -38,10 +38,9 @@
 9. 实现代码。
 10. 记录实现说明和变更。
 11. 读取 `rules/gates/development-gate.md`，通过开发门检查。
-12. 更新当前顶层任务目录和 Agent 工作区的 `report.md`。
-13. 如果需要交给 Tester 或其他下游任务，写对应任务目录的 `handoff.md`。
-14. 如果实现任务阶段结束或需要向上层/用户回报，写当前顶层任务目录和 Agent 工作区的 `report.md`。
-15. 更新顶层任务 `overview.md`。
+12. 如果需要向上层、owner 或用户留下实现结果，写当前 Agent 工作区的 `report.md`。
+13. 如果需要交给 Tester 或其他下游 Agent，写接手 Agent 工作区的 `handoff.md`。
+14. 父级、汇总者或任务 owner 读取 report 后，决定是否更新顶层任务 `overview.md`。
 
 ## 启动条件
 
@@ -52,11 +51,10 @@
 ## 输出
 
 - 代码
-- `docs/implementation/change-log.md`
-- 当前 Agent 工作区的 `report.md`
-- 必要时：当前任务或子任务目录下的 `handoff.md`
-- 必要时：当前 Agent 工作区的 `report.md`
-- `state/tasks/<task-id>/overview.md`
+- `docs/implementation/change-log.md`（用户确认后）
+- 当前 Agent 工作区的 `report.md`（需要向上回报时）
+- 接手或下游 Agent 工作区的 `handoff.md`（需要交接时）
+- `state/tasks/<task-id>/overview.md`（父级、汇总者或任务 owner 需要整理稳定任务级结论时）
 
 ## 禁止
 

@@ -176,6 +176,14 @@ state/tasks/<task-id>/
 
 ## handoff 与 report
 
+`handoff.md` 和 `report.md` 只是 Agent 之间的工作交流文件，不是状态机、流程引擎或阶段判定器。
+
+- `handoff.md` 写给下级、下游或接手者，放在接手者的 Agent 工作区里。
+- `report.md` 写给上级、上层汇总者、任务 owner 或用户，放在汇报者自己的 Agent 工作区里。
+- 写了 `handoff.md` 不代表当前工作区自动结束。
+- 写了 `report.md` 不代表顶层任务自动完成。
+- 顶层任务目录 `state/tasks/<task-id>/` 不是 Agent 工作区，不直接放 `handoff.md` 或 `report.md`。
+
 ### handoff.md 推荐格式
 
 `handoff.md` 是向下交接文件。只有需要交给另一个角色、Agent 或子工作区时才需要。
@@ -204,16 +212,18 @@ state/tasks/<task-id>/
 
 ### report.md 推荐格式
 
-`report.md` 是向上回报文件。当前工作区完成、阶段结束、阻塞、放弃或需要上层判断时填写。
+`report.md` 是写给上级、上层汇总者、任务 owner 或用户的回报文件。需要向上说明结果、阻塞、风险或请求判断时填写。
 
 ```markdown
-# 任务完成报告
+# 工作区回报
 
 ## 回报给谁
 
 ## 本工作区结论
 
 PASS / CONCERNS / BLOCKED / DROPPED
+
+只评价当前回报内容或当前工作区职责，不评价整个顶层任务，除非当前工作区就是顶层汇总者并且已经读取必要的下级 report。
 
 ## 完成内容
 

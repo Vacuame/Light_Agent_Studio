@@ -35,10 +35,9 @@
 6. 起草架构更新。
 7. 读取 `rules/gates/architecture-gate.md`，通过架构门检查。
 8. 用户确认后更新正式产物。
-9. 更新当前顶层任务目录和 Agent 工作区的 `report.md`。
-10. 如果需要交给下游任务或角色，写对应任务目录的 `handoff.md`。
-11. 如果架构任务阶段结束或需要向上层/用户回报，写当前顶层任务目录和 Agent 工作区的 `report.md`。
-12. 更新顶层任务 `overview.md`。
+9. 如果需要向上层、owner 或用户留下阶段结论，写当前 Agent 工作区的 `report.md`。
+10. 如果需要交给下游 Agent 或角色，写接手 Agent 工作区的 `handoff.md`。
+11. 父级、汇总者或任务 owner 读取 report 后，决定是否更新顶层任务 `overview.md`。
 
 任务是否拆分、拆几个子任务、由哪些角色接手，由用户或当前任务 owner 决定。本 skill 不强制创建模块子任务。
 
@@ -51,10 +50,9 @@
 
 ## 输出
 
-- `docs/architecture.md`
-- `docs/module-map.md`
-- `docs/decisions/decision-xxx.md`
-- 当前 Agent 工作区的 `report.md`
-- 必要时：当前任务或子任务目录下的 `handoff.md`
-- 必要时：当前 Agent 工作区的 `report.md`
-- `state/tasks/<task-id>/overview.md`
+- `docs/architecture.md`（用户确认后）
+- `docs/module-map.md`（用户确认后）
+- `docs/decisions/decision-xxx.md`（用户确认后）
+- 当前 Agent 工作区的 `report.md`（需要向上回报时）
+- 接手或下游 Agent 工作区的 `handoff.md`（需要交接时）
+- `state/tasks/<task-id>/overview.md`（父级、汇总者或任务 owner 需要整理稳定任务级结论时）
