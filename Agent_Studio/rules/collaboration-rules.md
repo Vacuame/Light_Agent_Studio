@@ -25,6 +25,8 @@ Agent Studio 不替用户判断任务应该如何拆分，也不规定固定的�
 ```text
 state/tasks/<task-id>/
   overview.md
+  docs/
+    <task-public-doc>.md
   <agent-workspace>/
     handoff.md
     report.md
@@ -118,6 +120,23 @@ overview.md = 顶层任务总览
 顶层任务 `overview.md` 只记录跨角色、稳定、会影响后续 Agent 的任务级结论。
 
 子级 Agent 写 report 时不自动更新 overview。父级、汇总者或任务 owner 读取 report 后，决定是否把其中的稳定结论写入 overview。
+
+## 任务公共认知
+
+任务推进中产生、多个 Agent 需要共享、但暂时不适合写入全局 `docs/` 的内容，在用户明确要求或确认后，写入任务目录下的 `docs/`：
+
+```text
+state/tasks/<task-id>/docs/<task-public-doc>.md
+```
+
+使用规则：
+
+- 只有在用户明确要求维护任务级公共认知，或用户确认当前任务需要任务级 docs 后，Agent 才能创建或写入任务目录 `docs/` 下的 Markdown 文件。
+- 用户已授权任务级 docs 后，Agent 可以把和自己工作有关的公共发现、假设、疑点、候选决策和参考线索追加到合适的 Markdown 文件中；如果没有合适文件，先按内容命名创建新的 Markdown 文件。
+- 写入时必须标明来源、确定性、影响范围和待确认问题。
+- 单个 Agent 的完整过程仍写自己的 `report.md`，不要复制到任务级 `docs/`。
+- 父级、汇总者或任务 owner 负责定期整理公共认知，必要时把稳定结论提炼到 `overview.md`。
+- 经用户或权威角色确认、具有长期价值的内容，再写入全局 `docs/`。
 
 ## 状态写入位置
 

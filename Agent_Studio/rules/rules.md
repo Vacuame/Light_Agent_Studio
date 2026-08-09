@@ -12,9 +12,10 @@
 4. 当前角色文件。
 5. 当前顶层任务目录的 `overview.md`。
 6. 当前 Agent 工作区的 `handoff.md` / `report.md`（如果存在）。
-7. 必要的父级、子级或兄弟工作区 `report.md`。
-8. `rules/project-config.md`：项目配置、运行环境、命令约束。
-9. 与任务相关的产物文件：
+7. 当前任务的 `docs/*.md`（如果存在、任务需要共享公共认知，且用户已要求或确认读取任务级 docs）。
+8. 必要的父级、子级或兄弟工作区 `report.md`。
+9. `rules/project-config.md`：项目配置、运行环境、命令约束。
+10. 与任务相关的产物文件：
    - 架构任务读 `docs/architecture.md`、`docs/module-map.md`
    - 模块设计读 `docs/modules/`
    - 程序实现读对应模块设计、技术决策、实现记录
@@ -29,7 +30,8 @@
 1. 当前 Agent 工作区的 `report.md`：当前进度、完成内容、下一步、阻塞问题。
 2. 必要时在接手 Agent 工作区写 `handoff.md`：向下交接给另一个角色、Agent 或子工作区。
 3. 如果当前 Agent 是父级、汇总者或任务 owner，并且子级 report 产生了稳定结论，更新顶层任务 `overview.md`。
-4. 如果长期事实已经确认，再更新 `docs/` 下的正式产物。
+4. 如果用户已明确要求或确认维护任务级公共认知，并且当前阶段产生了多个 Agent 需要共享的任务内认知，更新当前任务 `docs/` 下合适的 Markdown 文件。
+5. 如果长期事实已经确认，再更新全局 `docs/` 下的正式产物。
 
 ## 不能猜
 
@@ -88,6 +90,7 @@ Agent Studio 不判断任务是“大任务、中任务、小任务”，也不�
 
 ```text
 顶层任务：state/tasks/<task-id>/overview.md
+任务公共认知：state/tasks/<task-id>/docs/*.md（用户要求或确认后按需创建/修改）
 Agent 工作区：<agent-workspace>/handoff.md + report.md
 父子关系：嵌套目录
 并列/旁支关系：同级目录
@@ -191,6 +194,7 @@ My Agent Studio 分为七层。每一层负责不同问题。
 主要文件：
 
 - `state/tasks/<task-id>/overview.md`
+- `state/tasks/<task-id>/docs/*.md`（用户要求或确认后按需创建/修改）
 - `state/tasks/<task-id>/<agent-workspace>/handoff.md`
 - `state/tasks/<task-id>/<agent-workspace>/report.md`
 - `state/tasks/<task-id>/<agent-workspace>/<child-agent-workspace>/handoff.md`

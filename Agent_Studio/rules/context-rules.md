@@ -17,6 +17,8 @@
 ```text
 state/tasks/<task-id>/
   overview.md
+  docs/
+    <task-public-doc>.md
   <agent-workspace>/
     handoff.md
     report.md
@@ -29,6 +31,7 @@ state/tasks/<task-id>/
 
 - `state/tasks/<task-id>/` 是用户明确开启的顶层任务目录。
 - `overview.md` 是顶层任务总览，记录任务背景、目标、当前进展、重要文件、疑点、共识和会影响后续 Agent 的稳定结论。
+- `docs/` 是任务级公共认知区，按用户要求创建或修改其中的 Markdown 文件，记录任务推进中产生、多个 Agent 需要共享、但暂时不适合写入全局 `docs/` 的发现、假设、疑点、候选决策和参考线索。
 - `<agent-workspace>/` 是某个 Agent 窗口的工作区，每个 Agent 窗口都必须定位或创建自己的工作区。
 - `handoff.md` 是父级或上游写给当前工作区的交接。
 - `report.md` 是当前工作区写给父级、上层汇总者或用户的回报。
@@ -62,6 +65,47 @@ state/tasks/<task-id>/
 `overview.md` 只写跨角色、稳定、会影响后续工作的内容。不要复制完整 `handoff.md` 或 `report.md`，不要写成聊天流水账。
 
 子级 Agent 写 `report.md` 时不自动更新 `overview.md`。父级、汇总者或任务 owner 读取 report 后，再决定哪些稳定结论进入 `overview.md`。
+
+## 任务级 docs/
+
+`state/tasks/<task-id>/docs/` 是任务内公共认知草稿区。只有用户明确要求维护任务级公共认知，或用户确认当前任务需要任务级 docs 时，才按需创建或修改其中的 Markdown 文件；Agent 不得自行判断并创建或写入任务级 docs。不要为了单 Agent 私人笔记、普通进度、完整 handoff/report 复制或已确认长期事实而创建。
+
+它适合记录：
+
+- 任务推进中新发现的代码结构、调用链、配置、限制或异常现象
+- 多个 Agent 都需要知道，但尚未确认到可以写入全局 `docs/` 的事实候选
+- 暂时采用的假设
+- 需要用户、父级 Agent 或后续 Agent 确认的问题
+- 候选决策、备选方案和参考线索
+
+它不适合记录：
+
+- 单个 Agent 的完整工作过程
+- 完整 `handoff.md` 或 `report.md`
+- 已确认的长期项目事实
+- 普通聊天流水账
+
+写入任务级 `docs/` 下的 Markdown 文件时必须标明：
+
+```markdown
+## 条目标题
+
+来源：
+确定性：高 / 中 / 低
+影响范围：
+内容：
+待确认问题：
+建议后续处理：
+```
+
+维护规则：
+
+- 只有在用户明确要求维护任务级公共认知，或用户确认当前任务需要任务级 docs 后，Agent 才能创建或写入 `docs/` 下的 Markdown 文件。
+- 用户已授权任务级 docs 后，Agent 可以把会影响多个 Agent 的任务内信息追加到合适的 Markdown 文件中；如果没有合适文件，先按内容命名创建新的 Markdown 文件。
+- 不确定内容必须标明确定性，不得写成已确认事实。
+- 父级、汇总者或任务 owner 可以整理、去重、改写过期条目。
+- 内容被用户确认并具有长期价值后，再提升到全局 `docs/`。
+- 内容已经过期或被否定时，保留简短说明，不要无痕删除。
 
 ## Agent 工作区
 
