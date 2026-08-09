@@ -1,4 +1,4 @@
-# Agent Studio CN 内部导览
+# Agent Studio内部导览
 
 这是一个轻量级、通用型 Agent 工作流框架。
 
