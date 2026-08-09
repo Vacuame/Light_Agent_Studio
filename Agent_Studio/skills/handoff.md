@@ -27,6 +27,19 @@ report.md  写在当前 Agent 自己的工作区。
 
 顶层任务目录 `state/tasks/<task-id>/` 不是 Agent 工作区，不直接放 `handoff.md` 或 `report.md`。
 
+## 写入授权
+
+`handoff.md` 和 `report.md` 属于状态层通信文件。创建或修改前必须有用户明确要求或确认。
+
+需要写入时，先在对话中说明：
+
+- 写哪个文件
+- 写给谁
+- 为什么要写
+- 拟写内容摘要
+
+用户确认后再写入。
+
 ## 必读文件
 
 - `state/tasks/<task-id>/overview.md`
@@ -46,7 +59,8 @@ report.md  写在当前 Agent 自己的工作区。
 1. 明确交接给谁。
 2. 明确接手什么。
 3. 定位或创建接手者 Agent 工作区。
-4. 在接手者 Agent 工作区写 `handoff.md`。
+4. 说明拟写文件、写入原因和交接摘要，并询问用户是否写入。
+5. 用户确认后，在接手者 Agent 工作区写 `handoff.md`。
 
 `handoff.md` 应写清楚：
 
@@ -69,7 +83,8 @@ report.md  写在当前 Agent 自己的工作区。
 
 1. 明确回报给谁。
 2. 明确本次回报说明什么。
-3. 在当前 Agent 工作区写 `report.md`。
+3. 说明拟写文件、写入原因和回报摘要，并询问用户是否写入。
+4. 用户确认后，在当前 Agent 工作区写 `report.md`。
 
 `report.md` 应写清楚：
 
@@ -92,7 +107,7 @@ report.md  写在当前 Agent 自己的工作区。
 1. 创建 `state/tasks/<task-id>/`。
 2. 创建或更新 `overview.md`，记录任务目标、背景、当前状态和重要关系。
 3. 如果已有明确接手 Agent，创建对应 Agent 工作区。
-4. 如果需要交给接手 Agent，在接手者工作区写 `handoff.md`。
+4. 如果需要交给接手 Agent，先询问用户是否写 `handoff.md`，确认后在接手者工作区写入。
 
 不要在顶层任务目录直接创建 `handoff.md` 或 `report.md`。
 
@@ -100,11 +115,11 @@ report.md  写在当前 Agent 自己的工作区。
 
 按实际交流需要输出：
 
-- `state/tasks/<task-id>/<receiver-agent-workspace>/handoff.md`
-- `state/tasks/<task-id>/<current-agent-workspace>/report.md`
-- `state/tasks/<task-id>/<agent-workspace>/<child-agent-workspace>/handoff.md`
-- `state/tasks/<task-id>/<agent-workspace>/<child-agent-workspace>/report.md`
-- `state/tasks/<task-id>/overview.md`（只有任务 owner、父级或汇总者需要整理稳定任务级结论时）
+- `state/tasks/<task-id>/<receiver-agent-workspace>/handoff.md`（用户明确要求或确认后）
+- `state/tasks/<task-id>/<current-agent-workspace>/report.md`（用户明确要求或确认后）
+- `state/tasks/<task-id>/<agent-workspace>/<child-agent-workspace>/handoff.md`（用户明确要求或确认后）
+- `state/tasks/<task-id>/<agent-workspace>/<child-agent-workspace>/report.md`（用户明确要求或确认后）
+- `state/tasks/<task-id>/overview.md`（只有任务 owner、父级或汇总者需要整理稳定任务级结论，且用户确认后）
 
 ## 禁止
 
@@ -114,4 +129,5 @@ report.md  写在当前 Agent 自己的工作区。
 - 不把 `report.md` 当成顶层任务完成证明。
 - 不因为写了 `handoff.md` 就自动写 `report.md`。
 - 不因为写了 `report.md` 就自动更新 `overview.md`。
+- 不因为任务创建、阶段完成、实现完成、测试完成、会话压缩前整理或质量门通过而自动创建/修改 `handoff.md` 或 `report.md`。
 - 不把临时状态写入全局 `docs/`。

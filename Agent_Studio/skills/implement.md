@@ -36,10 +36,10 @@
 7. 给出实现计划，必须包含层级边界说明。
 8. 用户确认。
 9. 实现代码。
-10. 记录实现说明和变更。
+10. 在对话中说明实现完成、修改文件、验证结果、风险和下一步建议。
 11. 读取 `rules/gates/development-gate.md`，通过开发门检查。
-12. 如果需要向上层、owner 或用户留下实现结果，写当前 Agent 工作区的 `report.md`。
-13. 如果需要交给 Tester 或其他下游 Agent，写接手 Agent 工作区的 `handoff.md`。
+12. 如果需要向上层、owner 或用户留下实现结果，先说明拟写 report 摘要并询问是否写入；用户确认后写当前 Agent 工作区的 `report.md`。
+13. 如果需要交给 Tester 或其他下游 Agent，先说明接手对象和 handoff 摘要并询问是否写入；用户确认后写接手 Agent 工作区的 `handoff.md`。
 14. 父级、汇总者或任务 owner 读取 report 后，决定是否更新顶层任务 `overview.md`。
 
 ## 启动条件
@@ -52,9 +52,9 @@
 
 - 代码
 - `docs/implementation/change-log.md`（用户确认后）
-- 当前 Agent 工作区的 `report.md`（需要向上回报时）
-- 接手或下游 Agent 工作区的 `handoff.md`（需要交接时）
-- `state/tasks/<task-id>/overview.md`（父级、汇总者或任务 owner 需要整理稳定任务级结论时）
+- 当前 Agent 工作区的 `report.md`（用户明确要求或确认后）
+- 接手或下游 Agent 工作区的 `handoff.md`（用户明确要求或确认后）
+- `state/tasks/<task-id>/overview.md`（父级、汇总者或任务 owner 需要整理稳定任务级结论，且用户确认后）
 
 ## 禁止
 

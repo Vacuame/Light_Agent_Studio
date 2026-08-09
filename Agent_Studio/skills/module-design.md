@@ -39,8 +39,8 @@
 7. 起草模块设计，必须包含 `实现落点`。
 8. 读取 `rules/gates/module-gate.md`，通过模块门检查。
 9. 用户确认后写入 `docs/modules/<module-name>.md`。
-10. 如果需要向上层、owner 或用户留下阶段结论，写当前 Agent 工作区的 `report.md`。
-11. 如果需要交给 Developer 或其他下游 Agent，写接手 Agent 工作区的 `handoff.md`，必须包含实现落点摘要。
+10. 如果需要向上层、owner 或用户留下阶段结论，先说明拟写 report 摘要并询问是否写入；用户确认后写当前 Agent 工作区的 `report.md`。
+11. 如果需要交给 Developer 或其他下游 Agent，先说明接手对象和 handoff 摘要并询问是否写入；用户确认后写接手 Agent 工作区的 `handoff.md`。
 12. 父级、汇总者或任务 owner 读取 report 后，决定是否更新顶层任务 `overview.md`。
 
 任务是否拆分、拆几个子任务、由哪些角色接手，由用户或当前任务 owner 决定。本 skill 不强制创建实现子任务。
@@ -56,6 +56,6 @@
 ## 输出
 
 - `docs/modules/<module-name>.md`（用户确认后）
-- 当前 Agent 工作区的 `report.md`（需要向上回报时）
-- 接手或下游 Agent 工作区的 `handoff.md`（需要交接时）
-- `state/tasks/<task-id>/overview.md`（父级、汇总者或任务 owner 需要整理稳定任务级结论时）
+- 当前 Agent 工作区的 `report.md`（用户明确要求或确认后）
+- 接手或下游 Agent 工作区的 `handoff.md`（用户明确要求或确认后）
+- `state/tasks/<task-id>/overview.md`（父级、汇总者或任务 owner 需要整理稳定任务级结论，且用户确认后）

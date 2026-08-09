@@ -70,8 +70,8 @@ Module Designer 把“架构意图”变成“可实现、可测试的模块说�
 9. 写清不做什么。
 10. 写验收标准。
 11. 通过模块门。
-12. 如果需要交给 Developer 或下游 Agent，在子 Agent 工作区写 `handoff.md`。
-13. 如果阶段结束或需要向上层/用户回报，写当前 Agent 工作区的 `report.md`。
+12. 如果需要交给 Developer 或下游 Agent，先说明 handoff 摘要并询问用户是否写入；用户确认后在接手 Agent 工作区写 `handoff.md`。
+13. 如果需要向上层/用户回报，先在对话中说明阶段结论；用户确认后写当前 Agent 工作区的 `report.md`。
 
 任务是否拆分、拆几个子任务、由哪些角色接手，由用户或当前任务 owner 决定。
 

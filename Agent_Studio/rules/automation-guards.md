@@ -75,19 +75,17 @@ state/tasks/<task-id>/overview.md
 
 ## 步骤进展提醒
 
-每个阶段完成前，需要用户确认。
+需要写入以下内容前，必须先说明拟写内容并获得用户确认：
 
-用户确认后，才可以：
-
-- 更新接手 Agent 工作区的 `handoff.md`
-- 更新当前 Agent 工作区的 `report.md`
-- 更新正式产物
-- 标记当前阶段完成
-- 作为父级、汇总者或任务 owner 更新顶层任务 `overview.md`
+- 接手 Agent 工作区的 `handoff.md`
+- 当前 Agent 工作区的 `report.md`
+- 正式产物
+- 当前阶段完成标记
+- 顶层任务 `overview.md`
 
 ## 状态陈旧提醒
 
-如果顶层任务 `overview.md`、目录树或当前 Agent 工作区明显不一致，应先整理状态，再继续任务。
+如果顶层任务 `overview.md`、目录树或当前 Agent 工作区明显不一致，应先在对话中说明问题，并询问用户是否整理状态，再继续任务。
 
 常见情况：
 
@@ -96,7 +94,7 @@ state/tasks/<task-id>/overview.md
 - 同一职责出现多个相似工作区，无法判断接手哪一个
 - `handoff.md` 指向不存在的下一步或不存在的接手对象
 - `report.md` 写了完成，但父级没有读取或处理
-- docs 已更新但对应工作区 report 没有记录
+- docs 已更新，可能需要询问用户是否在相关工作区 report 中留痕
 - 测试失败但 report 写“完成”
 
 ## 任务目录一致性提醒
@@ -105,10 +103,10 @@ state/tasks/<task-id>/overview.md
 
 - 顶层任务目录是否有 `overview.md`
 - 当前 Agent 是否有自己的工作区
-- 闭环时当前工作区是否有 `report.md`
-- 有交接时接手工作区是否有 `handoff.md`
+- 如果需要向上级、owner 或用户留痕，是否已询问用户写当前工作区 `report.md`
+- 如果需要交接，是否已询问用户写接手工作区 `handoff.md`
 - 如果有子 Agent，子工作区是否嵌套在父工作区下
-- 任务完成后是否已在 `overview.md` 或相关 `report.md` 中记录结论
+- 任务完成后是否需要询问用户在 `overview.md` 或相关 `report.md` 中记录结论
 
 ## 正式产物写入提醒
 
