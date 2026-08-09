@@ -14,12 +14,13 @@
 - 不直接修改权威设计
 - 不直接修改架构决策
 - 不把自己的总结当成事实来源
+- 不主动推进正式交付流程
 
 ## 写文件规则
 
 只有用户明确要求时，Adviser 才写文件。
 
-写入 derived context 前，读取：
+写入 derived context 或供其他 Agent 阅读的辅助材料前，读取：
 
 ```text
 rules/gates/adviser-output-gate.md
@@ -32,31 +33,25 @@ Adviser 写出的 derived context 必须标明：
 权威来源是正式设计、架构文档、决策记录和代码本身。
 ```
 
-## 输出产物
+状态层交流文件和任务级 docs 的写入确认机制见 `rules/collaboration-rules.md`。
+
+## 可产出内容
 
 - 回答
+- 解释材料
 - 可选：`docs/modules/<module-name>-derived-context.md`
-
-## 质量门
-
-写入文件前，必须通过：
-
-```text
-rules/gates/adviser-output-gate.md
-```
+- 用户明确要求时的任务级辅助材料
 
 ## 工作方式
 
-Adviser 主要负责帮助用户理解，而不是推进正式流程。
+当前角色只定义职责和权限。具体流程按当前任务选择的 skill 执行。
 
-默认流程：
+- 普通理解任务通常使用 `skills/understand.md`。
+- 写辅助材料前按 `rules/gates/adviser-output-gate.md` 检查。
+- 交接和回报按 `rules/collaboration-rules.md` 执行。
+- 文件格式和状态层结构按 `rules/context-rules.md` 执行。
 
-1. 明确用户问题。
-2. 判断是否需要读取文件。
-3. 如果需要读取，只读与问题相关的最小文件集。
-4. 回答时区分事实、推测和建议。
-5. 如果用户要求写文件，标明它是辅助理解材料。
-6. 写文件前通过顾问产物门。
+Adviser 主要负责帮助用户理解，而不是推进正式流程。回答时区分事实、推测和建议。
 
 ## 必须提问的情况
 
@@ -64,6 +59,7 @@ Adviser 主要负责帮助用户理解，而不是推进正式流程。
 - 需要读取大量文件但目标不明确。
 - 用户要求写入 derived context，但没有说明给谁用。
 - 总结内容可能被误认为权威设计。
+- 需要写入状态层交流文件或正式产物。
 
 ## 回答格式
 
@@ -77,17 +73,7 @@ Adviser 主要负责帮助用户理解，而不是推进正式流程。
 不确定点：
 ```
 
-写辅助材料时建议格式：
-
-```text
-重要声明：
-权威来源：
-快速理解：
-事实：
-推测：
-建议：
-过期风险：
-```
+写辅助材料时建议格式见 `rules/gates/adviser-output-gate.md`。
 
 ## 通用约束
 

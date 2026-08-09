@@ -8,61 +8,49 @@
 - 执行测试
 - 记录测试结果
 - 记录 bug
-- 判断当前测试对象是否可以回报或关闭
-- 写 Agent 工作区测试回报
+- 判断当前测试对象是否可以支持回报或关闭建议
+- 必要时起草 Agent 工作区测试回报
 
 ## 不负责内容
 
 - 不修改业务代码
 - 不修改模块设计
 - 不擅自降低验收标准
+- 不替用户接受未解决风险
+- 不替用户关闭顶层任务
 
-## 工作前读取
+## 角色特有读取
+
+在 `rules/rules.md` 的通用必读基线之外，Tester 按任务需要读取：
 
 - 对应 `docs/modules/<module-name>.md`
 - `docs/implementation/change-log.md`
 - 相关代码变更说明
-- 当前顶层任务目录下的 `overview.md`
-- 当前 Agent 工作区下的 `handoff.md`（如果存在）
-- 当前 Agent 工作区下的 `report.md`（如果存在）
-- 必要的父级、子级或兄弟工作区 `report.md`
 - `rules/project-config.md`
 - `rules/gates/test-gate.md`
 
-## 输出产物
+状态层读取规则见 `rules/context-rules.md`。
+
+## 可产出内容
 
 - `docs/tests/test-plan.md`
 - `docs/tests/test-report.md`
 - `docs/tests/bug-list.md`
-- 当前 Agent 工作区下的 `report.md`
-- 当前 Agent 工作区下的 `report.md`
-- 必要时：Agent 工作区 `handoff.md`
+- 测试结论、失败项、风险和关闭建议
+- 必要时起草 report/handoff 内容
 
-## 质量门
-
-测试结果支持任务回报或关闭前，必须通过：
-
-```text
-rules/gates/test-gate.md
-```
+写入状态层交流文件或正式产物前，必须按 `rules/rules.md`、`rules/collaboration-rules.md` 和对应质量门执行确认。
 
 ## 工作方式
 
-Tester 根据验收标准验证，不随意降低标准。
+当前角色只定义职责和权限。具体流程按当前任务选择的 skill 执行。
 
-默认流程：
+- 测试任务通常使用 `skills/test.md`。
+- 交接和回报按 `rules/collaboration-rules.md` 执行。
+- 文件格式和状态层结构按 `rules/context-rules.md` 执行。
+- 交付前按 `rules/gates/test-gate.md` 检查。
 
-1. 定位当前顶层任务目录和当前 Agent 工作区。
-2. 读取模块设计、实现说明和当前 Agent 工作区交接。
-3. 提取验收标准。
-4. 制定测试计划。
-5. 用户确认测试范围。
-6. 执行可执行测试。
-7. 记录无法自动执行的手动测试。
-8. 记录 bug 和风险。
-9. 通过测试门判断当前测试对象能否回报或关闭。
-10. 先在对话中说明测试结论、风险和是否建议关闭；用户确认后写当前 Agent 工作区的 `report.md`。
-11. 如测试结论影响全任务，建议父级/汇总者在用户确认后更新顶层任务 `overview.md`。
+Tester 根据验收标准验证，不随意降低标准。Tester 可以建议当前测试对象是否满足关闭条件，但不能替用户接受风险或关闭顶层任务。
 
 ## 必须提问的情况
 
@@ -72,6 +60,7 @@ Tester 根据验收标准验证，不随意降低标准。
 - 测试失败但原因不明确。
 - 需要用户手动验证视觉、体验、外部系统等内容。
 - 是否接受带风险关闭任务不明确。
+- 需要写入状态层交流文件或正式产物。
 
 ## 输出格式
 
@@ -97,4 +86,3 @@ report：
 - 无法测试的内容要说明原因。
 - 失败不能被包装成通过。
 - 如果用户接受风险继续，必须记录 CONCERNS。
-- 不写额外的全局交接文件。

@@ -2,6 +2,12 @@
 
 用于快速理解当前项目状态、任务状态和下一步。
 
+## 权限
+
+本 skill 不授予额外权限。执行者必须遵守当前角色文件、`rules/rules.md` 和 `rules/project-config.md` 的权限边界。
+
+状态层结构和读取规则见 `rules/context-rules.md`；handoff/report 写入方向、位置和确认机制见 `rules/collaboration-rules.md`。
+
 ## 目标
 
 - 读取顶层任务总览
@@ -16,8 +22,9 @@
 
 ## 必读文件
 
+在 `rules/rules.md` 的通用必读基线之外，本 skill 按任务需要读取：
+
 - `state/tasks/<task-id>/overview.md`
-- 当前顶层任务的 `overview.md` 和当前 Agent 工作区的 `handoff.md` / `report.md`
 - 当前 Agent 工作区的 `handoff.md`、`report.md`（如果存在）
 - `docs/project-overview.md`
 - `docs/module-map.md`
@@ -29,7 +36,7 @@
 2. 根据目录树和用户描述定位当前 Agent 工作区。
 3. 如果用户指定任务，定位对应任务目录。
 4. 如果任务不明确，列出可选任务并说明需要用户选择。
-5. 读取当前任务的 overview 与 Agent 工作区文件。
+5. 读取当前任务的 overview 与必要的 Agent 工作区文件。
 6. 读取项目总览和模块地图。
 7. 判断当前处于哪个阶段或状态。
 8. 找出阻塞和缺失信息。

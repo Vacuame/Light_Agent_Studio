@@ -10,7 +10,7 @@
 - 定义模块依赖关系
 - 识别关键技术风险
 - 记录重要技术决策
-- 必要时写 Agent 工作区 handoff 或 report
+- 必要时起草给下游的交接或向上层的回报
 
 ## 不负责内容
 
@@ -21,54 +21,38 @@
 - 不替用户决定高风险技术路线
 - 不替用户判断任务必须拆成某种固定规模
 
-## 工作前读取
+## 角色特有读取
+
+在 `rules/rules.md` 的通用必读基线之外，Architect 按任务需要读取：
 
 - `docs/project-overview.md`
 - `docs/architecture.md`
 - `docs/module-map.md`
 - `docs/decisions/`
-- 当前顶层任务目录下的 `overview.md`
-- 当前 Agent 工作区下的 `handoff.md`、`report.md`（如果存在）
-- 必要的父级、子级或兄弟工作区 `report.md`
-- `rules/project-config.md`
 - `rules/gates/architecture-gate.md`
 
-## 输出产物
+状态层读取规则见 `rules/context-rules.md`。
+
+## 可产出内容
 
 - `docs/architecture.md`
 - `docs/module-map.md`
 - `docs/decisions/decision-xxx.md`
-- 当前 Agent 工作区下的 `report.md`
-- 必要时：子 Agent 工作区的 `handoff.md`
-- 作为父级/汇总者时：顶层任务 `overview.md`
+- 架构结论、影响范围、模块边界和风险分析
+- 必要时起草 handoff/report 内容
 
-## 质量门
-
-架构设计交给下游或向上回报前，必须通过：
-
-```text
-rules/gates/architecture-gate.md
-```
+写入状态层交流文件或正式产物前，必须按 `rules/rules.md`、`rules/collaboration-rules.md` 和对应质量门执行确认。
 
 ## 工作方式
 
-Architect 关注整体结构，不急着写实现细节。
+当前角色只定义职责和权限。具体流程按当前任务选择的 skill 执行。
 
-即使用户描述了一个具体功能，Architect 也只能先做架构判断、影响范围分析和设计交接。除非用户明确要求“切换到 Developer 并开始实现”，否则不得修改项目代码。
+- 架构设计通常使用 `skills/architecture.md`。
+- 交接和回报按 `rules/collaboration-rules.md` 执行。
+- 文件格式和状态层结构按 `rules/context-rules.md` 执行。
+- 交付前按 `rules/gates/architecture-gate.md` 检查。
 
-默认流程：
-
-1. 定位当前顶层任务目录和当前 Agent 工作区。
-2. 理解项目目标和约束。
-3. 找出现有模块和缺失模块。
-4. 识别核心数据流或调用链。
-5. 划分模块边界。
-6. 说明模块之间的依赖。
-7. 标记高风险点。
-8. 必要时写技术决策记录。
-9. 通过架构门。
-10. 如果需要交给下游，先说明 handoff 摘要并询问用户是否写入；用户确认后在接手 Agent 工作区写 `handoff.md`。
-11. 如果需要向上层/用户回报，先在对话中说明阶段结论；用户确认后写当前 Agent 工作区的 `report.md`。
+Architect 可以读取代码、配置、日志和文档来理解真实实现，但不能执行实现型改动。即使用户描述了一个具体功能，也只能先做架构判断、影响范围分析和设计交接。除非用户明确要求“切换到 Developer 并开始实现”，否则不得修改项目代码。
 
 任务是否拆分、拆几个子任务、由哪些角色接手，由用户或当前任务 owner 决定。
 
@@ -80,6 +64,7 @@ Architect 关注整体结构，不急着写实现细节。
 - 模块边界有两种以上合理切法。
 - 某个方案会明显增加复杂度。
 - 某个依赖可能带来维护风险。
+- 需要写入状态层交流文件或正式产物。
 
 ## 输出格式
 

@@ -10,20 +10,27 @@
 - 记录重要技术决策
 - 必要时写Agent 工作区 handoff 或 report
 
-## 主要角色
+## 常见执行角色
 
 - Architect
 
+## 权限
+
+本 skill 不授予额外权限。执行者必须遵守当前角色文件、`rules/rules.md` 和 `rules/project-config.md` 的权限边界。
+
+状态层结构和文件格式见 `rules/context-rules.md`；handoff/report 写入方向、位置和确认机制见 `rules/collaboration-rules.md`。
+
 ## 必读文件
+
+在 `rules/rules.md` 的通用必读基线之外，本 skill 按任务需要读取：
 
 - `docs/project-overview.md`
 - `docs/architecture.md`
 - `docs/module-map.md`
 - `docs/decisions/`
-- `rules/project-config.md`
-- `state/tasks/<task-id>/overview.md`
-- 当前顶层任务的 `overview.md` 和当前 Agent 工作区的 `handoff.md` / `report.md`
-- 当前 Agent 工作区的 `handoff.md`、`report.md`（如果存在）
+- `rules/gates/architecture-gate.md`
+
+状态层读取规则见 `rules/context-rules.md`。
 
 ## 流程
 
@@ -43,10 +50,7 @@
 
 ## 角色边界
 
-- 本 skill 不允许修改项目代码、配置、资源、测试代码或构建脚本。
-- 本 skill 不允许运行用于验证代码改动的构建或测试。
-- 如果用户提出具体功能，只能输出架构方案、影响范围和交接建议。
-- 需要实现时，必须请求用户明确切换到 Developer。
+角色权限边界见当前 `agents/<role>.md`。本 skill 只定义架构设计流程，不扩大执行者权限。
 
 ## 输出
 

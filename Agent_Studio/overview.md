@@ -7,14 +7,29 @@
 ## 核心分层
 
 ```text
-规则层：规定怎么工作
-角色层：规定谁来工作
+规则层：规定全局原则、上下文、协作协议和项目配置
+角色层：规定谁能做、职责和权限边界
 技能层：规定某类任务怎么做
-状态层：用树形任务目录记录 overview、Agent 工作区、交接和回报
+状态层：记录当前怎么接着干
 产物层：保存已经确认的项目事实
-质量门层：检查关键产物能否交接、回报或关闭
+质量门层：检查交付物能否交接、回报或支持关闭判断
 自动护栏层：提醒、检查、防止忘记重要步骤
 ```
+
+## 权威来源口诀
+
+```text
+全局原则看 rules/rules.md
+上下文放哪看 rules/context-rules.md
+怎么交接看 rules/collaboration-rules.md
+谁能做看 agents/
+怎么做看 skills/
+做得够不够看 rules/quality-gates.md 和 rules/gates/
+项目命令和依赖看 rules/project-config.md
+提醒和护栏看 rules/automation-guards.md
+```
+
+不要在 overview 里复制完整规则。具体规则以对应权威文件为准。
 
 ## 默认角色
 
@@ -38,73 +53,30 @@ understand
 -> implement
 -> review
 -> test
--> report / handoff
+-> handoff / report
 ```
 
-这是常见链路，不是强制串行流程。任务结构由用户或当前父级 Agent 决定。
+这是常见链路，不是强制串行流程。任务结构由用户或当前任务 owner 决定。
 
-```text
-handoff.md = 当前 Agent 工作区的交接上下文
-report.md  = 当前 Agent 工作区的回报结果
-overview.md = 顶层任务总览和跨角色稳定共识
-```
+## 状态层
 
-## 状态层结构
+状态层采用轻量树形任务工作区。完整结构、文件职责和格式模板见 `rules/context-rules.md`。
 
-```text
-state/
-  tasks/
-    <task-id>/
-      overview.md
-      <agent-workspace>/
-        handoff.md
-        report.md
-        <child-agent-workspace>/
-          handoff.md
-          report.md
-```
-
-规则：
-
-- 顶层任务目录 `state/tasks/<task-id>/` 只能在用户明确要求开启任务时创建。
-- 每个 Agent 窗口必须定位或创建自己的 Agent 工作区。
-- 工作区目录名表达角色组合和职责，例如 `01-architecture-module-login/`、`02-developer-login-api/`、`03-adviser-context/`。
-- 父子关系由目录嵌套表达；同级目录表示并列或旁支。
-- 默认不设全局 index，也不设 map；目录树就是索引。
-- 任务完成后不强制移动目录；完成状态写入 `overview.md` 和相关 `report.md`。
+协作关系、handoff/report 方向、写入位置和确认机制见 `rules/collaboration-rules.md`。
 
 ## 最小启动步骤
 
-1. 填写 `docs/project-overview.md`
-2. 填写 `rules/project-config.md`
-3. 读取 `rules/context-rules.md` 和 `rules/collaboration-rules.md`
-4. 根据用户描述匹配或请示创建顶层任务目录
-5. 读取该任务的 `overview.md`
-6. 定位或创建当前 Agent 工作区
-7. 读取当前工作区的 `handoff.md` / `report.md` 和必要父子工作区
-8. 需要架构时使用 `skills/architecture.md`
-9. 需要模块设计时使用 `skills/module-design.md`
-10. 需要实现时使用 `skills/implement.md`
-11. 需要测试时使用 `skills/test.md`
-12. 需要创建工作区、交接、回报或关闭时使用 `skills/handoff.md`
+1. 读取 `rules/rules.md`
+2. 读取 `rules/context-rules.md`
+3. 读取 `rules/collaboration-rules.md`
+4. 读取 `rules/project-config.md`
+5. 根据用户描述匹配或请示创建顶层任务目录
+6. 定位当前 Agent 工作区
+7. 读取当前角色文件和当前任务需要的 skill
+8. 按任务需要读取对应质量门和正式产物
 
-## 权威来源顺序
+## 冲突处理
 
-当信息冲突时，按以下顺序判断：
-
-```text
-用户最新明确指令
-> docs/decisions/
-> docs/architecture.md
-> docs/module-map.md
-> docs/modules/
-> docs/implementation/
-> docs/tests/
-> state/tasks/<task-id>/overview.md
-> 当前 Agent 工作区 report.md
-> 当前 Agent 工作区 handoff.md
-> 父级/子级相关工作区 report.md
-> Adviser 的 derived context
-```
+规则冲突时先按 `rules/rules.md` 的权威来源判断；协作文件冲突时按 `rules/collaboration-rules.md` 处理。
 
 如果冲突会影响实现、交接、回报或任务目录结构，必须先问用户。

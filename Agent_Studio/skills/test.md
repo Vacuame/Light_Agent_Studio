@@ -9,19 +9,26 @@
 - 记录 bug
 - 判断当前测试对象是否可以回报或关闭
 
-## 主要角色
+## 常见执行角色
 
 - Tester
 
+## 权限
+
+本 skill 不授予额外权限。执行者必须遵守当前角色文件、`rules/rules.md` 和 `rules/project-config.md` 的权限边界。
+
+状态层结构和文件格式见 `rules/context-rules.md`；handoff/report 写入方向、位置和确认机制见 `rules/collaboration-rules.md`。
+
 ## 必读文件
+
+在 `rules/rules.md` 的通用必读基线之外，本 skill 按任务需要读取：
 
 - 对应 `docs/modules/<module-name>.md`
 - `docs/implementation/change-log.md`
 - `rules/project-config.md`
-- `state/tasks/<task-id>/overview.md`
-- 当前顶层任务的 `overview.md` 和当前 Agent 工作区的 `handoff.md` / `report.md`
-- 当前 Agent 工作区的 `handoff.md`（如果存在）
-- 当前 Agent 工作区的 `report.md`（如果存在）
+- `rules/gates/test-gate.md`
+
+状态层读取规则见 `rules/context-rules.md`。
 
 ## 流程
 

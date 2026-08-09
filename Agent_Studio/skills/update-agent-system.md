@@ -2,9 +2,15 @@
 
 用于修改 Agent 架构本身。
 
-## 主要角色
+## 常见执行角色
 
 - Administrator
+
+## 权限
+
+本 skill 不授予额外权限。执行者必须遵守当前角色文件、`rules/rules.md` 和 `rules/project-config.md` 的权限边界。
+
+状态层结构和文件格式见 `rules/context-rules.md`；handoff/report 写入方向、位置和确认机制见 `rules/collaboration-rules.md`。
 
 ## 适用场景
 
@@ -27,15 +33,14 @@
 7. 读取 `rules/gates/administration-gate.md`，通过管理门。
 8. 用户确认。
 9. 修改文件。
-10. 记录变更。
-11. 更新顶层任务 `overview.md` 或当前 Agent 工作区状态。
+10. 在对话中记录变更摘要。
+11. 如果用户确认需要留痕，并且任务目录/工作区路径清楚，再按协作规则更新顶层任务 `overview.md` 或当前 Agent 工作区状态。
 
 ## 输出
 
-- 更新后的规则、角色或技能文件
-- 必要时写入 `docs/decisions/`
-- `state/tasks/<task-id>/overview.md`
-- 当前 Agent 工作区的 `report.md` 或 `report.md`
+- 更新后的规则、角色、技能、质量门或配置文件
+- 必要时：用户确认后的系统变更记录
+- 必要时：用户确认后的状态层交流文件
 
 ## 禁止
 
@@ -43,3 +48,4 @@
 - 不允许绕过用户确认。
 - 不允许未确认就删除任务目录。
 - 不允许只改单个文件而留下不一致的状态路径引用。
+- 不把同一条规则复制到多个层级；先判断权威来源，再决定改哪里。

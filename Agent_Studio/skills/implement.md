@@ -10,20 +10,27 @@
 - 标记偏离设计的地方
 - 给 Tester 提供测试交接，或向上层回报实现结果
 
-## 主要角色
+## 常见执行角色
 
 - Developer
 
+## 权限
+
+本 skill 不授予额外权限。执行者必须遵守当前角色文件、`rules/rules.md` 和 `rules/project-config.md` 的权限边界。
+
+状态层结构和文件格式见 `rules/context-rules.md`；handoff/report 写入方向、位置和确认机制见 `rules/collaboration-rules.md`。
+
 ## 必读文件
+
+在 `rules/rules.md` 的通用必读基线之外，本 skill 按任务需要读取：
 
 - 对应 `docs/modules/<module-name>.md`
 - `docs/architecture.md`
 - 相关 `docs/decisions/`
 - `rules/project-config.md`
-- `state/tasks/<task-id>/overview.md`
-- 当前顶层任务的 `overview.md` 和当前 Agent 工作区的 `handoff.md` / `report.md`
-- 当前 Agent 工作区的 `handoff.md`（如果存在）
-- 当前 Agent 工作区的 `report.md`（如果存在）
+- `rules/gates/development-gate.md`
+
+状态层读取规则见 `rules/context-rules.md`。
 
 ## 流程
 
@@ -46,7 +53,7 @@
 
 只有当前窗口角色是 Developer，或用户明确要求“切换到 Developer 并开始实现”时，才能使用本 skill 修改项目代码。
 
-如果当前窗口是 Architect、Module Designer，或“架构+模块”组合角色，应停止并回到模块设计或 handoff，不得调用本 skill。
+如果当前角色无权实现，应停止并回到当前角色允许的设计、交接或确认流程，不得调用本 skill。
 
 ## 输出
 
@@ -58,12 +65,4 @@
 
 ## 禁止
 
-- 不擅自改架构。
-- 不擅自引入依赖。
-- 不擅自改变模块目标。
-- 不在实现落点缺失或冲突时自行决定代码层级。
-- 不静默偏离模块设计中的实现落点。
-- 不为了调用方便向基础类、系统类或 Manager 类添加具体功能门面方法。
-- 不把具体能力塞进所有对象共有的基类；优先使用组件、接口、专门服务或明确的模块 owner。
-- 如果必须修改基础类、系统类或 Manager 类 API，先说明原因并等待用户确认。
-- 交接只写对应 Agent 工作区的 `handoff.md`。
+实现相关权限边界见当前 `agents/<role>.md`。本 skill 只定义实现流程，不授予偏离架构、引入依赖、改变模块边界或扩大基础类/系统类/Manager API 的权限。

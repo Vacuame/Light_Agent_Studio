@@ -1,6 +1,8 @@
 # 协作规则
 
-本文件定义角色之间如何通过文件协作。
+本文件是 handoff/report 协作协议的唯一权威来源，定义 Agent 之间如何通过状态层交流文件协作。
+
+文件格式模板见 `rules/context-rules.md`。全局确认原则见 `rules/rules.md`。
 
 ## 协作模型
 
@@ -13,27 +15,14 @@ Agent Studio 不替用户判断任务应该如何拆分，也不规定固定的�
 - 交接写入接手 Agent 工作区的 `handoff.md`，但必须先有用户明确要求或确认。
 - 完成或阶段结论需要向上留痕时，写入当前 Agent 工作区的 `report.md`，但必须先有用户明确要求或确认。
 - 顶层任务总览写入 `overview.md`。
-- 多个任务或多个 Agent 不会覆盖同一个交接文件。
+- 多个任务或多个 Agent 不会覆盖同一个交流文件。
 - 删除任务目录或 Agent 工作区前必须获得用户确认。
 
 任务可以只有一个 Agent 工作区，也可以有多个嵌套或并列工作区。一个 Agent 可以兼任多个角色，但应在工作区目录名或 handoff 中说明职责。
 
 ## 目录关系
 
-状态层目录结构：
-
-```text
-state/tasks/<task-id>/
-  overview.md
-  docs/
-    <task-public-doc>.md
-  <agent-workspace>/
-    handoff.md
-    report.md
-    <child-agent-workspace>/
-      handoff.md
-      report.md
-```
+状态层完整结构见 `rules/context-rules.md`。
 
 判断关系：
 
@@ -42,28 +31,6 @@ state/tasks/<task-id>/
 - 位于某个 Agent 工作区里面的文件夹，是该工作区的子 Agent 工作区。
 - 同一层级的工作区是兄弟、并列或旁支关系。
 - Adviser、Reviewer、Researcher 等辅助角色可以作为同级旁支，也可以挂在某个局部分支下。
-
-示例：
-
-```text
-state/tasks/login-refactor/
-  overview.md
-  01-architecture-module-login/
-    handoff.md
-    report.md
-    01-developer-login-api/
-      handoff.md
-      report.md
-  02-adviser-context/
-    handoff.md
-    report.md
-```
-
-这里：
-
-- `01-architecture-module-login/` 是一级 Agent 工作区。
-- `01-developer-login-api/` 是 `01-architecture-module-login/` 的子 Agent 工作区。
-- `02-adviser-context/` 与 `01-architecture-module-login/` 同级，是旁支工作区。
 
 ## 交接与回报方向
 
@@ -74,8 +41,9 @@ state/tasks/login-refactor/
 ```text
 handoff.md = 写给下级、下游或接手者，放在接手者 Agent 工作区
 report.md  = 写给上级、上层汇总者、任务 owner 或用户，放在当前 Agent 工作区
-overview.md = 顶层任务总览
 ```
+
+顶层任务目录 `state/tasks/<task-id>/` 不是 Agent 工作区，不直接放 `handoff.md` 或 `report.md`。
 
 ### 向下交接
 
@@ -92,14 +60,9 @@ overview.md = 顶层任务总览
 - 风险
 - 下一步建议
 
-如果交接给 Developer，还必须写清楚：
+如果交接给 Developer，还必须写清楚实现落点摘要。
 
-- 涉及文件/目录
-- 归属类、组件、模块或服务
-- 建议新增或修改的方法、事件、接口或配置点
-- 调用入口和数据流出口
-- 不应放置的位置
-- 需要 Developer 验证的不确定点
+写 `handoff.md` 不代表当前工作区自动结束，不自动要求写当前工作区 `report.md`，也不自动更新 `overview.md`。
 
 ### 向上回报
 
@@ -117,62 +80,33 @@ overview.md = 顶层任务总览
 - 对上层任务的影响
 - 建议下一步
 
-父级 Agent、任务 owner 或上层汇总者读取子工作区的 `report.md`，决定继续、返工、关闭、记录完成或再拆工作区。
+`report.md` 只表达当前工作区的回报内容，不代表顶层任务自动完成，不自动要求更新 `overview.md`。
 
 ### overview 更新
 
-顶层任务 `overview.md` 只记录跨角色、稳定、会影响后续 Agent 的任务级结论。
+顶层任务 `overview.md` 只记录跨角色、稳定、会影响后续 Agent 的任务级结论。文件职责和格式见 `rules/context-rules.md`。
 
-子级 Agent 写 report 时不自动更新 overview。父级、汇总者或任务 owner 读取 report 后，决定是否把其中的稳定结论写入 overview。
+子级 Agent 写 report 时不自动更新 overview。父级、汇总者或任务 owner 读取 report 后，决定是否建议把其中的稳定结论写入 overview；写入前必须向用户说明拟更新内容并获得确认。
 
 ## 任务公共认知
 
-任务推进中产生、多个 Agent 需要共享、但暂时不适合写入全局 `docs/` 的内容，在用户明确要求或确认后，写入任务目录下的 `docs/`：
+任务级 `docs/*.md` 的职责、格式和维护规则见 `rules/context-rules.md`。
 
-```text
-state/tasks/<task-id>/docs/<task-public-doc>.md
-```
-
-使用规则：
-
-- 只有在用户明确要求维护任务级公共认知，或用户确认当前任务需要任务级 docs 后，Agent 才能创建或写入任务目录 `docs/` 下的 Markdown 文件。
-- 用户已授权任务级 docs 后，Agent 可以把和自己工作有关的公共发现、假设、疑点、候选决策和参考线索追加到合适的 Markdown 文件中；如果没有合适文件，先按内容命名创建新的 Markdown 文件。
-- 写入时必须标明来源、确定性、影响范围和待确认问题。
-- 单个 Agent 的完整过程仍写自己的 `report.md`，不要复制到任务级 `docs/`。
-- 父级、汇总者或任务 owner 负责定期整理公共认知，必要时把稳定结论提炼到 `overview.md`。
-- 经用户或权威角色确认、具有长期价值的内容，再写入全局 `docs/`。
+协作层只规定：任务推进中产生、多个 Agent 需要共享、但暂时不适合写入全局 `docs/` 的内容，只有在用户明确要求或确认后，才能写入任务目录下的 `docs/`。
 
 ## 状态写入位置
 
-顶层任务总览写入：
-
-```text
-state/tasks/<task-id>/overview.md
-```
-
-Agent 交接和回报写入：
-
-```text
-state/tasks/<task-id>/<agent-workspace>/handoff.md
-state/tasks/<task-id>/<agent-workspace>/report.md
-```
-
-子 Agent 交接和回报写入：
-
-```text
-state/tasks/<task-id>/<agent-workspace>/<child-agent-workspace>/handoff.md
-state/tasks/<task-id>/<agent-workspace>/<child-agent-workspace>/report.md
-```
-
-长期事实写入：
-
-```text
-docs/
-```
+- 顶层任务总览：`state/tasks/<task-id>/overview.md`
+- Agent 交接：`state/tasks/<task-id>/<receiver-agent-workspace>/handoff.md`
+- Agent 回报：`state/tasks/<task-id>/<current-agent-workspace>/report.md`
+- 子 Agent 交接：`state/tasks/<task-id>/<agent-workspace>/<child-agent-workspace>/handoff.md`
+- 子 Agent 回报：`state/tasks/<task-id>/<agent-workspace>/<child-agent-workspace>/report.md`
+- 任务级公共认知：`state/tasks/<task-id>/docs/*.md`，按 `rules/context-rules.md` 和用户确认执行
+- 长期事实：全局 `docs/`
 
 ## 更新产物层的时机
 
-`docs/` 是正式产物，不要频繁写草稿。
+全局 `docs/` 是正式产物，不要频繁写草稿。
 
 只有在以下情况更新：
 
@@ -183,11 +117,11 @@ docs/
 - 测试结果确认
 - 任务准备进入下一阶段
 
-任务过程、交接、回报、阻塞、临时假设写入 `state/`。
+任务过程、交接、回报、阻塞、临时假设写入 `state/`，并按状态层写入确认规则执行。
 
 ## 状态层清理
 
-任务关闭需要留痕时，在顶层任务 `overview.md` 或相关 Agent 工作区 `report.md` 中记录结论。
+任务关闭需要留痕时，在顶层任务 `overview.md` 或相关 Agent 工作区 `report.md` 中记录结论，写入前必须获得用户确认。
 
 任务关闭后的处理方式：
 
@@ -206,6 +140,7 @@ docs/
 > docs/architecture.md
 > docs/modules/
 > state/tasks/<task-id>/overview.md
+> state/tasks/<task-id>/docs/*.md
 > 父级 Agent 工作区 report.md
 > 当前 Agent 工作区 handoff.md
 > 当前 Agent 工作区 report.md
@@ -220,14 +155,7 @@ docs/
 
 ## 角色责任边界
 
-```text
-Administrator：维护 Agent 系统本身
-Architect：维护整体架构和模块边界
-Module Designer：把模块设计到可实现、可测试
-Developer：按模块设计实现代码
-Tester：按验收标准测试和判断能否关闭
-Adviser：解释、问答、辅助理解，不产出权威设计
-```
+角色职责和权限边界见 `agents/<role>.md`。本文件只定义协作方向，不授予角色额外权限。
 
 角色可以提出跨领域建议，但不能直接越权修改其他角色负责的权威产物。
 
@@ -235,10 +163,10 @@ Adviser：解释、问答、辅助理解，不产出权威设计
 
 不要让每个角色读所有文件。
 
-读取范围应遵循：
+读取范围由以下部分组合：
 
 ```text
-总规则 + 当前顶层任务 overview + 当前 Agent 工作区 + 当前角色 + 当前技能 + 相关产物 + 对应质量门
+rules.md 通用基线 + context-rules 状态读取规则 + 当前角色 + 当前技能 + 相关产物 + 对应质量门
 ```
 
 如果某个文件只是背景知识，先判断是否必要。避免把无关上下文塞给 Agent。
@@ -253,7 +181,6 @@ Adviser：解释、问答、辅助理解，不产出权威设计
 - 下一个角色需要读哪些文件
 - 要写入哪个 Agent 工作区的 `handoff.md`
 - 是否已有用户明确要求或确认写入该 `handoff.md`
-- 是否需要用户确认
 
 ## 回报前检查
 
@@ -274,18 +201,23 @@ Adviser：解释、问答、辅助理解，不产出权威设计
 
 - 写入正式产物
 - 创建或修改 Agent 工作区的 `handoff.md` / `report.md`
-- 修改规则、角色、技能
+- 创建或修改任务级 `docs/*.md`
+- 修改顶层任务 `overview.md`
+- 修改规则、角色、技能或质量门
 - 删除或移动文件
 - 删除任务目录或 Agent 工作区
 - 引入依赖
 - 接受 CONCERNS 风险继续推进
 - 关闭任务
 
-用户确认可以是明确文字，例如：
+用户确认必须是明确文字，例如：
 
 ```text
 可以
 同意
 按这个写
+写入
 接受风险继续
 ```
+
+用户让 Agent “继续分析”“给建议”“先看看”不等于授权写文件。

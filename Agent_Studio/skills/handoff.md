@@ -1,6 +1,6 @@
 # Skill: handoff
 
-用于在 Agent 之间写交接和回报。
+用于在用户明确要求执行交接或回报时，定位工作区、起草内容，并在确认后写入对应状态层交流文件。
 
 ## 目标
 
@@ -9,27 +9,25 @@
 - 避免多个 Agent 覆盖同一个交流文件
 - 区分状态层交流文件和正式产物
 
-## 核心概念
+## 权限
 
-`handoff.md` 和 `report.md` 只是工作交流文件，不是状态机、流程引擎或阶段判定器。
+本 skill 不授予额外权限。执行者必须遵守当前角色文件、`rules/rules.md` 和 `rules/project-config.md` 的权限边界。
 
-```text
-handoff.md = 写给下级、下游或接手者
-report.md  = 写给上级、上层汇总者、任务 owner 或用户
-```
+handoff/report 的方向、写入位置和确认机制见 `rules/collaboration-rules.md`；格式模板见 `rules/context-rules.md`。
 
-写入位置：
-
-```text
-handoff.md 写在接手者 Agent 工作区。
-report.md  写在当前 Agent 自己的工作区。
-```
-
-顶层任务目录 `state/tasks/<task-id>/` 不是 Agent 工作区，不直接放 `handoff.md` 或 `report.md`。
-
-## 写入授权
+## 授权预检查
 
 `handoff.md` 和 `report.md` 属于状态层通信文件。创建或修改前必须有用户明确要求或确认。
+
+它们不会因为以下事件自动创建或修改：
+
+- 任务创建
+- 阶段完成
+- 实现完成
+- 测试完成
+- 会话压缩前整理
+- 质量门通过
+- 已经写了另一个 handoff/report
 
 需要写入时，先在对话中说明：
 
@@ -41,6 +39,8 @@ report.md  写在当前 Agent 自己的工作区。
 用户确认后再写入。
 
 ## 必读文件
+
+在 `rules/rules.md` 的通用必读基线之外，本 skill 按任务需要读取：
 
 - `state/tasks/<task-id>/overview.md`
 - 当前 Agent 工作区的 `handoff.md`（如果存在）
@@ -59,23 +59,11 @@ report.md  写在当前 Agent 自己的工作区。
 1. 明确交接给谁。
 2. 明确接手什么。
 3. 定位或创建接手者 Agent 工作区。
-4. 说明拟写文件、写入原因和交接摘要，并询问用户是否写入。
-5. 用户确认后，在接手者 Agent 工作区写 `handoff.md`。
+4. 按 `rules/collaboration-rules.md` 做交接前检查。
+5. 说明拟写文件、写入原因和交接摘要，并询问用户是否写入。
+6. 用户确认后，在接手者 Agent 工作区写 `handoff.md`。
 
-`handoff.md` 应写清楚：
-
-- 交接来源
-- 交接给谁
-- 接手什么
-- 必读文件
-- 已确认内容
-- 临时假设
-- 风险
-- 下一步建议
-
-如果交给 Developer，还应写清楚实现落点摘要。
-
-写 `handoff.md` 不代表当前工作区自动结束，不自动要求写当前工作区 `report.md`，也不自动更新 `overview.md`。
+`handoff.md` 推荐格式见 `rules/context-rules.md`。
 
 ## 流程：向上回报
 
@@ -83,24 +71,13 @@ report.md  写在当前 Agent 自己的工作区。
 
 1. 明确回报给谁。
 2. 明确本次回报说明什么。
-3. 说明拟写文件、写入原因和回报摘要，并询问用户是否写入。
-4. 用户确认后，在当前 Agent 工作区写 `report.md`。
+3. 按 `rules/collaboration-rules.md` 做回报前检查。
+4. 说明拟写文件、写入原因和回报摘要，并询问用户是否写入。
+5. 用户确认后，在当前 Agent 工作区写 `report.md`。
 
-`report.md` 应写清楚：
+`report.md` 推荐格式见 `rules/context-rules.md`。
 
-- 回报给谁
-- 本工作区结论：PASS / CONCERNS / BLOCKED / DROPPED
-- 完成内容
-- 修改或产出文件
-- 验证结果
-- 未完成项
-- 风险与注意事项
-- 对上层任务的影响
-- 建议下一步
-
-`report.md` 只表达当前工作区的回报内容，不代表顶层任务自动完成，不自动要求更新 `overview.md`。
-
-## 任务创建
+## 流程：任务创建
 
 如果用户或任务 owner 要开启新的顶层任务：
 
@@ -115,11 +92,9 @@ report.md  写在当前 Agent 自己的工作区。
 
 按实际交流需要输出：
 
-- `state/tasks/<task-id>/<receiver-agent-workspace>/handoff.md`（用户明确要求或确认后）
-- `state/tasks/<task-id>/<current-agent-workspace>/report.md`（用户明确要求或确认后）
-- `state/tasks/<task-id>/<agent-workspace>/<child-agent-workspace>/handoff.md`（用户明确要求或确认后）
-- `state/tasks/<task-id>/<agent-workspace>/<child-agent-workspace>/report.md`（用户明确要求或确认后）
-- `state/tasks/<task-id>/overview.md`（只有任务 owner、父级或汇总者需要整理稳定任务级结论，且用户确认后）
+- 接手 Agent 工作区的 `handoff.md`（用户明确要求或确认后）
+- 当前 Agent 工作区的 `report.md`（用户明确要求或确认后）
+- 顶层任务 `overview.md`（任务 owner、父级或汇总者需要整理稳定任务级结论，且用户确认后）
 
 ## 禁止
 
@@ -129,5 +104,4 @@ report.md  写在当前 Agent 自己的工作区。
 - 不把 `report.md` 当成顶层任务完成证明。
 - 不因为写了 `handoff.md` 就自动写 `report.md`。
 - 不因为写了 `report.md` 就自动更新 `overview.md`。
-- 不因为任务创建、阶段完成、实现完成、测试完成、会话压缩前整理或质量门通过而自动创建/修改 `handoff.md` 或 `report.md`。
 - 不把临时状态写入全局 `docs/`。

@@ -1,37 +1,55 @@
 # 总规则
 
-本文件定义 My Agent Studio 的基本运作方式。所有角色和技能默认遵守本文件。
+本文件是 My Agent Studio 的总入口，定义全局原则和权威来源。所有角色和技能默认遵守本文件。
+
+## 权威来源
+
+不同问题读取不同权威来源：
+
+```text
+全局原则、角色锁定、用户确认总原则 -> rules/rules.md
+状态层结构、上下文恢复、文件格式模板 -> rules/context-rules.md
+handoff/report 协作方向、写入位置、确认机制 -> rules/collaboration-rules.md
+角色职责和权限边界 -> agents/<role>.md
+任务 SOP -> skills/<skill>.md
+质量门索引和结论定义 -> rules/quality-gates.md
+具体质量门检查项 -> rules/gates/<gate>.md
+项目运行环境、命令、依赖策略 -> rules/project-config.md
+自动提醒和护栏触发点 -> rules/automation-guards.md
+```
+
+不要在非权威文件里重新定义同一条规则。其他文件只保留必要摘要和引用。
 
 ## 工作前必须读取
 
-每次开始任务前，先读取：
+每次开始任务前，先读取通用必读基线：
 
-1. `rules/rules.md`：总规则。
-2. `rules/context-rules.md`：上下文恢复、状态层组织、overview/handoff/report 格式。
-3. `rules/collaboration-rules.md`：父子 Agent、旁支 Agent、交接与回报方向。
-4. 当前角色文件。
-5. 当前顶层任务目录的 `overview.md`。
-6. 当前 Agent 工作区的 `handoff.md` / `report.md`（如果存在）。
-7. 当前任务的 `docs/*.md`（如果存在、任务需要共享公共认知，且用户已要求或确认读取任务级 docs）。
-8. 必要的父级、子级或兄弟工作区 `report.md`。
-9. `rules/project-config.md`：项目配置、运行环境、命令约束。
-10. 与任务相关的产物文件：
-   - 架构任务读 `docs/architecture.md`、`docs/module-map.md`
-   - 模块设计读 `docs/modules/`
-   - 程序实现读对应模块设计、技术决策、实现记录
-   - 测试任务读模块设计、实现说明、测试计划
+1. `rules/rules.md`
+2. `rules/context-rules.md`
+3. `rules/collaboration-rules.md`
+4. 当前角色文件
+5. 当前任务需要使用的 skill
+6. `rules/project-config.md`
 
-如果当前顶层任务目录和 Agent 工作区不明确，先从顶层任务目录名、`overview.md`、目录树和 Agent 工作区 `handoff.md` / `report.md` 定位；仍不明确时询问用户。
+然后按任务组合读取：
+
+- 状态层读取规则见 `rules/context-rules.md`。
+- 角色特有必读见当前 `agents/<role>.md`。
+- skill 特有必读见当前 `skills/<skill>.md`。
+- 质量门读取见 `rules/quality-gates.md` 和对应 `rules/gates/<gate>.md`。
+- 与任务相关的正式产物按当前任务需要读取。
+
+如果当前顶层任务目录和 Agent 工作区不明确，按 `rules/context-rules.md` 定位；仍不明确时询问用户。
 
 ## 工作后状态整理
 
-需要和其他 Agent 或用户交流时，按交流对象整理通信文件。`handoff.md` 和 `report.md` 都属于状态层写入，必须在用户明确要求或确认后才创建或修改，不能因为实现完成、测试完成、写了交接或需要回报就自动写。
+需要和其他 Agent 或用户交流时，按交流对象整理通信文件。
 
-1. 用户明确要求或确认后，需要下级、下游或接手者继续工作时，在接手者工作区写 `handoff.md`。
-2. 用户明确要求或确认后，需要向上级、上层汇总者、任务 owner 或用户说明当前结果、阻塞、风险或请求判断时，在当前 Agent 工作区写 `report.md`。
-3. 如果当前 Agent 是父级、汇总者或任务 owner，并且产生了稳定任务级结论，必要时更新顶层任务 `overview.md`。
-4. 如果用户已明确要求或确认维护任务级公共认知，并且当前阶段产生了多个 Agent 需要共享的任务内认知，更新当前任务 `docs/` 下合适的 Markdown 文件。
-5. 如果长期事实已经确认，再更新全局 `docs/` 下的正式产物。
+- `handoff.md` / `report.md` 的写入方向、位置和确认机制见 `rules/collaboration-rules.md`。
+- 状态层目录结构和文件格式模板见 `rules/context-rules.md`。
+- 正式产物写入前必须满足本文件的用户确认原则和对应质量门。
+
+`handoff.md`、`report.md`、任务级 `docs/*.md` 和正式 `docs/` 都必须在用户明确要求或确认后才创建或修改，不能因为实现完成、测试完成、写了交接或需要回报就自动写。
 
 ## 逐步推进
 
@@ -61,7 +79,7 @@ Agent 不需要把所有不确定点都升级成实验验证。只有当用户�
 - 需要删除或大幅移动文件
 - 需要删除任务目录
 - 需要写入状态层交流文件：`handoff.md`、`report.md` 或任务级 `docs/*.md`
-- 需要修改规则、角色、技能
+- 需要修改规则、角色、技能或质量门
 - 实现需要偏离模块设计
 - 测试失败但原因不明确
 
@@ -71,15 +89,7 @@ Agent 不需要把所有不确定点都升级成实验验证。只有当用户�
 
 每个窗口启动时声明的角色就是当前窗口的职责边界。后续用户描述具体功能时，不会自动改变当前角色。
 
-如果当前窗口是 Architect、Module Designer，或“架构+模块”组合角色：
-
-- 可以读取代码、配置、日志和文档来理解真实实现。
-- 可以分析影响范围、设计模块、写验收标准、写给 Developer 的交接。
-- 可以更新状态层和设计产物，但必须先说明写入内容并获得用户确认。
-- 禁止修改项目代码、配置、资源、测试代码或构建脚本。
-- 禁止执行实现型改动。
-- 禁止运行以验证自己代码改动为目的的构建或测试。
-- 禁止把“先做一个简单的”“这个功能很小”“顺手实现一下”理解为代码实现授权。
+角色职责和权限边界以 `agents/<role>.md` 为准。skill 不授予额外权限。
 
 只有用户明确说出以下含义时，才允许从设计角色切换到实现角色：
 
@@ -89,17 +99,7 @@ Agent 不需要把所有不确定点都升级成实验验证。只有当用户�
 允许你实现
 ```
 
-如果用户只是描述功能需求，设计角色必须先输出：
-
-```text
-功能理解：
-影响范围：
-涉及文件：
-模块设计：
-验收标准：
-给 Developer 的 handoff：
-是否需要用户确认：
-```
+如果当前角色无权执行目标动作，必须停止并请求用户明确切换到对应角色。
 
 ## 任务结构原则
 
@@ -107,48 +107,17 @@ Agent Studio 不判断任务是“大任务、中任务、小任务”，也不�
 
 任务结构由用户或当前任务 owner 决定。框架只提供灵活容器和读写协议：
 
-```text
-顶层任务：state/tasks/<task-id>/overview.md
-任务公共认知：state/tasks/<task-id>/docs/*.md（用户要求或确认后按需创建/修改）
-Agent 工作区：<agent-workspace>/handoff.md + report.md
-父子关系：嵌套目录
-并列/旁支关系：同级目录
-```
-
-允许：
-
-- 一个任务目录内完成设计 + 实现。
-- 一个 Agent 兼任多个角色。
-- 一个任务没有子任务。
-- 一个任务有多个子任务。
-- 多个 Agent 并行处理多个子任务。
-- 子任务代表模块、程序、测试、研究、审查或用户自定义工作单元。
+- 状态层结构和文件格式见 `rules/context-rules.md`。
+- 父子、并列、旁支关系和交接/回报方向见 `rules/collaboration-rules.md`。
 
 框架只要求：交接、进展、回报、完成记录路径清楚，避免覆盖和丢上下文。
 
 ## Handoff 与 Report
 
-handoff.md 和 report.md 只是 Agent 之间的工作交流文件，不是状态机、流程引擎或阶段判定器。
+`handoff.md` 和 `report.md` 是状态层交流文件，不是状态机、流程引擎或完成判定器。
 
-### handoff.md
-
-`handoff.md` 是写给下级、下游或接手者的交接文件，放在接手者的 Agent 工作区里。
-
-- 谁写：上游角色、父级 Agent、任务 owner，或当前要转交工作的人。
-- 谁读：接手该工作的角色/Agent。
-- 什么时候写：需要别人接手继续工作时。
-- 是否必须：不是。没有交接时可以不存在。
-
-### report.md
-
-`report.md` 是写给上级、上层汇总者、任务 owner 或用户的回报文件，放在汇报者自己的 Agent 工作区里。
-
-- 谁写：需要向上说明结果、阻塞、风险或请求判断的当前 Agent。
-- 谁读：父级 Agent、上层汇总者、任务 owner 或用户。
-- 什么时候写：需要向上沟通时。
-- 是否必须：不是每次 handoff 后都必须写。
-
-顶层任务目录 `state/tasks/<task-id>/` 不是 Agent 工作区，不直接放 `handoff.md` 或 `report.md`。
+- 交接和回报方向、写入位置、用户确认机制：见 `rules/collaboration-rules.md`。
+- 文件格式模板和上下文恢复：见 `rules/context-rules.md`。
 
 ## 架构分层
 
@@ -198,28 +167,7 @@ My Agent Studio 分为七层。每一层负责不同问题。
 
 ### 状态层
 
-状态层记录当前进度、任务目录、交接和回报。
-
-它回答：
-
-- 现在有哪些任务？
-- 当前关注哪个任务？
-- 每个任务的状态是什么？
-- 当前任务由谁接手？
-- 当前任务已经完成什么？
-- 下一步是什么？
-- 有什么阻塞？
-- 要交给下游的内容是什么？
-- 要向上层回报的结果是什么？
-
-主要文件：
-
-- `state/tasks/<task-id>/overview.md`
-- `state/tasks/<task-id>/docs/*.md`（用户要求或确认后按需创建/修改）
-- `state/tasks/<task-id>/<agent-workspace>/handoff.md`
-- `state/tasks/<task-id>/<agent-workspace>/report.md`
-- `state/tasks/<task-id>/<agent-workspace>/<child-agent-workspace>/handoff.md`
-- `state/tasks/<task-id>/<agent-workspace>/<child-agent-workspace>/report.md`
+状态层记录当前怎么接着干。结构、文件语义和格式见 `rules/context-rules.md`。
 
 状态层是“现在怎么接着干”，不是正式项目事实。
 
@@ -241,34 +189,21 @@ My Agent Studio 分为七层。每一层负责不同问题。
 
 ### 质量门层
 
-质量门层负责关键交接前的检查。
-
-主要文件：
-
-- `rules/quality-gates.md`
-- `rules/gates/*-gate.md`
-
-质量门检查的是产物能不能进入下一环节，不是评价角色本人。
-
-角色按当前任务读取 `rules/gates/` 里的对应质量门，通常只读自己当前交付点需要的检查文件。
+质量门层负责关键产物准备交接、准备向上留痕、或准备支持关闭判断前的检查。索引和结论定义见 `rules/quality-gates.md`，具体检查项见 `rules/gates/`。
 
 ### 自动护栏层
 
-自动护栏层负责提醒、检查和防止忘记重要步骤。
+自动护栏层负责提醒、检查和防止忘记重要步骤。它只提醒，不重新定义权威规则。
 
 主要文件：
 
 - `rules/automation-guards.md`
 
-本文件只定义护栏规则，不实现脚本。
-
 ## 角色和技能
 
-角色定义在 `agents/`。
+角色定义在 `agents/`。技能 SOP 定义在 `skills/`。
 
-技能 SOP 定义在 `skills/`。
-
-角色负责判断，技能负责流程，状态负责不断片，产物负责沉淀事实。
+角色负责判断权限，技能负责流程，状态负责不断片，产物负责沉淀事实，质量门负责检查交付物够不够。
 
 ## 通用工作原则
 
@@ -286,6 +221,7 @@ Agent 可以分析、建议、起草、执行和审查，但不能替用户做�
 - 大规模移动目录
 - 改变架构边界
 - 偏离已确认的模块设计
+- 创建或修改状态层交流文件
 - 将临时结论写入正式产物
 - 接受 CONCERNS 风险继续推进
 
@@ -313,7 +249,7 @@ Agent 可以分析、建议、起草、执行和审查，但不能替用户做�
 建议：Agent 的行动建议
 ```
 
-未经确认的推测不能写入正式产物，只能写入状态层或 Adviser 的辅助材料。
+未经确认的推测不能写入正式产物，只能在用户确认后写入状态层或 Adviser 的辅助材料。
 
 ### 写入前说明
 
@@ -343,8 +279,6 @@ Agent 可以分析、建议、起草、执行和审查，但不能替用户做�
 -> 通过质量门
 -> 必要时在对话中说明拟写的状态层交流文件或正式产物
 -> 用户确认后写入
--> 用户确认后，必要时写 handoff 给下级或接手者
--> 用户确认后，必要时写 report 给上级、owner 或用户
 ```
 
 任何任务都可以按用户或当前任务 owner 的分配简化流程，但必须保留：
@@ -352,4 +286,3 @@ Agent 可以分析、建议、起草、执行和审查，但不能替用户做�
 - 读取相关上下文
 - 不清楚就问
 - 需要留痕或交流时，先说明拟写内容并询问是否写入，用户确认后再更新对应状态层文件
-- 需要向上级、owner 或用户留痕时，用户确认后再写当前 Agent 工作区的 `report.md`

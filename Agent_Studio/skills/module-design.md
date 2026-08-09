@@ -13,20 +13,28 @@
 - 写清验收标准
 - 必要时写Agent 工作区 handoff 或 report
 
-## 主要角色
+## 常见执行角色
 
 - Module Designer
 
+## 权限
+
+本 skill 不授予额外权限。执行者必须遵守当前角色文件、`rules/rules.md` 和 `rules/project-config.md` 的权限边界。
+
+状态层结构和文件格式见 `rules/context-rules.md`；handoff/report 写入方向、位置和确认机制见 `rules/collaboration-rules.md`。
+
 ## 必读文件
+
+在 `rules/rules.md` 的通用必读基线之外，本 skill 按任务需要读取：
 
 - `docs/project-overview.md`
 - `docs/architecture.md`
 - `docs/module-map.md`
 - 相关 `docs/decisions/`
 - 项目源码和目录结构，仅用于定位已有职责归属
-- `state/tasks/<task-id>/overview.md`
-- 当前顶层任务的 `overview.md` 和当前 Agent 工作区的 `handoff.md` / `report.md`
-- 当前 Agent 工作区的 `handoff.md`、`report.md`（如果存在）
+- `rules/gates/module-gate.md`
+
+状态层读取规则见 `rules/context-rules.md`。
 
 ## 流程
 
@@ -47,11 +55,9 @@
 
 ## 角色边界
 
-- 本 skill 不允许修改项目代码、配置、资源、测试代码或构建脚本。
-- 本 skill 不允许运行用于验证代码改动的构建或测试。
-- “功能很简单”不代表可以跳过模块设计直接实现。
-- 需要实现时，必须请求用户明确切换到 Developer。
-- 如果无法确定实现落点，必须标为 `待确认`，不得编造路径、类名、函数名或接口名。
+角色权限边界见当前 `agents/<role>.md`。本 skill 只定义模块设计流程，不扩大执行者权限。
+
+如果无法确定实现落点，必须标为 `待确认`，不得编造路径、类名、函数名或接口名。
 
 ## 输出
 

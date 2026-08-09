@@ -1,45 +1,31 @@
 # 自动护栏
 
-自动护栏是提醒和机械检查，不代替用户判断。
+自动护栏是提醒和机械检查，不代替用户判断，也不重新定义权威规则。
 
-本文件只定义护栏规则，不实现脚本。
+本文件只定义何时提醒、何时阻止、何时要求确认。具体规则以对应权威文件为准。
+
+## 权威来源引用
+
+```text
+全局原则和角色锁定 -> rules/rules.md
+状态层结构和文件格式 -> rules/context-rules.md
+handoff/report 协作和确认机制 -> rules/collaboration-rules.md
+角色权限边界 -> agents/<role>.md
+质量门 -> rules/quality-gates.md 和 rules/gates/
+项目配置、命令、依赖策略 -> rules/project-config.md
+```
 
 ## 会话开始提醒
 
-开始新会话时，应提醒读取：
+开始新会话时，应提醒读取 `rules/rules.md` 的通用必读基线，并按当前任务组合读取角色、skill、状态层、项目配置和质量门。
 
-```text
-rules/rules.md
-rules/context-rules.md
-rules/collaboration-rules.md
-rules/project-config.md
-```
+如果顶层任务目录或 Agent 工作区不明确，按 `rules/context-rules.md` 定位；仍不明确时询问用户。
 
-如果已经确定要接手的任务，还应读取：
+## 压缩前保存提醒
 
-```text
-state/tasks/<task-id>/overview.md
-当前 Agent 工作区/handoff.md   # 如果存在
-当前 Agent 工作区/report.md    # 如果存在
-必要的父级、子级或兄弟工作区 report
-```
+压缩或长任务中断前，应提醒用户是否需要保存状态层通信文件。
 
-如果顶层任务目录或 Agent 工作区不明确，必须先定位或询问用户。
-
-## 压缩前保存
-
-压缩或长任务中断前，应提醒更新：
-
-```text
-当前 Agent 工作区/report.md
-```
-
-必要时更新：
-
-```text
-接手 Agent 工作区/handoff.md
-state/tasks/<task-id>/overview.md
-```
+如需写入 `handoff.md`、`report.md`、任务级 `docs/*.md` 或 `overview.md`，按 `rules/collaboration-rules.md` 的确认机制执行。
 
 ## 危险操作提醒
 
@@ -51,27 +37,15 @@ state/tasks/<task-id>/overview.md
 - 移动任务目录或 Agent 工作区
 - 大规模移动目录
 - 修改项目配置
-- 修改规则、角色、技能
+- 修改规则、角色、技能或质量门
 - 引入新依赖
 - 重写架构
 
 ## 角色越界提醒
 
-当前窗口必须遵守启动时声明的角色边界。
+当前窗口必须遵守启动时声明的角色边界，具体权限见当前 `agents/<role>.md`。
 
-如果当前角色是 Architect、Module Designer，或“架构+模块”组合角色：
-
-- 不得修改项目代码、配置、资源、测试代码或构建脚本。
-- 不得为了验证自己改动而运行构建或测试。
-- 不得把用户描述的功能需求当作实现授权。
-- 只能输出设计、影响范围、验收标准和给 Developer 的 handoff。
-
-当设计角色准备写入源码、配置、资源、测试、脚本或构建配置时，必须停止并提示：
-
-```text
-当前角色不允许修改项目代码。
-请确认是否切换到 Developer 并开始实现。
-```
+如果当前角色准备执行无权动作，必须停止并请求用户明确切换到对应角色或调整授权。
 
 ## 步骤进展提醒
 
@@ -79,9 +53,10 @@ state/tasks/<task-id>/overview.md
 
 - 接手 Agent 工作区的 `handoff.md`
 - 当前 Agent 工作区的 `report.md`
+- 任务级 `docs/*.md`
+- 顶层任务 `overview.md`
 - 正式产物
 - 当前阶段完成标记
-- 顶层任务 `overview.md`
 
 ## 状态陈旧提醒
 
@@ -94,7 +69,7 @@ state/tasks/<task-id>/overview.md
 - 同一职责出现多个相似工作区，无法判断接手哪一个
 - `handoff.md` 指向不存在的下一步或不存在的接手对象
 - `report.md` 写了完成，但父级没有读取或处理
-- docs 已更新，可能需要询问用户是否在相关工作区 report 中留痕
+- 全局 docs 已更新，可能需要询问用户是否在相关工作区 report 中留痕
 - 测试失败但 report 写“完成”
 
 ## 任务目录一致性提醒
@@ -105,12 +80,13 @@ state/tasks/<task-id>/overview.md
 - 当前 Agent 是否有自己的工作区
 - 如果需要向上级、owner 或用户留痕，是否已询问用户写当前工作区 `report.md`
 - 如果需要交接，是否已询问用户写接手工作区 `handoff.md`
+- 如果需要任务级公共认知，是否已有用户明确要求或确认写任务级 `docs/*.md`
 - 如果有子 Agent，子工作区是否嵌套在父工作区下
 - 任务完成后是否需要询问用户在 `overview.md` 或相关 `report.md` 中记录结论
 
 ## 正式产物写入提醒
 
-写入 `docs/` 前，提醒检查：
+写入全局 `docs/` 前，提醒检查：
 
 - 是否已经用户确认？
 - 是否是长期事实？
@@ -129,6 +105,6 @@ state/tasks/<task-id>/overview.md
 
 - 会话开始时打印顶层任务 `overview.md` 和当前 Agent 工作区路径
 - 压缩前提醒更新当前 Agent 工作区
-- 写入 `docs/` 前提醒检查质量门
+- 写入全局 `docs/` 前提醒检查质量门
 - 检查工作区路径是否存在
 - 检查 TODO/FIXME 是否有说明

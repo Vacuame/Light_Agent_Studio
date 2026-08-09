@@ -1,14 +1,20 @@
 # 上下文规则
 
-上下文规则用于防止会话断片、压缩后遗忘、交接混乱。
+本文件是状态层结构、上下文恢复和状态文件格式模板的唯一权威来源。
+
+handoff/report 的方向、写入位置和确认机制见 `rules/collaboration-rules.md`。全局原则见 `rules/rules.md`。
 
 ## 核心原则
 
 文件是长期记忆，对话只是临时过程。
 
-重要信息不要只留在聊天里。只要会影响后续工作，就要考虑写入 `state/` 或 `docs/`；但 `handoff.md`、`report.md`、任务级 `docs/*.md` 和正式 `docs/` 都必须按各自确认规则，在用户明确要求或确认后才写入。
+重要信息不要只留在聊天里。只要会影响后续工作，就要考虑写入 `state/` 或全局 `docs/`；但 `handoff.md`、`report.md`、任务级 `docs/*.md` 和正式 `docs/` 都必须按各自确认规则，在用户明确要求或确认后才写入。
 
-`state/` 是当前怎么接着干；`docs/` 是已确认的项目事实。
+```text
+state/ = 当前怎么接着干
+state/tasks/<task-id>/docs/ = 用户授权后的任务级公共认知草稿
+全局 docs/ = 已确认的项目事实
+```
 
 ## 状态层组织
 
@@ -33,9 +39,9 @@ state/tasks/<task-id>/
 - `overview.md` 是顶层任务总览，记录任务背景、目标、当前进展、重要文件、疑点、共识和会影响后续 Agent 的稳定结论。
 - `docs/` 是任务级公共认知区，按用户要求创建或修改其中的 Markdown 文件，记录任务推进中产生、多个 Agent 需要共享、但暂时不适合写入全局 `docs/` 的发现、假设、疑点、候选决策和参考线索。
 - `<agent-workspace>/` 是某个 Agent 窗口的工作区，每个 Agent 窗口都必须定位或创建自己的工作区。
-- `handoff.md` 是父级或上游写给当前工作区的交接。
-- `report.md` 是当前工作区写给父级、上层汇总者或用户的回报。
-- 嵌套工作区表示父子关系；同级工作区表示并列或旁支关系。
+- `handoff.md` 是写给当前工作区的交接。
+- `report.md` 是当前工作区写出的回报。
+- 嵌套工作区表示父子关系；同级工作区表示并列或旁支关系。关系判断见 `rules/collaboration-rules.md`。
 - 目录树就是定位线索，不额外维护任务索引或状态面板。
 
 ## 顶层任务 overview.md
@@ -64,11 +70,11 @@ state/tasks/<task-id>/
 
 `overview.md` 只写跨角色、稳定、会影响后续工作的内容。不要复制完整 `handoff.md` 或 `report.md`，不要写成聊天流水账。
 
-子级 Agent 写 `report.md` 时不自动更新 `overview.md`。父级、汇总者或任务 owner 读取 report 后，再决定哪些稳定结论进入 `overview.md`。
+子级 Agent 写 `report.md` 时不自动更新 `overview.md`。是否更新、谁更新、如何确认，见 `rules/collaboration-rules.md`。
 
 ## 任务级 docs/
 
-`state/tasks/<task-id>/docs/` 是任务内公共认知草稿区。只有用户明确要求维护任务级公共认知，或用户确认当前任务需要任务级 docs 时，才按需创建或修改其中的 Markdown 文件；Agent 不得自行判断并创建或写入任务级 docs。不要为了单 Agent 私人笔记、普通进度、完整 handoff/report 复制或已确认长期事实而创建。
+`state/tasks/<task-id>/docs/` 是任务内公共认知草稿区。只有用户明确要求维护任务级公共认知，或用户确认当前任务需要任务级 docs 时，才按需创建或修改其中的 Markdown 文件；Agent 不得自行判断并创建或写入任务级 docs。
 
 它适合记录：
 
@@ -100,10 +106,9 @@ state/tasks/<task-id>/
 
 维护规则：
 
-- 只有在用户明确要求维护任务级公共认知，或用户确认当前任务需要任务级 docs 后，Agent 才能创建或写入 `docs/` 下的 Markdown 文件。
 - 用户已授权任务级 docs 后，Agent 可以把会影响多个 Agent 的任务内信息追加到合适的 Markdown 文件中；如果没有合适文件，先按内容命名创建新的 Markdown 文件。
 - 不确定内容必须标明确定性，不得写成已确认事实。
-- 父级、汇总者或任务 owner 可以整理、去重、改写过期条目。
+- 父级、汇总者或任务 owner 可以整理、去重、改写过期条目，但写入前仍按协作规则确认。
 - 内容被用户确认并具有长期价值后，再提升到全局 `docs/`。
 - 内容已经过期或被否定时，保留简短说明，不要无痕删除。
 
@@ -133,19 +138,17 @@ state/tasks/<task-id>/
 
 ## 压缩前
 
-如果会话将被压缩或任务很长，当前 Agent 应提醒用户是否需要把上下文保存到状态层通信文件；用户确认后再写入：
+如果会话将被压缩或任务很长，当前 Agent 应提醒用户是否需要把上下文保存到状态层通信文件；用户确认后再写入。
 
-1. 需要向上级、owner 或用户留痕时，在当前工作区写 `report.md`，写清楚已完成、未完成、风险和下一步。
-2. 需要交给下游 Agent 时，在接手者工作区写 `handoff.md`。
-3. 如果当前 Agent 是父级、汇总者或任务 owner，并且已经读取子级 report，用户确认后可更新顶层任务 `overview.md`。
-
-并写清楚：
+需要保存时，优先说明：
 
 - 已经做完什么
 - 还没做什么
 - 哪些文件是权威来源
 - 下个角色或上层 owner 应该从哪里继续
 - 当前顶层任务目录和 Agent 工作区路径
+
+具体写入 `handoff.md`、`report.md` 或 `overview.md` 的方向和确认机制见 `rules/collaboration-rules.md`。
 
 ## 压缩后
 
@@ -155,7 +158,8 @@ state/tasks/<task-id>/
 2. 当前 Agent 工作区的 `handoff.md`（如果存在）
 3. 当前 Agent 工作区的 `report.md`（如果存在）
 4. 必要的父级、子级或兄弟工作区 `report.md`
-5. 当前任务相关的正式产物文件
+5. 用户已授权且当前任务相关的任务级 `docs/*.md`
+6. 当前任务相关的正式产物文件
 
 不要根据压缩摘要直接继续做复杂决策。
 
@@ -174,19 +178,13 @@ state/tasks/<task-id>/
 
 不要把未经确认的完整方案、假想任务树、完整下游流程或被用户否定的长方案全文写入状态层。遇到不确定点时，先记录当前阻塞或待确认问题，不要带着未确认前提继续扩展状态内容。
 
-## handoff 与 report
+## handoff 与 report 格式模板
 
 `handoff.md` 和 `report.md` 只是 Agent 之间的工作交流文件，不是状态机、流程引擎或阶段判定器。
 
-- `handoff.md` 写给下级、下游或接手者，放在接手者的 Agent 工作区里；必须在用户明确要求或确认后才创建或修改。
-- `report.md` 写给上级、上层汇总者、任务 owner 或用户，放在汇报者自己的 Agent 工作区里；必须在用户明确要求或确认后才创建或修改。
-- 写了 `handoff.md` 不代表当前工作区自动结束。
-- 写了 `report.md` 不代表顶层任务自动完成。
-- 顶层任务目录 `state/tasks/<task-id>/` 不是 Agent 工作区，不直接放 `handoff.md` 或 `report.md`。
+方向、位置和写入确认见 `rules/collaboration-rules.md`。
 
 ### handoff.md 推荐格式
-
-`handoff.md` 是向下交接文件。只有需要交给另一个角色、Agent 或子工作区时才需要。
 
 ```markdown
 # 任务交接
@@ -211,8 +209,6 @@ state/tasks/<task-id>/
 ```
 
 ### report.md 推荐格式
-
-`report.md` 是写给上级、上层汇总者、任务 owner 或用户的回报文件。需要向上说明结果、阻塞、风险或请求判断，并且用户明确要求或确认后才填写。
 
 ```markdown
 # 工作区回报
@@ -257,6 +253,8 @@ docs/modules/xxx-derived-context.md
 权威来源是 architecture.md、module-spec、decision records 和代码本身。
 ```
 
+Adviser 写文件的质量要求见 `rules/gates/adviser-output-gate.md`。
+
 ## 长任务更新频率
 
 长任务不需要每一步都更新正式产物；需要留痕时，先询问用户是否写入状态层通信文件。
@@ -266,15 +264,16 @@ docs/modules/xxx-derived-context.md
 - 需要留下阶段结论、阻塞或下一步时，询问是否写当前 Agent 工作区的 `report.md`。
 - 需要另一个 Agent 接续时，询问是否在接手工作区写 `handoff.md`。
 - 父级、汇总者或任务 owner 读取 report 后，询问是否更新顶层任务 `overview.md`。
-- 每次用户确认长期结论，再更新 `docs/`。
+- 每次用户确认长期结论，再更新全局 `docs/`。
 
 ## 状态层与产物层
 
 ```text
 state/ = 当前怎么接着干
-docs/  = 已确认的项目事实
+state/tasks/<task-id>/docs/ = 用户授权后的任务级公共认知草稿
+全局 docs/ = 已确认的项目事实
 ```
 
 如果只是临时进度、阻塞、下一步、交接或回报，写入 `state/`。
 
-如果是长期会被后续角色依赖的事实，写入 `docs/`。
+如果是长期会被后续角色依赖的事实，写入全局 `docs/`。

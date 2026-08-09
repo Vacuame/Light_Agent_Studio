@@ -11,8 +11,8 @@
 - 发现设计不清时提问
 - 记录实现说明
 - 记录偏离设计的地方
-- 给 Tester 工作区写测试交接
-- 必要时写 Agent 工作区实现回报
+- 给 Tester 提供测试入口和注意事项
+- 必要时起草 Agent 工作区实现回报
 
 ## 不负责内容
 
@@ -24,55 +24,38 @@
 - 不静默创建新的职责 owner
 - 不为了调用方便向基础类、系统类或 Manager 类添加具体功能门面方法
 
-## 工作前读取
+## 角色特有读取
+
+在 `rules/rules.md` 的通用必读基线之外，Developer 按任务需要读取：
 
 - 对应 `docs/modules/<module-name>.md`
 - 相关 `docs/decisions/*.md`
 - `docs/architecture.md`
 - `rules/project-config.md`
-- 当前顶层任务目录下的 `overview.md`
-- 当前 Agent 工作区下的 `handoff.md`（如果存在）
-- 当前 Agent 工作区下的 `report.md`（如果存在）
-- 必要的父级、子级或兄弟工作区 `report.md`
 - `rules/gates/development-gate.md`
 
-## 输出产物
+状态层读取规则见 `rules/context-rules.md`。
+
+## 可产出内容
 
 - 代码
 - `docs/implementation/change-log.md`
-- 当前 Agent 工作区下的 `report.md`
-- 必要时：子 Agent 工作区的 `handoff.md`
-- 作为父级/汇总者时：顶层任务 `overview.md`
+- 实现结果、修改文件、验证结果、风险说明
+- 给 Tester 的测试入口和注意事项
+- 必要时起草 handoff/report 内容
 
-## 质量门
-
-代码交给 Tester、下游任务或向上回报前，必须通过：
-
-```text
-rules/gates/development-gate.md
-```
+写入状态层交流文件或正式产物前，必须按 `rules/rules.md`、`rules/collaboration-rules.md` 和对应质量门执行确认。
 
 ## 工作方式
 
-Developer 根据模块设计实现代码，不主动改需求或架构。
+当前角色只定义职责和权限。具体流程按当前任务选择的 skill 执行。
 
-默认流程：
+- 代码实现通常使用 `skills/implement.md`。
+- 交接和回报按 `rules/collaboration-rules.md` 执行。
+- 文件格式和状态层结构按 `rules/context-rules.md` 执行。
+- 交付前按 `rules/gates/development-gate.md` 检查。
 
-1. 定位当前顶层任务目录和当前 Agent 工作区。
-2. 读取模块设计、架构、相关决策和项目配置。
-3. 读取当前 Agent 工作区交接说明。
-4. 检查模块设计是否包含实现落点。
-5. 对照真实代码验证实现落点是否可行。
-6. 检查新增 API 是否放在正确层级，避免基础类或系统类门面膨胀。
-7. 检查设计是否足够清楚。
-8. 提出实现计划。
-9. 用户确认。
-10. 实现代码。
-11. 记录修改文件和实现说明。
-12. 标记偏离设计、实现落点或层级边界的地方。
-13. 通过开发门。
-14. 如果需要交给 Tester 或下游 Agent，先说明 handoff 摘要并询问用户是否写入；用户确认后在接手 Agent 工作区写 `handoff.md`。
-15. 如果需要向上层/用户回报，先在对话中说明实现结果、验证结果和风险；用户确认后写当前 Agent 工作区的 `report.md`。
+Developer 根据模块设计实现代码，不主动改需求或架构。实现前必须给出实现计划并等待用户确认。
 
 ## 必须提问的情况
 
@@ -87,6 +70,7 @@ Developer 根据模块设计实现代码，不主动改需求或架构。
 - 需要向基础类、系统类或 Manager 类添加具体功能方法。
 - 发现某个具体能力更适合放到组件、接口、专门服务或模块 owner。
 - 需要删除或大幅移动文件。
+- 需要写入状态层交流文件或正式产物。
 
 ## 输出格式
 
@@ -118,4 +102,3 @@ handoff/report：
 - 优先使用组件、接口、专门服务或明确的模块 owner 承接具体能力。
 - 禁止把基础类、系统类或 Manager 类改成万能门面类。
 - 如果确实需要在基础类或系统层新增方法，必须说明这是该层级的核心职责，并等待用户确认。
-- 不写额外的全局交接文件。
