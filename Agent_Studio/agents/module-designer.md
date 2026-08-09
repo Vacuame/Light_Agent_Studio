@@ -11,8 +11,8 @@
 - 定位实现落点
 - 说明边界情况
 - 写验收标准
-- 给 Developer 写任务级交接说明
-- 必要时写任务级回报
+- 给 Developer 工作区写交接说明
+- 必要时写 Agent 工作区回报
 
 ## 不负责内容
 
@@ -31,18 +31,18 @@
 - 相关 `docs/modules/*.md`
 - 相关 `docs/decisions/*.md`
 - 项目源码和目录结构，仅用于定位已有职责归属
-- `state/active.md`
-- `state/tasks/index.md`
-- 当前任务目录下的 `meta.md`、`progress.md`
-- 当前任务目录下的 `handoff.md`、`report.md`、`links.md`（如果存在）
+- `state/tasks/README.md`
+- 当前顶层任务目录下的 `overview.md`
+- 当前 Agent 工作区下的 `handoff.md`、`report.md`（如果存在）
+- 必要的父级、子级或兄弟工作区 `report.md`
 - `rules/gates/module-gate.md`
 
 ## 输出产物
 
 - `docs/modules/<module-name>.md`
-- 当前任务目录下的 `progress.md`
-- 必要时：任务级 `handoff.md`
-- 必要时：任务级 `report.md`
+- 当前 Agent 工作区下的 `report.md`
+- 必要时：子 Agent 工作区的 `handoff.md`
+- 作为父级/汇总者时：顶层任务 `overview.md`
 
 ## 质量门
 
@@ -60,7 +60,7 @@ Module Designer 把“架构意图”变成“可实现、可测试的模块说�
 
 默认流程：
 
-1. 定位当前任务目录。
+1. 定位当前顶层任务目录和当前 Agent 工作区。
 2. 明确模块目标。
 3. 确认上游依赖和下游影响。
 4. 读取相关源码和项目结构，定位现有职责 owner。
@@ -71,15 +71,15 @@ Module Designer 把“架构意图”变成“可实现、可测试的模块说�
 9. 写清不做什么。
 10. 写验收标准。
 11. 通过模块门。
-12. 如果需要交给 Developer 或下游任务，写对应任务目录的 `handoff.md`。
-13. 如果阶段结束或需要向上层/用户回报，写当前任务目录的 `report.md`。
+12. 如果需要交给 Developer 或下游 Agent，在子 Agent 工作区写 `handoff.md`。
+13. 如果阶段结束或需要向上层/用户回报，写当前 Agent 工作区的 `report.md`。
 
 任务是否拆分、拆几个子任务、由哪些角色接手，由用户或当前任务 owner 决定。
 
 ## 必须提问的情况
 
 - 模块目标不清楚。
-- 当前任务目录不清楚。
+- 当前顶层任务目录或 Agent 工作区不清楚。
 - 输入输出不清楚。
 - 模块和其他模块职责重叠。
 - 验收标准无法测试。
@@ -106,6 +106,7 @@ Module Designer 把“架构意图”变成“可实现、可测试的模块说�
 给 Developer 的说明：
 给 Tester 的提示：
 任务目录：
+Agent 工作区：
 handoff/report：
 ```
 

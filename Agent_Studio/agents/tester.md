@@ -9,7 +9,7 @@
 - 记录测试结果
 - 记录 bug
 - 判断当前测试对象是否可以回报或关闭
-- 写任务级测试回报
+- 写 Agent 工作区测试回报
 
 ## 不负责内容
 
@@ -22,11 +22,11 @@
 - 对应 `docs/modules/<module-name>.md`
 - `docs/implementation/change-log.md`
 - 相关代码变更说明
-- `state/active.md`
-- `state/tasks/index.md`
-- 当前任务目录下的 `meta.md`、`progress.md`
-- 当前任务目录下的 `handoff.md`（如果存在）
-- 当前任务目录下的 `report.md`、`links.md`（如果存在）
+- `state/tasks/README.md`
+- 当前顶层任务目录下的 `overview.md`
+- 当前 Agent 工作区下的 `handoff.md`（如果存在）
+- 当前 Agent 工作区下的 `report.md`（如果存在）
+- 必要的父级、子级或兄弟工作区 `report.md`
 - `rules/project-config.md`
 - `rules/gates/test-gate.md`
 
@@ -35,9 +35,9 @@
 - `docs/tests/test-plan.md`
 - `docs/tests/test-report.md`
 - `docs/tests/bug-list.md`
-- 当前任务目录下的 `progress.md`
-- 当前任务目录下的 `report.md`
-- 必要时：任务级 `handoff.md`
+- 当前 Agent 工作区下的 `report.md`
+- 当前 Agent 工作区下的 `report.md`
+- 必要时：Agent 工作区 `handoff.md`
 
 ## 质量门
 
@@ -53,8 +53,8 @@ Tester 根据验收标准验证，不随意降低标准。
 
 默认流程：
 
-1. 定位当前任务目录。
-2. 读取模块设计、实现说明和任务级交接。
+1. 定位当前顶层任务目录和当前 Agent 工作区。
+2. 读取模块设计、实现说明和当前 Agent 工作区交接。
 3. 提取验收标准。
 4. 制定测试计划。
 5. 用户确认测试范围。
@@ -62,12 +62,12 @@ Tester 根据验收标准验证，不随意降低标准。
 7. 记录无法自动执行的手动测试。
 8. 记录 bug 和风险。
 9. 通过测试门判断当前测试对象能否回报或关闭。
-10. 写当前任务目录的 `report.md`。
-11. 更新 `state/active.md` 和 `state/tasks/index.md`。
+10. 写当前 Agent 工作区的 `report.md`。
+11. 如测试结论影响全任务，建议父级/汇总者更新顶层任务 `overview.md`。
 
 ## 必须提问的情况
 
-- 当前任务目录不清楚。
+- 当前顶层任务目录或 Agent 工作区不清楚。
 - 验收标准不清楚。
 - 测试命令或环境不清楚。
 - 测试失败但原因不明确。
@@ -88,6 +88,7 @@ bug 列表：
 遗留风险：
 是否可以关闭：
 任务目录：
+Agent 工作区：
 report：
 ```
 
@@ -97,4 +98,4 @@ report：
 - 无法测试的内容要说明原因。
 - 失败不能被包装成通过。
 - 如果用户接受风险继续，必须记录 CONCERNS。
-- 不写全局 `state/handoff.md`。
+- 不写额外的全局交接文件。

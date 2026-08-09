@@ -8,7 +8,7 @@
 - 判断这次应该由哪个角色接手
 - 判断应该使用哪个技能 SOP
 - 检查状态层和项目配置是否足够继续
-- 定位当前任务目录，或提示用户创建/选择任务
+- 定位当前顶层任务目录和 Agent 工作区，或提示用户创建/选择任务
 - 在用户确认前，不修改状态层、产物层或项目代码
 
 ## 输入
@@ -28,16 +28,16 @@
 - `rules/project-config.md`
 - `rules/quality-gates.md`
 - `rules/automation-guards.md`
-- `state/active.md`
-- `state/tasks/index.md`
+- `state/tasks/<task-id>/overview.md`
+- `state/tasks/README.md`
 
-如果已经确定当前任务目录，再读取该任务目录下的：
+如果已经确定当前顶层任务目录和 Agent 工作区，再读取该任务目录下的：
 
-- `meta.md`
-- `progress.md`
+- `overview.md`
+- `report.md`
 - `handoff.md`（如果存在）
 - `report.md`（如果存在）
-- `links.md`（如果存在）
+- `相关工作区 report`（如果存在）
 
 如果用户给出了具体任务，再读取对应角色和技能：
 
@@ -52,7 +52,7 @@
 
 1. 确认 Agent Studio 根目录和项目根目录。
 2. 读取启动必读文件。
-3. 摘要全局任务面板：当前聚焦任务、活跃任务、阻塞任务、任务索引。
+3. 摘要顶层任务总览：当前顶层任务、活跃任务、阻塞任务、任务目录说明。
 4. 如果用户指定任务，定位对应任务目录。
 5. 如果任务目录不明确，列出可选任务或询问用户。
 6. 检查 `rules/project-config.md` 是否已填写关键配置。
@@ -76,16 +76,16 @@
 启动摘要：
 项目根目录：
 Agent Studio 目录：
-当前聚焦任务：
+当前顶层任务：
 活跃任务：
 阻塞任务：
-当前任务目录：
+当前顶层任务目录和 Agent 工作区：
 当前状态：
 缺失信息：
 建议角色：
 建议技能：
 下一步需要读取：
-是否需要更新 state/active.md 或 state/tasks/index.md：
+是否需要更新 state/tasks/<task-id>/overview.md 或 state/tasks/README.md：
 等待用户确认：
 ```
 
@@ -104,8 +104,8 @@ Administrator 先检查规则、状态和配置是否可用；Architect 再建�
 - `rules/project-config.md`
 - `docs/project-overview.md`
 - `docs/module-map.md`
-- `state/active.md`
-- `state/tasks/index.md`
+- `state/tasks/<task-id>/overview.md`
+- `state/tasks/README.md`
 
 这些文件不要自动填写为事实。缺信息时先向用户提问，或把内容标为“待确认”。
 
@@ -114,6 +114,6 @@ Administrator 先检查规则、状态和配置是否可用；Architect 再建�
 - 不要在启动阶段直接修改项目代码。
 - 不要在没有用户确认时更新正式产物。
 - 不要把猜测写入 `docs/`。
-- 不要跳过 `state/active.md` 和 `state/tasks/index.md`。
+- 不要跳过 `state/tasks/<task-id>/overview.md` 和 `state/tasks/README.md`。
 - 不要因为缺少配置就自行假设运行命令、测试命令或技术栈。
 - 不要替用户判断任务应该拆成大/中/小结构；任务分配由用户或任务 owner 决定。

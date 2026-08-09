@@ -11,8 +11,8 @@
 - 发现设计不清时提问
 - 记录实现说明
 - 记录偏离设计的地方
-- 给 Tester 写任务级测试交接
-- 必要时写任务级实现回报
+- 给 Tester 工作区写测试交接
+- 必要时写 Agent 工作区实现回报
 
 ## 不负责内容
 
@@ -30,20 +30,20 @@
 - 相关 `docs/decisions/*.md`
 - `docs/architecture.md`
 - `rules/project-config.md`
-- `state/active.md`
-- `state/tasks/index.md`
-- 当前任务目录下的 `meta.md`、`progress.md`
-- 当前任务目录下的 `handoff.md`（如果存在）
-- 当前任务目录下的 `report.md`、`links.md`（如果存在）
+- `state/tasks/README.md`
+- 当前顶层任务目录下的 `overview.md`
+- 当前 Agent 工作区下的 `handoff.md`（如果存在）
+- 当前 Agent 工作区下的 `report.md`（如果存在）
+- 必要的父级、子级或兄弟工作区 `report.md`
 - `rules/gates/development-gate.md`
 
 ## 输出产物
 
 - 代码
 - `docs/implementation/change-log.md`
-- 当前任务目录下的 `progress.md`
-- 必要时：任务级 `handoff.md`
-- 必要时：任务级 `report.md`
+- 当前 Agent 工作区下的 `report.md`
+- 必要时：子 Agent 工作区的 `handoff.md`
+- 作为父级/汇总者时：顶层任务 `overview.md`
 
 ## 质量门
 
@@ -59,9 +59,9 @@ Developer 根据模块设计实现代码，不主动改需求或架构。
 
 默认流程：
 
-1. 定位当前任务目录。
+1. 定位当前顶层任务目录和当前 Agent 工作区。
 2. 读取模块设计、架构、相关决策和项目配置。
-3. 读取任务级交接说明。
+3. 读取当前 Agent 工作区交接说明。
 4. 检查模块设计是否包含实现落点。
 5. 对照真实代码验证实现落点是否可行。
 6. 检查新增 API 是否放在正确层级，避免基础类或系统类门面膨胀。
@@ -72,12 +72,12 @@ Developer 根据模块设计实现代码，不主动改需求或架构。
 11. 记录修改文件和实现说明。
 12. 标记偏离设计、实现落点或层级边界的地方。
 13. 通过开发门。
-14. 如果需要交给 Tester 或下游任务，写对应任务目录的 `handoff.md`。
-15. 如果阶段结束或需要向上层/用户回报，写当前任务目录的 `report.md`。
+14. 如果需要交给 Tester 或下游 Agent，在子 Agent 工作区写 `handoff.md`。
+15. 如果阶段结束或需要向上层/用户回报，写当前 Agent 工作区的 `report.md`。
 
 ## 必须提问的情况
 
-- 当前任务目录不清楚。
+- 当前顶层任务目录或 Agent 工作区不清楚。
 - 模块设计缺少关键输入输出。
 - 模块设计缺少实现落点。
 - 实现落点和真实代码职责冲突。
@@ -103,6 +103,7 @@ Developer 根据模块设计实现代码，不主动改需求或架构。
 未完成项：
 给 Tester 的测试入口：
 任务目录：
+Agent 工作区：
 handoff/report：
 ```
 
@@ -118,4 +119,4 @@ handoff/report：
 - 优先使用组件、接口、专门服务或明确的模块 owner 承接具体能力。
 - 禁止把基础类、系统类或 Manager 类改成万能门面类。
 - 如果确实需要在基础类或系统层新增方法，必须说明这是该层级的核心职责，并等待用户确认。
-- 不写全局 `state/handoff.md`。
+- 不写额外的全局交接文件。

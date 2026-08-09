@@ -15,14 +15,14 @@
 - 代码交给测试或向上回报前
 - 测试结果支持关闭任务前
 - 规则或技能修改前
-- 任务级 `handoff.md` / `report.md` 写入前
+- Agent 工作区 `handoff.md` / `report.md` 写入前
 
 ## 流程
 
 1. 明确要 review 的对象。
 2. 明确对象所属任务目录。
 3. 读取上游权威文件。
-4. 读取当前任务目录下的相关状态文件。
+4. 读取当前顶层任务目录和 Agent 工作区下的相关状态文件。
 5. 根据 review 对象只读取对应质量门：
    - 规则/角色/技能变更：`rules/gates/administration-gate.md`
    - 架构产物：`rules/gates/architecture-gate.md`

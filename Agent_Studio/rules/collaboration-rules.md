@@ -9,10 +9,10 @@ Agent Studio 不替用户判断任务应该如何拆分，也不规定固定的�
 任务结构由用户或当前任务 owner 决定。框架只保证：
 
 - 每个任务有独立目录。
-- 交接写入任务级 `handoff.md`。
-- 完成或阶段结论写入任务级 `report.md`。
+- 交接写入Agent 工作区 `handoff.md`。
+- 完成或阶段结论写入Agent 工作区 `report.md`。
 - 多个任务不会覆盖同一个全局 handoff。
-- 删除和归档有明确路径。
+- 删除和完成记录有明确路径。
 
 任务可以是单目录任务，也可以有多个子任务。一个 Agent 可以兼任多个角色，但应在任务状态中说明。
 
@@ -48,7 +48,7 @@ report.md  = 向上回报
 
 ### 向上回报
 
-当一个任务完成、阶段结束、阻塞、放弃或需要上层判断时，写入当前任务目录的 `report.md`。
+当一个任务完成、阶段结束、阻塞、放弃或需要上层判断时，写入当前顶层任务目录和 Agent 工作区的 `report.md`。
 
 回报必须写清楚：
 
@@ -62,32 +62,32 @@ report.md  = 向上回报
 - 对上层任务的影响
 - 建议下一步
 
-父任务 owner 或上层汇总者读取子任务的 `report.md`，决定继续、返工、关闭、归档或再拆任务。
+父任务 owner 或上层汇总者读取子任务的 `report.md`，决定继续、返工、关闭、完成记录或再拆任务。
 
 ## 状态写入位置
 
-全局任务面板写入：
+顶层任务总览写入：
 
 ```text
-state/active.md
+state/tasks/<task-id>/overview.md
 ```
 
-任务索引写入：
+任务目录说明写入：
 
 ```text
-state/tasks/index.md
+state/tasks/README.md
 ```
 
 任务正文写入：
 
 ```text
-state/tasks/active/<task-id>/
+state/tasks/<task-id>/
 ```
 
-归档任务写入：
+完成记录任务写入：
 
 ```text
-state/tasks/archived/<task-id>/
+state/tasks/<task-id>/（完成后不默认移动）
 ```
 
 长期事实写入：
@@ -117,17 +117,17 @@ docs/
 
 任务关闭后的处理方式：
 
-1. 保留在 `state/tasks/active/<task-id>/` 并标记为 `done`。
-2. 归档到 `state/tasks/archived/<task-id>/`。
+1. 保留在 `state/tasks/<task-id>/` 并标记为 `done`。
+2. 完成记录到 `state/tasks/<task-id>/（完成后不默认移动）`。
 3. 在用户明确确认后删除任务目录。
 
-删除或归档后，必须同步更新：
+删除或完成记录后，必须同步更新：
 
-- `state/tasks/index.md`
-- `state/active.md`
+- `state/tasks/README.md`
+- `state/tasks/<task-id>/overview.md`
 - 必要时追加 `state/session-log.md`
 
-`state/active.md` 不删除，只更新为新的当前任务面板或空闲状态。
+`state/tasks/<task-id>/overview.md` 不删除，只更新为新的当前任务面板或空闲状态。
 
 ## 冲突处理
 
@@ -138,10 +138,10 @@ docs/
 > docs/decisions/
 > docs/architecture.md
 > docs/modules/
-> state/tasks/active/<task-id>/report.md
-> state/tasks/active/<task-id>/handoff.md
-> state/tasks/active/<task-id>/progress.md
-> state/active.md
+> state/tasks/<task-id>/report.md
+> state/tasks/<task-id>/handoff.md
+> state/tasks/<task-id>/report.md
+> state/tasks/<task-id>/overview.md
 > Adviser 的 derived context
 ```
 
@@ -149,7 +149,7 @@ docs/
 
 如果模块设计中的实现落点与真实代码冲突，Developer 必须反馈给 Module Designer 或用户确认，不得自行改变模块边界或代码层级。
 
-如果两个任务需要修改同一文件或同一职责边界，必须在相关任务的 `links.md` 或 `progress.md` 中标明冲突，并由用户或共同上层 owner 决定如何处理。
+如果两个任务需要修改同一文件或同一职责边界，必须在相关任务的 `相关工作区 report` 或 `report.md` 中标明冲突，并由用户或共同上层 owner 决定如何处理。
 
 ## 角色责任边界
 
@@ -171,7 +171,7 @@ Adviser：解释、问答、辅助理解，不产出权威设计
 读取范围应遵循：
 
 ```text
-总规则 + 当前全局面板 + 任务索引 + 当前任务目录 + 当前角色 + 当前技能 + 相关产物 + 对应质量门
+总规则 + 当前全局面板 + 任务目录说明 + 当前顶层任务目录和 Agent 工作区 + 当前角色 + 当前技能 + 相关产物 + 对应质量门
 ```
 
 如果某个文件只是背景知识，先判断是否必要。避免把无关上下文塞给 Agent。

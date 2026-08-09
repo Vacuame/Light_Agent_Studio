@@ -9,19 +9,19 @@
 开始新会话时，应提醒读取：
 
 ```text
-state/active.md
-state/tasks/index.md
+state/tasks/<task-id>/overview.md
+state/tasks/README.md
 rules/project-config.md
 ```
 
 如果已经确定要接手的任务，还应读取该任务目录下的：
 
 ```text
-meta.md
-progress.md
+overview.md
+report.md
 handoff.md   # 如果存在
 report.md    # 如果存在
-links.md     # 如果存在
+相关工作区 report     # 如果存在
 ```
 
 ## 压缩前保存
@@ -29,16 +29,16 @@ links.md     # 如果存在
 压缩或长任务中断前，应提醒更新：
 
 ```text
-state/active.md
-state/tasks/index.md
-state/tasks/active/<task-id>/progress.md
+state/tasks/<task-id>/overview.md
+state/tasks/README.md
+state/tasks/<task-id>/report.md
 ```
 
 必要时更新：
 
 ```text
-state/tasks/active/<task-id>/handoff.md
-state/tasks/active/<task-id>/report.md
+state/tasks/<task-id>/handoff.md
+state/tasks/<task-id>/report.md
 ```
 
 ## 危险操作提醒
@@ -47,7 +47,7 @@ state/tasks/active/<task-id>/report.md
 
 - 删除文件
 - 删除任务目录
-- 归档或移动任务目录
+- 完成记录或移动任务目录
 - 大规模移动目录
 - 修改项目配置
 - 修改规则、角色、技能
@@ -78,15 +78,15 @@ state/tasks/active/<task-id>/report.md
 
 用户确认后，才可以：
 
-- 更新当前任务目录下的 `handoff.md`
-- 更新当前任务目录下的 `report.md`
+- 更新当前 Agent 工作区的 `handoff.md`
+- 更新当前 Agent 工作区的 `report.md`
 - 更新正式产物
 - 标记当前阶段完成
-- 更新 `state/tasks/index.md` 和 `state/active.md`
+- 更新 `state/tasks/README.md` 和 `state/tasks/<task-id>/overview.md`
 
 ## 状态陈旧提醒
 
-如果 `state/active.md`、`state/tasks/index.md` 或当前任务目录明显不一致，应先更新状态，再继续任务。
+如果 `state/tasks/<task-id>/overview.md`、`state/tasks/README.md` 或当前顶层任务目录和 Agent 工作区明显不一致，应先更新状态，再继续任务。
 
 常见情况：
 
@@ -95,7 +95,7 @@ state/tasks/active/<task-id>/report.md
 - `tasks/index.md` 记录的路径不存在
 - 任务目录存在但没有登记到 `tasks/index.md`
 - `handoff.md` 指向不存在的下一步
-- `report.md` 写了完成，但任务索引仍是 active
+- `report.md` 写了完成，但任务目录说明仍是 active
 - docs 已更新但 active.md 未更新
 - 测试失败但任务状态仍写“完成”
 
@@ -103,12 +103,12 @@ state/tasks/active/<task-id>/report.md
 
 更新任务目录时，提醒检查：
 
-- 是否有 `meta.md`
-- 是否有 `progress.md`
+- 是否有 `overview.md`
+- 是否有 `report.md`
 - 闭环时是否有 `report.md`
 - 有交接时是否有 `handoff.md`
 - 如果有子任务，父任务是否链接了子任务
-- 删除或归档后，`active.md` 和 `tasks/index.md` 是否仍残留旧路径
+- 删除或完成记录后，`active.md` 和 `tasks/index.md` 是否仍残留旧路径
 
 ## 正式产物写入提醒
 
@@ -129,8 +129,8 @@ state/tasks/active/<task-id>/report.md
 
 以后如果需要自动化，可以增加：
 
-- 会话开始时打印 `state/active.md` 和 `state/tasks/index.md`
-- 压缩前提醒更新当前任务目录
+- 会话开始时打印 `state/tasks/<task-id>/overview.md` 和 `state/tasks/README.md`
+- 压缩前提醒更新当前顶层任务目录和 Agent 工作区
 - 写入 `docs/` 前提醒检查质量门
-- 检查任务索引中的路径是否存在
+- 检查任务目录说明中的路径是否存在
 - 检查 TODO/FIXME 是否有说明

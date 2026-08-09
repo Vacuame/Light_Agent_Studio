@@ -21,13 +21,13 @@ report.md  = 向上回报
 
 ## 必读文件
 
-- `state/active.md`
-- `state/tasks/index.md`
-- 当前任务目录下的 `meta.md`
-- 当前任务目录下的 `progress.md`
+- `state/tasks/<task-id>/overview.md`
+- `state/tasks/README.md`
+- 当前顶层任务的 `overview.md`
+- 当前 Agent 工作区的 `report.md`
 - 当前任务相关产物
 
-如果要接手已有交接，读取当前任务目录下的 `handoff.md`。
+如果要接手已有交接，读取当前 Agent 工作区的 `handoff.md`。
 
 如果要汇总子任务或关闭任务，读取相关子任务的 `report.md`。
 
@@ -35,13 +35,13 @@ report.md  = 向上回报
 
 1. 明确任务目标。
 2. 明确任务 owner 或接手角色。
-3. 创建任务目录：`state/tasks/active/<task-id>/`。
-4. 写 `meta.md`。
-5. 写 `progress.md`。
+3. 创建任务目录：`state/tasks/<task-id>/`。
+4. 写 `overview.md`。
+5. 写 `report.md`。
 6. 必要时写 `handoff.md`。
-7. 必要时写 `links.md`。
-8. 更新 `state/tasks/index.md`。
-9. 更新 `state/active.md`。
+7. 必要时写 `相关工作区 report`。
+8. 更新 `state/tasks/README.md`。
+9. 更新 `state/tasks/<task-id>/overview.md`。
 
 任务如何拆分由用户或当前任务 owner 决定。本 skill 不判断任务是大、中、小，也不强制创建子任务。
 
@@ -56,8 +56,8 @@ report.md  = 向上回报
 7. 如果交给 Developer，列出实现落点摘要。
 8. 列出下一步。
 9. 写入接手任务目录的 `handoff.md`。
-10. 更新接手任务的 `meta.md` 和 `progress.md`。
-11. 更新 `state/tasks/index.md` 和 `state/active.md`。
+10. 更新接手任务的 `overview.md` 和 `report.md`。
+11. 更新 `state/tasks/README.md` 和 `state/tasks/<task-id>/overview.md`。
 
 ## 流程：向上回报
 
@@ -69,9 +69,9 @@ report.md  = 向上回报
 6. 列出风险与注意事项。
 7. 说明对上层任务的影响。
 8. 给出建议下一步。
-9. 写入当前任务目录的 `report.md`。
-10. 更新当前任务的 `meta.md` 和 `progress.md`。
-11. 更新 `state/tasks/index.md` 和 `state/active.md`。
+9. 写入当前顶层任务目录和 Agent 工作区的 `report.md`。
+10. 更新当前任务的 `overview.md` 和 `report.md`。
+11. 更新 `state/tasks/README.md` 和 `state/tasks/<task-id>/overview.md`。
 12. 必要时追加到 `state/session-log.md`。
 
 ## 流程：关闭任务
@@ -81,18 +81,18 @@ report.md  = 向上回报
 3. 检查是否通过相关质量门。
 4. 检查是否存在未解决风险或 CONCERNS。
 5. 用户确认关闭后，标记任务为 `done` 或 `dropped`。
-6. 更新 `state/tasks/index.md` 和 `state/active.md`。
+6. 更新 `state/tasks/README.md` 和 `state/tasks/<task-id>/overview.md`。
 7. 必要时追加到 `state/session-log.md`。
 
-## 流程：归档任务
+## 流程：完成记录任务
 
 1. 确认任务状态为 `done` 或 `dropped`。
-2. 确认用户同意归档。
-3. 在任务目录写或更新 `closeout.md`。
-4. 将任务目录移动到 `state/tasks/archived/<task-id>/`。
-5. 更新 `state/tasks/index.md`。
-6. 更新 `state/active.md`。
-7. 追加归档摘要到 `state/session-log.md`。
+2. 确认用户同意完成记录。
+3. 在任务目录写或更新 `overview.md`。
+4. 将任务目录移动到 `state/tasks/<task-id>/（完成后不默认移动）`。
+5. 更新 `state/tasks/README.md`。
+6. 更新 `state/tasks/<task-id>/overview.md`。
+7. 追加完成记录摘要到 `state/session-log.md`。
 
 ## 流程：删除任务
 
@@ -102,21 +102,21 @@ report.md  = 向上回报
 2. 确认任务没有需要保留的长期价值。
 3. 如果有子任务，先处理子任务。
 4. 用户确认后删除任务目录。
-5. 更新 `state/tasks/index.md`。
-6. 更新 `state/active.md`。
+5. 更新 `state/tasks/README.md`。
+6. 更新 `state/tasks/<task-id>/overview.md`。
 7. 必要时追加摘要到 `state/session-log.md`。
 
 ## 输出
 
 按场景输出：
 
-- `state/tasks/active/<task-id>/meta.md`
-- `state/tasks/active/<task-id>/progress.md`
-- `state/tasks/active/<task-id>/handoff.md`
-- `state/tasks/active/<task-id>/report.md`
-- `state/tasks/active/<task-id>/links.md`
-- `state/active.md`
-- `state/tasks/index.md`
+- `state/tasks/<task-id>/overview.md`
+- `state/tasks/<task-id>/report.md`
+- `state/tasks/<task-id>/handoff.md`
+- `state/tasks/<task-id>/report.md`
+- `state/tasks/<task-id>/相关工作区 report`
+- `state/tasks/<task-id>/overview.md`
+- `state/tasks/README.md`
 - `state/session-log.md`
 
 ## 禁止

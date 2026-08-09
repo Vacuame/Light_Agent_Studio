@@ -20,16 +20,16 @@
 - `docs/architecture.md`
 - 相关 `docs/decisions/`
 - `rules/project-config.md`
-- `state/active.md`
-- `state/tasks/index.md`
-- 当前任务目录下的 `meta.md`、`progress.md`
-- 当前任务目录下的 `handoff.md`（如果存在）
-- 当前任务目录下的 `links.md`、`report.md`（如果存在）
+- `state/tasks/<task-id>/overview.md`
+- `state/tasks/README.md`
+- 当前顶层任务的 `overview.md` 和当前 Agent 工作区的 `handoff.md` / `report.md`
+- 当前 Agent 工作区的 `handoff.md`（如果存在）
+- 当前 Agent 工作区的 `report.md`（如果存在）
 
 ## 流程
 
-1. 定位当前任务目录。
-2. 读取模块设计和任务级交接说明。
+1. 定位当前顶层任务目录和 Agent 工作区。
+2. 读取模块设计和Agent 工作区交接说明。
 3. 检查模块设计和交接说明是否包含实现落点。
 4. 对照真实代码验证实现落点是否可行。
 5. 检查新增 API 的归属层级，避免基础类、系统类或 Manager 类门面膨胀。
@@ -39,10 +39,10 @@
 9. 实现代码。
 10. 记录实现说明和变更。
 11. 读取 `rules/gates/development-gate.md`，通过开发门检查。
-12. 更新当前任务目录的 `progress.md`。
+12. 更新当前顶层任务目录和 Agent 工作区的 `report.md`。
 13. 如果需要交给 Tester 或其他下游任务，写对应任务目录的 `handoff.md`。
-14. 如果实现任务阶段结束或需要向上层/用户回报，写当前任务目录的 `report.md`。
-15. 更新 `state/active.md` 和 `state/tasks/index.md`。
+14. 如果实现任务阶段结束或需要向上层/用户回报，写当前顶层任务目录和 Agent 工作区的 `report.md`。
+15. 更新 `state/tasks/<task-id>/overview.md` 和 `state/tasks/README.md`。
 
 ## 启动条件
 
@@ -54,11 +54,11 @@
 
 - 代码
 - `docs/implementation/change-log.md`
-- 当前任务目录下的 `progress.md`
+- 当前 Agent 工作区的 `report.md`
 - 必要时：当前任务或子任务目录下的 `handoff.md`
-- 必要时：当前任务目录下的 `report.md`
-- `state/active.md`
-- `state/tasks/index.md`
+- 必要时：当前 Agent 工作区的 `report.md`
+- `state/tasks/<task-id>/overview.md`
+- `state/tasks/README.md`
 
 ## 禁止
 

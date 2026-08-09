@@ -12,15 +12,15 @@
 
 ## 全局状态与任务状态
 
-`state/active.md` 是全局任务面板，至少记录：
+`state/tasks/<task-id>/overview.md` 是顶层任务总览，至少记录：
 
-- 当前聚焦任务
+- 当前顶层任务
 - 活跃任务列表
 - 阻塞任务列表
 - 最近交接/回报摘要
-- `state/tasks/index.md` 入口
+- `state/tasks/README.md` 入口
 
-`state/tasks/index.md` 是任务索引，至少记录：
+`state/tasks/README.md` 是任务目录说明，至少记录：
 
 - 任务 ID
 - 标题
@@ -33,8 +33,8 @@
 每个任务目录至少包含：
 
 ```text
-meta.md
-progress.md
+overview.md
+report.md
 report.md
 ```
 
@@ -42,8 +42,8 @@ report.md
 
 ```text
 handoff.md
-links.md
-children/
+相关工作区 report
+嵌套 Agent 工作区
 ```
 
 框架不判断任务大小，也不强制任务层级。任务目录、子任务和角色分配由用户或当前任务 owner 决定。
@@ -52,10 +52,10 @@ children/
 
 如果会话将被压缩或任务很长，先更新：
 
-1. `state/active.md`
-2. `state/tasks/index.md`
-3. 当前任务目录下的 `progress.md`
-4. 必要时更新当前任务目录下的 `handoff.md` 或 `report.md`
+1. `state/tasks/<task-id>/overview.md`
+2. `state/tasks/README.md`
+3. 当前 Agent 工作区的 `report.md`
+4. 必要时更新当前 Agent 工作区的 `handoff.md` 或 `report.md`
 
 并写清楚：
 
@@ -63,22 +63,22 @@ children/
 - 还没做什么
 - 哪些文件是权威来源
 - 下个角色或上层 owner 应该从哪里继续
-- 当前任务目录路径
+- 当前顶层任务目录和 Agent 工作区路径
 
 ## 压缩后
 
 压缩或换窗口后，第一步必须读取：
 
-1. `state/active.md`
-2. `state/tasks/index.md`
-3. 当前任务目录下的 `meta.md`
-4. 当前任务目录下的 `progress.md`
-5. 当前任务目录下的 `handoff.md` 或 `report.md`（如果存在）
+1. `state/tasks/<task-id>/overview.md`
+2. `state/tasks/README.md`
+3. 当前顶层任务的 `overview.md`
+4. 当前 Agent 工作区的 `report.md`
+5. 当前 Agent 工作区的 `handoff.md` 或 `report.md`（如果存在）
 6. 当前任务相关的正式产物文件
 
 不要根据压缩摘要直接继续做复杂决策。
 
-如果当前任务目录不明确，先从 `state/active.md` 和 `state/tasks/index.md` 定位；仍不明确时询问用户。
+如果当前顶层任务目录和 Agent 工作区不明确，先从 `state/tasks/<task-id>/overview.md` 和 `state/tasks/README.md` 定位；仍不明确时询问用户。
 
 ## handoff 与 report
 
@@ -154,7 +154,7 @@ docs/modules/xxx-derived-context.md
 ```markdown
 # 当前任务面板
 
-## 当前聚焦任务
+## 当前顶层任务
 
 ## 活跃任务
 
@@ -162,7 +162,7 @@ docs/modules/xxx-derived-context.md
 
 ## 最近交接/回报摘要
 
-## 任务索引
+## 任务目录说明
 
 ## 下一步
 ```
@@ -170,16 +170,16 @@ docs/modules/xxx-derived-context.md
 ## 任务目录推荐格式
 
 ```text
-state/tasks/active/<task-id>/
-  meta.md
-  progress.md
+state/tasks/<task-id>/
+  overview.md
+  report.md
   report.md
   handoff.md   # 按需
-  links.md     # 按需
-  children/    # 按需
+  相关工作区 report     # 按需
+  嵌套 Agent 工作区    # 按需
 ```
 
-`meta.md` 推荐包含：
+`overview.md` 推荐包含：
 
 ```markdown
 # 任务元信息
@@ -194,16 +194,16 @@ state/tasks/active/<task-id>/
 
 ## 状态
 
-created / active / handoff / reported / done / blocked / dropped / archived
+created / active / handoff / reported / done / blocked / dropped / 完成记录d
 
 ## 当前角色/负责人
 
 ## 关联正式产物
 
-## 关闭或归档策略
+## 关闭或完成记录策略
 ```
 
-`progress.md` 推荐包含：
+`report.md` 推荐包含：
 
 ```markdown
 # 任务进展
@@ -230,7 +230,7 @@ created / active / handoff / reported / done / blocked / dropped / archived
 - 修改规则、角色、技能
 - 发生一次重要返工
 - 发现一个长期风险
-- 任务归档或删除摘要
+- 任务完成记录或删除摘要
 
 完整任务正文保存在对应任务目录，不写入 `session-log.md`。
 
@@ -240,10 +240,10 @@ created / active / handoff / reported / done / blocked / dropped / archived
 
 建议：
 
-- 每完成一个小阶段，更新当前任务目录下的 `progress.md`
+- 每完成一个小阶段，更新当前 Agent 工作区的 `report.md`
 - 每次向下交接，更新对应任务目录下的 `handoff.md`
 - 每次向上回报，更新对应任务目录下的 `report.md`
-- 每次任务状态变化，更新 `state/tasks/index.md` 和 `state/active.md`
+- 每次任务状态变化，更新 `state/tasks/README.md` 和 `state/tasks/<task-id>/overview.md`
 - 每次用户确认长期结论，再更新 `docs/`
 
 ## 状态层与产物层

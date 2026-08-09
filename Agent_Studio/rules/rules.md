@@ -6,11 +6,11 @@
 
 每次开始任务前，先读取：
 
-1. `state/active.md`：全局任务面板、当前聚焦任务、活跃任务、阻塞任务。
-2. `state/tasks/index.md`：任务索引、任务状态、任务路径、父子关系。
-3. 当前任务目录下的状态文件：
-   - `meta.md`：任务身份、状态、负责人/角色、父子关系。
-   - `progress.md`：当前进展、已完成、未完成、阻塞、下一步。
+1. `state/tasks/<task-id>/overview.md`：顶层任务总览、当前顶层任务、活跃任务、阻塞任务。
+2. `state/tasks/README.md`：任务目录说明、任务状态、任务路径、父子关系。
+3. 当前顶层任务目录和 Agent 工作区下的状态文件：
+   - `overview.md`：任务身份、状态、负责人/角色、父子关系。
+   - `report.md`：当前进展、已完成、未完成、阻塞、下一步。
    - `handoff.md`：如果存在，读取向下交接内容。
    - `report.md`：如果存在，读取向上回报内容。
 4. `rules/project-config.md`：项目配置、运行环境、命令约束。
@@ -20,17 +20,17 @@
    - 程序实现读对应模块设计、技术决策、实现记录
    - 测试任务读模块设计、实现说明、测试计划
 
-如果当前任务目录不明确，先从 `state/active.md` 和 `state/tasks/index.md` 定位；仍不明确时询问用户。
+如果当前顶层任务目录和 Agent 工作区不明确，先从 `state/tasks/<task-id>/overview.md` 和 `state/tasks/README.md` 定位；仍不明确时询问用户。
 
 ## 工作后必须更新
 
 任务结束或阶段结束前，必须更新：
 
-1. 当前任务目录下的 `progress.md`：当前进度、完成内容、下一步、阻塞问题。
+1. 当前 Agent 工作区的 `report.md`：当前进度、完成内容、下一步、阻塞问题。
 2. 必要时更新当前任务或子任务的 `handoff.md`：向下交接给另一个角色、Agent 或子任务。
 3. 必要时更新当前任务的 `report.md`：向上回报完成、阻塞、放弃、风险或阶段结论。
-4. `state/active.md`：全局任务面板摘要。
-5. `state/tasks/index.md`：任务状态、路径、负责人/角色变化。
+4. `state/tasks/<task-id>/overview.md`：顶层任务总览摘要。
+5. `state/tasks/README.md`：任务状态、路径、负责人/角色变化。
 6. 如果长期事实已经确认，再更新 `docs/` 下的正式产物。
 
 ## 不能猜
@@ -89,10 +89,10 @@ Agent Studio 不判断任务是“大任务、中任务、小任务”，也不�
 任务结构由用户或当前任务 owner 决定。框架只提供灵活容器和读写协议：
 
 ```text
-最小任务：meta.md + progress.md + report.md
+最小任务：overview.md + report.md + report.md
 需要交接：增加 handoff.md
-需要引用：增加 links.md
-需要拆分：增加 children/
+需要引用：增加 相关工作区 report
+需要拆分：增加 嵌套 Agent 工作区
 ```
 
 允许：
@@ -104,7 +104,7 @@ Agent Studio 不判断任务是“大任务、中任务、小任务”，也不�
 - 多个 Agent 并行处理多个子任务。
 - 子任务代表模块、程序、测试、研究、审查或用户自定义工作单元。
 
-框架只要求：交接、进展、回报、归档路径清楚，避免覆盖和丢上下文。
+框架只要求：交接、进展、回报、完成记录路径清楚，避免覆盖和丢上下文。
 
 ## Handoff 与 Report
 
@@ -192,14 +192,14 @@ My Agent Studio 分为七层。每一层负责不同问题。
 
 主要文件：
 
-- `state/active.md`
-- `state/tasks/index.md`
-- `state/tasks/active/<task-id>/meta.md`
-- `state/tasks/active/<task-id>/progress.md`
-- `state/tasks/active/<task-id>/handoff.md`（按需）
-- `state/tasks/active/<task-id>/report.md`
-- `state/tasks/active/<task-id>/links.md`（按需）
-- `state/tasks/archived/`
+- `state/tasks/<task-id>/overview.md`
+- `state/tasks/README.md`
+- `state/tasks/<task-id>/overview.md`
+- `state/tasks/<task-id>/report.md`
+- `state/tasks/<task-id>/handoff.md`（按需）
+- `state/tasks/<task-id>/report.md`
+- `state/tasks/<task-id>/相关工作区 report`（按需）
+- `state/tasks/（完成后不默认移动）`
 - `state/session-log.md`
 
 状态层是“现在怎么接着干”，不是正式项目事实。

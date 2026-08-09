@@ -18,15 +18,15 @@
 - 对应 `docs/modules/<module-name>.md`
 - `docs/implementation/change-log.md`
 - `rules/project-config.md`
-- `state/active.md`
-- `state/tasks/index.md`
-- 当前任务目录下的 `meta.md`、`progress.md`
-- 当前任务目录下的 `handoff.md`（如果存在）
-- 当前任务目录下的 `links.md`、`report.md`（如果存在）
+- `state/tasks/<task-id>/overview.md`
+- `state/tasks/README.md`
+- 当前顶层任务的 `overview.md` 和当前 Agent 工作区的 `handoff.md` / `report.md`
+- 当前 Agent 工作区的 `handoff.md`（如果存在）
+- 当前 Agent 工作区的 `report.md`（如果存在）
 
 ## 流程
 
-1. 定位当前任务目录。
+1. 定位当前顶层任务目录和 Agent 工作区。
 2. 读取模块设计和实现交接。
 3. 提取验收标准。
 4. 制定测试计划。
@@ -35,18 +35,18 @@
 7. 写测试报告。
 8. 记录 bug。
 9. 读取 `rules/gates/test-gate.md`，通过测试门判断当前测试对象是否可以回报或关闭。
-10. 更新当前任务目录的 `progress.md`。
-11. 写当前任务目录的 `report.md`，说明测试结论、风险、是否可以关闭。
+10. 更新当前顶层任务目录和 Agent 工作区的 `report.md`。
+11. 写当前顶层任务目录和 Agent 工作区的 `report.md`，说明测试结论、风险、是否可以关闭。
 12. 如需交给其他角色继续处理，写对应任务目录的 `handoff.md`。
-13. 更新 `state/active.md` 和 `state/tasks/index.md`。
+13. 更新 `state/tasks/<task-id>/overview.md` 和 `state/tasks/README.md`。
 
 ## 输出
 
 - `docs/tests/test-plan.md`
 - `docs/tests/test-report.md`
 - `docs/tests/bug-list.md`
-- 当前任务目录下的 `progress.md`
-- 当前任务目录下的 `report.md`
+- 当前 Agent 工作区的 `report.md`
+- 当前 Agent 工作区的 `report.md`
 - 必要时：当前任务或子任务目录下的 `handoff.md`
-- `state/active.md`
-- `state/tasks/index.md`
+- `state/tasks/<task-id>/overview.md`
+- `state/tasks/README.md`

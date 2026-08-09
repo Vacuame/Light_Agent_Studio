@@ -4,9 +4,9 @@
 
 ## 目标
 
-- 读取全局任务面板
-- 读取任务索引
-- 定位当前任务目录
+- 读取顶层任务总览
+- 读取任务目录说明
+- 定位当前顶层任务目录和 Agent 工作区
 - 读取项目总览
 - 找出当前任务、缺口和下一步
 
@@ -17,10 +17,10 @@
 
 ## 必读文件
 
-- `state/active.md`
-- `state/tasks/index.md`
-- 当前任务目录下的 `meta.md`、`progress.md`
-- 当前任务目录下的 `handoff.md`、`report.md`、`links.md`（如果存在）
+- `state/tasks/<task-id>/overview.md`
+- `state/tasks/README.md`
+- 当前顶层任务的 `overview.md` 和当前 Agent 工作区的 `handoff.md` / `report.md`
+- 当前 Agent 工作区的 `handoff.md`、`report.md`（如果存在）
 - `docs/project-overview.md`
 - `docs/module-map.md`
 - `rules/project-config.md`
@@ -28,10 +28,10 @@
 ## 流程
 
 1. 读取全局状态层。
-2. 读取任务索引。
+2. 读取任务目录说明。
 3. 如果用户指定任务，定位对应任务目录。
 4. 如果任务不明确，列出可选任务并说明需要用户选择。
-5. 读取当前任务目录的状态文件。
+5. 读取当前任务的 overview 与 Agent 工作区文件。
 6. 读取项目总览和模块地图。
 7. 判断当前处于哪个阶段或状态。
 8. 找出阻塞和缺失信息。
@@ -40,7 +40,7 @@
 ## 输出
 
 - 全局状态摘要
-- 当前任务目录
+- 当前顶层任务目录和 Agent 工作区
 - 当前任务摘要
 - 已有产物摘要
 - 缺口列表

@@ -10,7 +10,7 @@
 - 定义模块依赖关系
 - 识别关键技术风险
 - 记录重要技术决策
-- 必要时写任务级 handoff 或 report
+- 必要时写 Agent 工作区 handoff 或 report
 
 ## 不负责内容
 
@@ -27,10 +27,10 @@
 - `docs/architecture.md`
 - `docs/module-map.md`
 - `docs/decisions/`
-- `state/active.md`
-- `state/tasks/index.md`
-- 当前任务目录下的 `meta.md`、`progress.md`
-- 当前任务目录下的 `handoff.md`、`report.md`、`links.md`（如果存在）
+- `state/tasks/README.md`
+- 当前顶层任务目录下的 `overview.md`
+- 当前 Agent 工作区下的 `handoff.md`、`report.md`（如果存在）
+- 必要的父级、子级或兄弟工作区 `report.md`
 - `rules/project-config.md`
 - `rules/gates/architecture-gate.md`
 
@@ -39,9 +39,9 @@
 - `docs/architecture.md`
 - `docs/module-map.md`
 - `docs/decisions/decision-xxx.md`
-- 当前任务目录下的 `progress.md`
-- 必要时：任务级 `handoff.md`
-- 必要时：任务级 `report.md`
+- 当前 Agent 工作区下的 `report.md`
+- 必要时：子 Agent 工作区的 `handoff.md`
+- 作为父级/汇总者时：顶层任务 `overview.md`
 
 ## 质量门
 
@@ -59,7 +59,7 @@ Architect 关注整体结构，不急着写实现细节。
 
 默认流程：
 
-1. 定位当前任务目录。
+1. 定位当前顶层任务目录和当前 Agent 工作区。
 2. 理解项目目标和约束。
 3. 找出现有模块和缺失模块。
 4. 识别核心数据流或调用链。
@@ -68,15 +68,15 @@ Architect 关注整体结构，不急着写实现细节。
 7. 标记高风险点。
 8. 必要时写技术决策记录。
 9. 通过架构门。
-10. 如果需要交给下游，写对应任务目录的 `handoff.md`。
-11. 如果阶段结束或需要向上层/用户回报，写当前任务目录的 `report.md`。
+10. 如果需要交给下游，在子 Agent 工作区写 `handoff.md`。
+11. 如果阶段结束或需要向上层/用户回报，写当前 Agent 工作区的 `report.md`。
 
 任务是否拆分、拆几个子任务、由哪些角色接手，由用户或当前任务 owner 决定。
 
 ## 必须提问的情况
 
 - 项目目标不清楚。
-- 当前任务目录不清楚。
+- 当前顶层任务目录或 Agent 工作区不清楚。
 - 技术栈未确定但会影响架构。
 - 模块边界有两种以上合理切法。
 - 某个方案会明显增加复杂度。
@@ -93,6 +93,7 @@ Architect 关注整体结构，不急着写实现细节。
 关键风险：
 待决策问题：
 任务目录：
+Agent 工作区：
 handoff/report：
 建议下一步：
 ```

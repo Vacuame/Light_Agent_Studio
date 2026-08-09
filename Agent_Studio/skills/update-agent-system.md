@@ -14,7 +14,7 @@
 - 修改质量门
 - 修改项目配置
 - 修改状态层结构
-- 修改任务目录、handoff/report 协议、归档/删除规则
+- 修改任务目录、handoff/report 协议、完成记录/删除规则
 
 ## 流程
 
@@ -22,21 +22,21 @@
 2. 说明为什么要修改。
 3. 分析影响范围。
 4. 检查是否需要同步修改其他文件。
-5. 如果修改状态结构，说明旧状态文件如何迁移、删除或归档。
+5. 如果修改状态结构，说明旧状态文件如何迁移、删除或完成记录。
 6. 如果会删除任务目录或状态文件，获得用户明确确认。
 7. 读取 `rules/gates/administration-gate.md`，通过管理门。
 8. 用户确认。
 9. 修改文件。
 10. 记录变更。
-11. 更新 `state/active.md`、`state/tasks/index.md` 或当前任务目录状态。
+11. 更新 `state/tasks/<task-id>/overview.md`、`state/tasks/README.md` 或当前任务 overview 与 Agent 工作区状态。
 
 ## 输出
 
 - 更新后的规则、角色或技能文件
 - 必要时写入 `docs/decisions/`
-- `state/active.md`
-- `state/tasks/index.md`
-- 当前任务目录下的 `progress.md` 或 `report.md`
+- `state/tasks/<task-id>/overview.md`
+- `state/tasks/README.md`
+- 当前 Agent 工作区的 `report.md` 或 `report.md`
 
 ## 禁止
 

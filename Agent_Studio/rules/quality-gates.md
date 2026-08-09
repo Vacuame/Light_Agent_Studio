@@ -14,7 +14,7 @@
 - Developer 只读 `rules/gates/development-gate.md`
 - Tester 只读 `rules/gates/test-gate.md`
 
-如果当前任务使用了子任务、并行任务或任务级 handoff/report，对应质量门只检查当前任务相关的交接、回报和风险是否清楚，不强制固定任务层级。
+如果当前任务使用了子任务、并行任务或Agent 工作区 handoff/report，对应质量门只检查当前任务相关的交接、回报和风险是否清楚，不强制固定任务层级。
 
 ## 质量门列表
 
