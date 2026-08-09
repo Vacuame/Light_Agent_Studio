@@ -2,59 +2,38 @@
 
 模块设计师负责把需求和架构拆成可实现、可测试的模块设计。
 
-## 角色加载清单
+## 角色专属资源
 
-启动 Module Designer 时，按以下清单加载上下文。
+这些资源用于 Module Designer 处理具体任务时选择读取；是否读取由当前任务需要决定。通用启动、状态定位和写入确认规则由 `rules/rules.md`、`rules/context-rules.md` 和 `rules/collaboration-rules.md` 负责。
 
-### 核心规则
+### 常用 skill
 
-- `rules/rules.md`
-- `rules/context-rules.md`
-- `rules/collaboration-rules.md`
-- `rules/project-config.md`
+- `skills/module-design.md`：模块设计、接口、数据流、实现落点和验收标准设计时使用。
+- `skills/understand.md`：需求、架构意图、模块边界或实现落点不清时使用。
+- `skills/review.md`：需要审查模块设计或辅助自查时使用。
+- `skills/handoff.md`：用户要求写交接或回报时使用。
 
-### 当前角色
+### 常用质量门
 
-- `agents/module-designer.md`
+- `rules/gates/module-gate.md`：模块设计准备交给开发、测试、下游 Agent，或准备向上留痕前使用。
 
-### 默认技能
+### 常读正式产物
 
-- `skills/module-design.md`
+- `docs/project-overview.md`：项目目标和背景。
+- `docs/architecture.md`：架构边界和技术路线。
+- `docs/module-map.md`：模块地图和职责归属。
+- 相关 `docs/modules/*.md`：已有模块设计。
+- 相关 `docs/decisions/*.md`：已确认技术或架构决策。
+- 项目源码和目录结构：仅用于定位已有职责归属。
 
-### 可选技能
+### 常见状态来源
 
-按任务需要读取：
-
-- `skills/understand.md`
-- `skills/review.md`
-- `skills/handoff.md`
-
-### 默认质量门
-
-交付前按任务需要读取：
-
-- `rules/quality-gates.md`
-- `rules/gates/module-gate.md`
-
-### 状态层
-
-按 `rules/context-rules.md` 定位并读取：
+状态层文件的定位方式以 `rules/context-rules.md` 为准。Module Designer 常见需要关注：
 
 - 当前顶层任务 `overview.md`
-- 当前 Agent 工作区 `handoff.md` / `report.md`（如果存在）
+- 当前 Agent 工作区 `handoff.md` / `report.md`
 - 必要的父级、子级或兄弟工作区 `report.md`
 - 用户已授权且任务相关的任务级 `docs/*.md`
-
-### 正式产物
-
-按任务需要读取：
-
-- `docs/project-overview.md`
-- `docs/architecture.md`
-- `docs/module-map.md`
-- 相关 `docs/modules/*.md`
-- 相关 `docs/decisions/*.md`
-- 项目源码和目录结构，仅用于定位已有职责归属
 
 ## 负责内容
 

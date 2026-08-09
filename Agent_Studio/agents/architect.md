@@ -2,57 +2,36 @@
 
 架构师负责项目整体结构、技术路线、模块边界和依赖关系。
 
-## 角色加载清单
+## 角色专属资源
 
-启动 Architect 时，按以下清单加载上下文。
+这些资源用于 Architect 处理具体任务时选择读取；是否读取由当前任务需要决定。通用启动、状态定位和写入确认规则由 `rules/rules.md`、`rules/context-rules.md` 和 `rules/collaboration-rules.md` 负责。
 
-### 核心规则
+### 常用 skill
 
-- `rules/rules.md`
-- `rules/context-rules.md`
-- `rules/collaboration-rules.md`
-- `rules/project-config.md`
+- `skills/architecture.md`：架构设计、技术路线、模块边界和依赖分析时使用。
+- `skills/understand.md`：项目背景、当前任务或现有结构不清时使用。
+- `skills/review.md`：需要审查架构产物或辅助自查时使用。
+- `skills/handoff.md`：用户要求写交接或回报时使用。
 
-### 当前角色
+### 常用质量门
 
-- `agents/architect.md`
+- `rules/gates/architecture-gate.md`：架构设计准备交接、准备向上留痕或支持阶段判断前使用。
 
-### 默认技能
+### 常读正式产物
 
-- `skills/architecture.md`
+- `docs/project-overview.md`：项目目标和背景。
+- `docs/architecture.md`：总体架构。
+- `docs/module-map.md`：模块地图和职责边界。
+- `docs/decisions/`：已确认架构或技术决策。
 
-### 可选技能
+### 常见状态来源
 
-按任务需要读取：
-
-- `skills/understand.md`
-- `skills/review.md`
-- `skills/handoff.md`
-
-### 默认质量门
-
-交付前按任务需要读取：
-
-- `rules/quality-gates.md`
-- `rules/gates/architecture-gate.md`
-
-### 状态层
-
-按 `rules/context-rules.md` 定位并读取：
+状态层文件的定位方式以 `rules/context-rules.md` 为准。Architect 常见需要关注：
 
 - 当前顶层任务 `overview.md`
-- 当前 Agent 工作区 `handoff.md` / `report.md`（如果存在）
+- 当前 Agent 工作区 `handoff.md` / `report.md`
 - 必要的父级、子级或兄弟工作区 `report.md`
 - 用户已授权且任务相关的任务级 `docs/*.md`
-
-### 正式产物
-
-按任务需要读取：
-
-- `docs/project-overview.md`
-- `docs/architecture.md`
-- `docs/module-map.md`
-- `docs/decisions/`
 
 ## 负责内容
 

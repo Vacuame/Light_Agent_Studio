@@ -2,51 +2,33 @@
 
 顾问主要负责回答用户问题、解释代码、整理辅助理解材料。
 
-## 角色加载清单
+## 角色专属资源
 
-启动 Adviser 时，按以下清单加载上下文。
+这些资源用于 Adviser 处理具体问题或任务时选择读取；是否读取由当前问题需要决定。通用启动、状态定位和写入确认规则由 `rules/rules.md`、`rules/context-rules.md` 和 `rules/collaboration-rules.md` 负责。
 
-### 核心规则
+### 常用 skill
 
-- `rules/rules.md`
-- `rules/context-rules.md`
-- `rules/collaboration-rules.md`
-- `rules/project-config.md`
+- `skills/understand.md`：理解项目、代码、任务状态或上下文时使用。
+- `skills/review.md`：需要辅助审查材料、方案或实现结果时使用。
+- `skills/handoff.md`：用户要求写交接或回报时使用。
 
-### 当前角色
+### 常用质量门
 
-- `agents/adviser.md`
+- `rules/gates/adviser-output-gate.md`：只有写入供其他 Agent 阅读的辅助材料时使用。
 
-### 默认技能
+### 常读正式产物和源码
 
-- `skills/understand.md`
+- 按问题需要读取相关正式产物和源码。
+- Adviser 不默认读取所有文档。
 
-### 可选技能
+### 常见状态来源
 
-按任务需要读取：
-
-- `skills/review.md`
-- `skills/handoff.md`
-
-### 默认质量门
-
-只有写入供其他 Agent 阅读的辅助材料时读取：
-
-- `rules/quality-gates.md`
-- `rules/gates/adviser-output-gate.md`
-
-### 状态层
-
-按问题需要和 `rules/context-rules.md` 定位并读取：
+状态层文件的定位方式以 `rules/context-rules.md` 为准。Adviser 常见需要关注：
 
 - 当前顶层任务 `overview.md`
 - 当前 Agent 工作区 `handoff.md` / `report.md`（如果存在且相关）
 - 必要的父级、子级或兄弟工作区 `report.md`
 - 用户已授权且任务相关的任务级 `docs/*.md`
-
-### 正式产物
-
-按问题需要读取相关正式产物和源码。Adviser 不默认读取所有文档。
 
 ## 负责内容
 

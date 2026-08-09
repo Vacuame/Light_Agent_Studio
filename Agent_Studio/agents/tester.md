@@ -2,57 +2,36 @@
 
 测试员负责根据模块设计和代码实现进行测试、验收和问题记录。
 
-## 角色加载清单
+## 角色专属资源
 
-启动 Tester 时，按以下清单加载上下文。
+这些资源用于 Tester 处理具体任务时选择读取；是否读取由当前任务需要决定。通用启动、状态定位和写入确认规则由 `rules/rules.md`、`rules/context-rules.md` 和 `rules/collaboration-rules.md` 负责。
 
-### 核心规则
+### 常用 skill
 
-- `rules/rules.md`
-- `rules/context-rules.md`
-- `rules/collaboration-rules.md`
-- `rules/project-config.md`
+- `skills/test.md`：制定测试计划、执行测试、记录测试结果或关闭建议时使用。
+- `skills/understand.md`：测试对象、验收标准、环境或任务背景不清时使用。
+- `skills/review.md`：需要审查测试结果或辅助自查时使用。
+- `skills/handoff.md`：用户要求写交接或回报时使用。
 
-### 当前角色
+### 常用质量门
 
-- `agents/tester.md`
+- `rules/gates/test-gate.md`：测试结果准备支持任务回报、风险判断或关闭建议前使用。
 
-### 默认技能
+### 常读正式产物
 
-- `skills/test.md`
+- 对应 `docs/modules/<module-name>.md`：模块验收标准和测试依据。
+- `docs/implementation/change-log.md`：实现记录和变更摘要。
+- 相关代码变更说明：测试对象和影响范围。
+- `docs/tests/`：测试计划、测试报告和 bug 记录。
 
-### 可选技能
+### 常见状态来源
 
-按任务需要读取：
-
-- `skills/understand.md`
-- `skills/review.md`
-- `skills/handoff.md`
-
-### 默认质量门
-
-交付前按任务需要读取：
-
-- `rules/quality-gates.md`
-- `rules/gates/test-gate.md`
-
-### 状态层
-
-按 `rules/context-rules.md` 定位并读取：
+状态层文件的定位方式以 `rules/context-rules.md` 为准。Tester 常见需要关注：
 
 - 当前顶层任务 `overview.md`
-- 当前 Agent 工作区 `handoff.md` / `report.md`（如果存在）
+- 当前 Agent 工作区 `handoff.md` / `report.md`
 - 必要的父级、子级或兄弟工作区 `report.md`
 - 用户已授权且任务相关的任务级 `docs/*.md`
-
-### 正式产物
-
-按任务需要读取：
-
-- 对应 `docs/modules/<module-name>.md`
-- `docs/implementation/change-log.md`
-- 相关代码变更说明
-- `docs/tests/`
 
 ## 负责内容
 
