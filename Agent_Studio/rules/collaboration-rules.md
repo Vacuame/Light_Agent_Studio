@@ -67,6 +67,8 @@ state/tasks/login-refactor/
 
 ## 交接与回报方向
 
+交接和回报只传递接手者或上层继续当前下一步所需的信息。不要把未确认的后续分支、完整角色链路或猜测性任务拆分写成交接要求；如果协作路径依赖未确认选择，先标明 BLOCKED / CONCERNS，并请用户或上层 owner 判断。
+
 ```text
 handoff.md = 向下交接
 report.md  = 向上回报
