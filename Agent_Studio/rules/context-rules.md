@@ -188,21 +188,6 @@ docs/modules/xxx-derived-context.md
 权威来源是 architecture.md、module-spec、decision records 和代码本身。
 ```
 
-## session-log.md 使用规则
-
-`state/session-log.md` 用于记录少量重要历史摘要，不要写成聊天流水账，也不要当成任务定位入口。
-
-适合记录：
-
-- 完成一个阶段
-- 做出一个关键决策
-- 修改规则、角色、技能
-- 发生一次重要返工
-- 发现一个长期风险
-- 任务完成或删除摘要
-
-完整任务正文保存在对应任务目录和 Agent 工作区，不写入 `session-log.md`。
-
 ## 长任务更新频率
 
 长任务不需要每一步都更新正式产物，但要定期更新状态。

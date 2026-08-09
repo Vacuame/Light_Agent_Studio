@@ -195,7 +195,6 @@ My Agent Studio 分为七层。每一层负责不同问题。
 - `state/tasks/<task-id>/<agent-workspace>/report.md`
 - `state/tasks/<task-id>/<agent-workspace>/<child-agent-workspace>/handoff.md`
 - `state/tasks/<task-id>/<agent-workspace>/<child-agent-workspace>/report.md`
-- `state/session-log.md`
 
 状态层是“现在怎么接着干”，不是正式项目事实。
 

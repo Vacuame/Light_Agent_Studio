@@ -71,7 +71,6 @@ report.md  = 向上回报
 9. 写入当前顶层任务目录和 Agent 工作区的 `report.md`。
 10. 更新当前任务的 `overview.md` 和 `report.md`。
 11. 更新顶层任务 `overview.md`。
-12. 必要时追加到 `state/session-log.md`。
 
 ## 流程：关闭任务
 
@@ -81,7 +80,6 @@ report.md  = 向上回报
 4. 检查是否存在未解决风险或 CONCERNS。
 5. 用户确认关闭后，标记任务为 `done` 或 `dropped`。
 6. 更新顶层任务 `overview.md`。
-7. 必要时追加到 `state/session-log.md`。
 
 ## 流程：完成记录任务
 
@@ -91,7 +89,6 @@ report.md  = 向上回报
 4. 将任务目录移动到 `state/tasks/<task-id>/（完成后不默认移动）`。
 5. 更新顶层任务 `overview.md`。
 6. 更新 `state/tasks/<task-id>/overview.md`。
-7. 追加完成记录摘要到 `state/session-log.md`。
 
 ## 流程：删除任务
 
@@ -103,7 +100,6 @@ report.md  = 向上回报
 4. 用户确认后删除任务目录。
 5. 更新顶层任务 `overview.md`。
 6. 更新 `state/tasks/<task-id>/overview.md`。
-7. 必要时追加摘要到 `state/session-log.md`。
 
 ## 输出
 
@@ -115,7 +111,6 @@ report.md  = 向上回报
 - `state/tasks/<task-id>/report.md`
 - `state/tasks/<task-id>/相关工作区 report`
 - `state/tasks/<task-id>/overview.md`
-- `state/session-log.md`
 
 ## 禁止
 
