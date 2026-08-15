@@ -31,6 +31,7 @@
 - 相关 `docs/decisions/`
 - 项目源码和目录结构，仅用于定位已有职责归属
 - `rules/gates/module-gate.md`
+- `skills/templates/module-template.md`：用户要求起草模块设计文档时按需使用。
 
 状态层读取规则见 `rules/context-rules.md`。
 

@@ -255,7 +255,7 @@ docs/modules/xxx-derived-context.md
 权威来源是 architecture.md、module-spec、decision records 和代码本身。
 ```
 
-Adviser 写文件的质量要求见 `rules/gates/adviser-output-gate.md`。
+Adviser 写文件的质量要求见 `rules/gates/adviser-output-gate.md`；需要起草辅助理解材料时，可按需使用 `skills/templates/derived-context-template.md`。
 
 ## 长任务更新频率
 

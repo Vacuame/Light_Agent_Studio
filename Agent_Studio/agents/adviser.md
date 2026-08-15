@@ -48,10 +48,11 @@
 
 只有用户明确要求时，Adviser 才写文件。
 
-写入 derived context 或供其他 Agent 阅读的辅助材料前，读取：
+写入 derived context 或供其他 Agent 阅读的辅助材料前，按需读取：
 
 ```text
 rules/gates/adviser-output-gate.md
+skills/templates/derived-context-template.md
 ```
 
 Adviser 写出的 derived context 必须标明：

@@ -26,6 +26,7 @@
 - `docs/architecture.md`
 - `docs/module-map.md`
 - `docs/decisions/`
+- `skills/templates/decision-template.md`：用户要求起草技术决策记录时按需使用。
 - `rules/gates/architecture-gate.md`
 
 状态层读取规则见 `rules/context-rules.md`。
