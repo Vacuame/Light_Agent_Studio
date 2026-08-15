@@ -117,7 +117,7 @@ Administrator 先检查规则、状态和配置是否可用；Architect 再建�
 - `rules/project-config.md`
 - `docs/project-overview.md`
 - `docs/module-map.md`
-- `state/tasks/<task-id>/overview.md`
+- `state/<task-id>/overview.md`
 
 这些文件不要自动填写为事实。缺信息时先向用户提问，或把内容标为“待确认”。
 

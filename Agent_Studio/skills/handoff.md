@@ -42,7 +42,7 @@ handoff/report 的方向、写入位置和确认机制见 `rules/collaboration-r
 
 本 skill 按任务需要使用：
 
-- `state/tasks/<task-id>/overview.md`
+- `state/<task-id>/overview.md`
 - 当前 Agent 工作区的 `handoff.md`（如果存在）
 - 当前 Agent 工作区的 `report.md`（如果存在）
 - 必要的父级、子级或兄弟工作区 `report.md`
@@ -84,7 +84,7 @@ handoff/report 的方向、写入位置和确认机制见 `rules/collaboration-r
 
 如果用户或任务 owner 要开启新的顶层任务：
 
-1. 创建 `state/tasks/<task-id>/`。
+1. 创建 `state/<task-id>/`。
 2. 创建或更新 `overview.md`，记录任务目标、背景、当前状态和重要关系。
 3. 如果已有明确接手 Agent，按 `rules/collaboration-rules.md` 判断接手工作区位置；没有当前父级工作区时，通常创建为顶层任务下的一级工作区。
 4. 如果需要交给接手 Agent，先询问用户是否写 `handoff.md`，确认后在接手者工作区写入。
@@ -95,8 +95,8 @@ handoff/report 的方向、写入位置和确认机制见 `rules/collaboration-r
 
 按实际交流需要输出：
 
-- 向子 Agent 交接：`state/tasks/<task-id>/<current-agent-workspace>/<child-agent-workspace>/handoff.md`（用户明确要求或确认后）
-- 同级或旁支 Agent 交接：`state/tasks/<task-id>/<sibling-or-branch-workspace>/handoff.md`（用户明确要求或确认后）
+- 向子 Agent 交接：`state/<task-id>/<current-agent-workspace>/<child-agent-workspace>/handoff.md`（用户明确要求或确认后）
+- 同级或旁支 Agent 交接：`state/<task-id>/<sibling-or-branch-workspace>/handoff.md`（用户明确要求或确认后）
 - 当前 Agent 工作区的 `report.md`（用户明确要求或确认后）
 - 顶层任务 `overview.md`（任务 owner、父级或汇总者需要整理稳定任务级结论，且用户确认后）
 

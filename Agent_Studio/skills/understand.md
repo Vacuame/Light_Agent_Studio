@@ -22,7 +22,7 @@
 
 本 skill 按任务需要使用：
 
-- `state/tasks/<task-id>/overview.md`
+- `state/<task-id>/overview.md`
 - 当前 Agent 工作区的 `handoff.md`、`report.md`（如果存在）
 - `docs/project-overview.md`
 - `docs/module-map.md`

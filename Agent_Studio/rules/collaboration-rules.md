@@ -26,7 +26,7 @@ Agent Studio 不替用户判断任务应该如何拆分，也不规定固定的�
 
 判断关系：
 
-- `state/tasks/<task-id>/` 是顶层任务，不是 Agent 工作区。
+- `state/<task-id>/` 是顶层任务，不是 Agent 工作区。
 - 直接位于顶层任务目录下的文件夹，是该任务的一级 Agent 工作区。
 - 位于某个 Agent 工作区里面的文件夹，是该工作区的子 Agent 工作区。
 - 同一层级的工作区是兄弟、并列或旁支关系。
@@ -35,7 +35,7 @@ Agent Studio 不替用户判断任务应该如何拆分，也不规定固定的�
 示例：
 
 ```text
-state/tasks/login-refactor/
+state/login-refactor/
   overview.md
   01-architecture-module-login/
     handoff.md
@@ -74,7 +74,7 @@ handoff.md = 写给下级、下游或接手者，放在接手者 Agent 工作区
 report.md  = 写给上级、上层汇总者、任务 owner 或用户，放在当前 Agent 工作区
 ```
 
-顶层任务目录 `state/tasks/<task-id>/` 不是 Agent 工作区，不直接放 `handoff.md` 或 `report.md`。
+顶层任务目录 `state/<task-id>/` 不是 Agent 工作区，不直接放 `handoff.md` 或 `report.md`。
 
 ### 向下交接
 
@@ -133,13 +133,13 @@ report.md  = 写给上级、上层汇总者、任务 owner 或用户，放在当
 
 ## 状态写入位置
 
-- 顶层任务总览：`state/tasks/<task-id>/overview.md`
-- 当前 Agent 回报：`state/tasks/<task-id>/<current-agent-workspace>/report.md`
-- 向子 Agent 交接：`state/tasks/<task-id>/<current-agent-workspace>/<child-agent-workspace>/handoff.md`
-- 子 Agent 回报：`state/tasks/<task-id>/<current-agent-workspace>/<child-agent-workspace>/report.md`
-- 同级或旁支 Agent 交接：`state/tasks/<task-id>/<sibling-or-branch-workspace>/handoff.md`
-- 同级或旁支 Agent 回报：`state/tasks/<task-id>/<sibling-or-branch-workspace>/report.md`
-- 任务级公共认知：`state/tasks/<task-id>/docs/*.md`，按 `rules/context-rules.md` 和用户确认执行
+- 顶层任务总览：`state/<task-id>/overview.md`
+- 当前 Agent 回报：`state/<task-id>/<current-agent-workspace>/report.md`
+- 向子 Agent 交接：`state/<task-id>/<current-agent-workspace>/<child-agent-workspace>/handoff.md`
+- 子 Agent 回报：`state/<task-id>/<current-agent-workspace>/<child-agent-workspace>/report.md`
+- 同级或旁支 Agent 交接：`state/<task-id>/<sibling-or-branch-workspace>/handoff.md`
+- 同级或旁支 Agent 回报：`state/<task-id>/<sibling-or-branch-workspace>/report.md`
+- 任务级公共认知：`state/<task-id>/docs/*.md`，按 `rules/context-rules.md` 和用户确认执行
 - 长期事实：全局 `docs/`
 
 ## 更新产物层的时机
@@ -163,7 +163,7 @@ report.md  = 写给上级、上层汇总者、任务 owner 或用户，放在当
 
 任务关闭后的处理方式：
 
-1. 保留在 `state/tasks/<task-id>/`，在 `overview.md` 标记结论。
+1. 保留在 `state/<task-id>/`，在 `overview.md` 标记结论。
 2. 在用户明确确认后删除任务目录。
 
 删除前必须确认任务没有需要保留的长期价值。删除顶层任务目录或 Agent 工作区是破坏性操作。
@@ -177,8 +177,8 @@ report.md  = 写给上级、上层汇总者、任务 owner 或用户，放在当
 > docs/decisions/
 > docs/architecture.md
 > docs/modules/
-> state/tasks/<task-id>/overview.md
-> state/tasks/<task-id>/docs/*.md
+> state/<task-id>/overview.md
+> state/<task-id>/docs/*.md
 > 父级 Agent 工作区 report.md
 > 当前 Agent 工作区 handoff.md
 > 当前 Agent 工作区 report.md

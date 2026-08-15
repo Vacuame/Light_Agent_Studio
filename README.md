@@ -60,7 +60,7 @@ Agent Studio 支持按任务需要裁剪流程。常见链路是：
 
 ## 日常角色提示词
 
-如果你想在日常使用中让 Agent 以某个已有角色接手，只需要填角色名和当前任务描述。不要手动填写任务目录路径，让 Agent 自己根据 `state/tasks/` 的目录树、`overview.md` 和 handoff/report 定位。
+如果你想在日常使用中让 Agent 以某个已有角色接手，只需要填角色名和当前任务描述。不要手动填写任务目录路径，让 Agent 自己根据 `state/` 的目录树、`overview.md` 和 handoff/report 定位。
 
 ```text
 你现在是 [角色名]。
@@ -115,7 +115,7 @@ agents/
 skills/
   每类任务的 SOP
 
-state/tasks/
+state/
   用户明确开启的顶层任务目录；每个任务包含 overview.md、嵌套 Agent 工作区，以及用户要求或确认后的任务级 docs/*.md
 
 docs/

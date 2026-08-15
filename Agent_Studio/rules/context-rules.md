@@ -12,7 +12,7 @@ handoff/report 的方向、写入位置和确认机制见 `rules/collaboration-r
 
 ```text
 state/ = 当前怎么接着干
-state/tasks/<task-id>/docs/ = 用户授权后的任务级公共认知草稿
+state/<task-id>/docs/ = 用户授权后的任务级公共认知草稿
 全局 docs/ = 已确认的项目事实
 ```
 
@@ -21,7 +21,7 @@ state/tasks/<task-id>/docs/ = 用户授权后的任务级公共认知草稿
 状态层采用轻量树形任务工作区：
 
 ```text
-state/tasks/<task-id>/
+state/<task-id>/
   overview.md
   docs/
     <task-public-doc>.md
@@ -35,7 +35,7 @@ state/tasks/<task-id>/
 
 说明：
 
-- `state/tasks/<task-id>/` 是用户明确开启的顶层任务目录。
+- `state/<task-id>/` 是用户明确开启的顶层任务目录。
 - `overview.md` 是顶层任务总览，记录任务背景、目标、当前进展、重要文件、疑点、共识和会影响后续 Agent 的稳定结论。
 - `docs/` 是任务级公共认知区，按用户要求创建或修改其中的 Markdown 文件，记录任务推进中产生、多个 Agent 需要共享、但暂时不适合写入全局 `docs/` 的发现、假设、疑点、候选决策和参考线索。
 - `<agent-workspace>/` 是某个 Agent 窗口的工作区，每个 Agent 窗口都必须定位或创建自己的工作区。
@@ -74,7 +74,7 @@ state/tasks/<task-id>/
 
 ## 任务级 docs/
 
-`state/tasks/<task-id>/docs/` 是任务内公共认知草稿区。只有用户明确要求维护任务级公共认知，或用户确认当前任务需要任务级 docs 时，才按需创建或修改其中的 Markdown 文件；Agent 不得自行判断并创建或写入任务级 docs。
+`state/<task-id>/docs/` 是任务内公共认知草稿区。只有用户明确要求维护任务级公共认知，或用户确认当前任务需要任务级 docs 时，才按需创建或修改其中的 Markdown 文件；Agent 不得自行判断并创建或写入任务级 docs。
 
 它适合记录：
 
@@ -272,7 +272,7 @@ Adviser 写文件的质量要求见 `rules/gates/adviser-output-gate.md`；需�
 
 ```text
 state/ = 当前怎么接着干
-state/tasks/<task-id>/docs/ = 用户授权后的任务级公共认知草稿
+state/<task-id>/docs/ = 用户授权后的任务级公共认知草稿
 全局 docs/ = 已确认的项目事实
 ```
 

@@ -63,4 +63,4 @@
 - `docs/modules/<module-name>.md`（用户确认后）
 - 当前 Agent 工作区的 `report.md`（用户明确要求或确认后）
 - 接手或下游 Agent 工作区的 `handoff.md`（用户明确要求或确认后）
-- `state/tasks/<task-id>/overview.md`（父级、汇总者或任务 owner 需要整理稳定任务级结论，且用户确认后）
+- `state/<task-id>/overview.md`（父级、汇总者或任务 owner 需要整理稳定任务级结论，且用户确认后）

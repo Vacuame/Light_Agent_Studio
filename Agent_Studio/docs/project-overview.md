@@ -28,5 +28,5 @@
 
 ## 权威说明
 
-本文件是项目长期事实的入口。当前进度不要写在这里，当前进度写 `state/tasks/<task-id>/overview.md`。
+本文件是项目长期事实的入口。当前进度不要写在这里，当前进度写 `state/<task-id>/overview.md`。
 
