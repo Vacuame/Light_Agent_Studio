@@ -39,9 +39,7 @@
 7. 在对话中汇总测试结果。
 8. 如果需要写入 `docs/tests/*`、`report.md`、`handoff.md` 或 bug 记录，先说明拟写摘要并询问用户是否写入。
 9. 读取 `rules/gates/test-gate.md`，通过测试门判断当前测试对象是否可以回报或建议关闭。
-10. 如果需要向上层、owner 或用户留下测试结论，用户确认后写当前 Agent 工作区的 `report.md`，说明测试结论、风险、是否建议关闭。
-11. 如需交给其他角色继续处理，用户确认后写接手 Agent 工作区的 `handoff.md`。
-12. 父级、汇总者或任务 owner 读取 report 后，决定是否更新顶层任务 `overview.md`。
+10. 需要交接或回报时，按 `skills/handoff.md` 执行。
 
 ## 输出
 

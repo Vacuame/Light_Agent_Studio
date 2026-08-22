@@ -98,13 +98,3 @@ handoff/report 协作和确认机制 -> rules/collaboration-rules.md
 当前不做提交前自动检查。
 
 用户手动提交更安全。
-
-## 未来可选脚本
-
-以后如果需要自动化，可以增加：
-
-- 会话开始时打印顶层任务 `overview.md` 和当前 Agent 工作区路径
-- 压缩前提醒更新当前 Agent 工作区
-- 写入全局 `docs/` 前提醒检查质量门
-- 检查工作区路径是否存在
-- 检查 TODO/FIXME 是否有说明

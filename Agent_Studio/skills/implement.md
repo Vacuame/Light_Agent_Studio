@@ -43,9 +43,7 @@
 9. 实现代码。
 10. 在对话中说明实现完成、修改文件、验证结果、风险和下一步建议。
 11. 读取 `rules/gates/development-gate.md`，通过开发门检查。
-12. 如果需要向上层、owner 或用户留下实现结果，先说明拟写 report 摘要并询问是否写入；用户确认后写当前 Agent 工作区的 `report.md`。
-13. 如果需要交给 Tester 或其他下游 Agent，先说明接手对象和 handoff 摘要并询问是否写入；用户确认后写接手 Agent 工作区的 `handoff.md`。
-14. 父级、汇总者或任务 owner 读取 report 后，决定是否更新顶层任务 `overview.md`。
+12. 需要交接或回报时，按 `skills/handoff.md` 执行。
 
 ## 启动条件
 

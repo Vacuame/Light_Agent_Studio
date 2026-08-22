@@ -11,7 +11,7 @@
 ## 测试结果
 
 ```text
-PASS / CONCERNS / FAIL
+PASS / CONCERNS / BLOCKED
 ```
 
 ## 通过项
