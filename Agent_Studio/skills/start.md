@@ -48,7 +48,7 @@
 6. 摘要顶层任务总览：当前顶层任务、进展、阻塞、重要文件和下一步。
 7. 如果用户指定任务，定位对应任务目录。
 8. 如果任务目录不明确，列出可选任务或询问用户。
-9. 检查 `rules/project-config.md` 是否已填写关键配置。
+9. 如果存在 `docs/project-config.md`，读取项目环境和常用命令；不存在时不得自行假设（见 `rules/rules.md` 不能猜）。
 10. 判断需要使用的技能 SOP。
 11. 列出当前最小下一步需要读取的额外文件。
 12. 如果状态层缺失、过期或任务目录不存在，提出更新建议，但先征求用户确认。
@@ -114,7 +114,7 @@ Administrator 先检查规则、状态和配置是否可用；Architect 再建�
 
 首次初始化时，建议补齐：
 
-- `rules/project-config.md`
+- `docs/project-config.md`（可选，模板见 `skills/templates/project-config-template.md`）
 - `docs/project-overview.md`
 - `docs/module-map.md`
 - `state/<task-id>/overview.md`

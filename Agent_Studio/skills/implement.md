@@ -25,7 +25,7 @@
 - 对应 `docs/modules/<module-name>.md`
 - `docs/architecture.md`
 - 相关 `docs/decisions/`
-- `rules/project-config.md`
+- `docs/project-config.md`（如存在）
 - `rules/gates/development-gate.md`
 
 状态层读取规则见 `rules/context-rules.md`。

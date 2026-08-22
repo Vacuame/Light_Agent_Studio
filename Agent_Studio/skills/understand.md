@@ -26,7 +26,7 @@
 - 当前 Agent 工作区的 `handoff.md`、`report.md`（如果存在）
 - `docs/project-overview.md`
 - `docs/module-map.md`
-- `rules/project-config.md`
+- `docs/project-config.md`（如存在）
 
 ## 流程
 

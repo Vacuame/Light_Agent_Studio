@@ -107,7 +107,7 @@ Adviser：回答问题、解释代码、在用户要求时整理辅助理解材�
 
 ```text
 rules/
-  系统规则、上下文规则、协作规则、项目配置、质量门、自动护栏
+  系统规则、上下文规则、协作规则、质量门、自动护栏
 
 agents/
   Administrator、Architect、Module Designer、Developer、Tester、Adviser

@@ -14,7 +14,7 @@ handoff/report 协作方向、写入位置、确认机制 -> rules/collaboration
 任务 SOP -> skills/<skill>.md
 质量门索引和结论定义 -> rules/quality-gates.md
 具体质量门检查项 -> rules/gates/<gate>.md
-项目运行环境、命令、依赖策略 -> rules/project-config.md
+项目运行环境、技术栈、常用命令 -> docs/project-config.md（可选，模板见 skills/templates/project-config-template.md）
 自动提醒和护栏触发点 -> rules/automation-guards.md
 ```
 
@@ -127,7 +127,6 @@ My Agent Studio 分为七层。每一层负责不同问题。
 - `rules/rules.md`
 - `rules/context-rules.md`
 - `rules/collaboration-rules.md`
-- `rules/project-config.md`
 - `rules/quality-gates.md`
 - `rules/automation-guards.md`
 
@@ -182,6 +181,7 @@ My Agent Studio 分为七层。每一层负责不同问题。
 - `docs/decisions/`
 - `docs/implementation/`
 - `docs/tests/`
+- `docs/project-config.md`（可选，模板见 `skills/templates/project-config-template.md`）
 
 产物层是“项目事实是什么”，更新必须谨慎。只有内容确认后才写入正式产物。
 
@@ -213,7 +213,7 @@ Agent 可以分析、建议、起草、执行和审查，但不能替用户做�
 
 - 修改规则、角色、技能或质量门
 - 修改项目配置
-- 引入新依赖
+- 引入新依赖（必须说明用途、替代方案和维护风险）
 - 删除文件
 - 删除任务目录
 - 大规模移动目录

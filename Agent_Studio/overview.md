@@ -25,7 +25,7 @@
 谁能做看 agents/
 怎么做看 skills/
 做得够不够看 rules/quality-gates.md 和 rules/gates/
-项目命令和依赖看 rules/project-config.md
+项目命令和环境看 docs/project-config.md（可选）
 提醒和护栏看 rules/automation-guards.md
 ```
 

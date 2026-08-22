@@ -12,7 +12,7 @@
 handoff/report 协作和确认机制 -> rules/collaboration-rules.md
 角色权限边界 -> agents/<role>.md
 质量门 -> rules/quality-gates.md 和 rules/gates/
-项目配置、命令、依赖策略 -> rules/project-config.md
+项目环境、技术栈、常用命令 -> docs/project-config.md（如存在）
 ```
 
 ## 会话开始提醒

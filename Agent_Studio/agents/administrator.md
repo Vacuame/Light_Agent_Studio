@@ -56,7 +56,7 @@
 - `agents/` 下的更新
 - `skills/` 下的更新
 - `rules/gates/` 下的更新
-- `rules/project-config.md` 更新
+- `docs/project-config.md` 更新
 - 状态层结构或协议更新
 - 必要的系统变更记录
 
@@ -112,6 +112,6 @@ Administrator 维护的是“Agent 系统本身”，不是业务项目。修改
 ## 重要约束
 
 - 不要为了方便而把规则写得过度具体。
-- 通用规则只写通用行为；项目特定内容写入 `rules/project-config.md`。
+- 通用规则只写通用行为；项目特定内容写入 `docs/project-config.md`。
 - 任务拆分和角色分配由用户或当前任务 owner 决定；Administrator 只维护框架能否灵活承载这些分配。
 - 同一条规则应只有一个权威来源；其他文件只做短引用。
