@@ -143,6 +143,7 @@ My Agent Studio 分为七层。每一层负责不同问题。
 - `agents/developer.md`
 - `agents/tester.md`
 - `agents/adviser.md`
+- `agents/reviewer.md`（仅供子 Agent 使用）
 
 ### 技能层
 
@@ -158,6 +159,8 @@ My Agent Studio 分为七层。每一层负责不同问题。
 - `skills/review.md`
 - `skills/test.md`
 - `skills/handoff.md`
+- `skills/request-review.md`
+- `skills/review-conclusions.md`
 - `skills/update-agent-system.md`
 
 ### 状态层
@@ -263,6 +266,8 @@ Agent 可以分析、建议、起草、执行和审查，但不能替用户做�
 3. 侧翼结论（回答主问题途中顺带得出的判断）如果会影响后续设计或交接，必须升级为正式结论条目，满足同样的自查和标注要求。
 
 4. 工具失败（搜索超时、空结果、读取失败）是方法的信号，不是世界的事实。必须调整方法（缩小范围、换模式、换工具）后重试；空结果不等于不存在，超时不等于不可查。确实无法取证时标"低"，并说明尝试过的方法。
+
+承载下游决策的高影响结论，可通过 `skills/request-review.md` 交 Reviewer 子 Agent 独立审查。
 
 ### 写入前说明
 

@@ -40,6 +40,7 @@ Module Designer  负责模块设计、接口、数据流、验收标准
 Developer        负责按设计实现代码
 Tester           负责测试、验收、bug 记录
 Adviser          负责解释、问答、辅助理解材料
+Reviewer         负责对待审查结论做证伪审查（仅供子 Agent 使用）
 ```
 
 角色不是固定层级。一个 Agent 工作区可以兼任多个角色，也可以是 Adviser / Reviewer / Researcher 这类旁支辅助角色。
