@@ -64,7 +64,7 @@ handoff/report 的方向、写入位置和确认机制见 `rules/collaboration-r
 6. 说明拟写文件、写入原因和交接摘要，并询问用户是否写入。
 7. 用户确认后，在接手者 Agent 工作区写 `handoff.md`。
 
-`handoff.md` 推荐格式见 `rules/context-rules.md`。
+`handoff.md` 推荐格式见 `rules/context-rules.md`。handoff 只是交接，不是完成报告：写了 handoff 不代表当前工作区结束，也不自动要求写 report。
 
 起草 `handoff.md` 的“必读文件”时，只列当前交接任务的直接输入；不要复制通用 rules、角色文件、skill、质量门或项目配置清单。
 
@@ -78,7 +78,7 @@ handoff/report 的方向、写入位置和确认机制见 `rules/collaboration-r
 4. 说明拟写文件、写入原因和回报摘要，并询问用户是否写入。
 5. 用户确认后，在当前 Agent 工作区写 `report.md`。
 
-`report.md` 推荐格式见 `rules/context-rules.md`。
+`report.md` 推荐格式见 `rules/context-rules.md`。report 只表达当前工作区的回报，不是顶层任务完成证明，不自动触发 overview 更新。
 
 ## 流程：任务创建
 
@@ -102,10 +102,4 @@ handoff/report 的方向、写入位置和确认机制见 `rules/collaboration-r
 
 ## 禁止
 
-- 不在顶层任务目录直接写 `handoff.md`。
-- 不在顶层任务目录直接写 `report.md`。
-- 不把 `handoff.md` 当成完成报告。
-- 不把 `report.md` 当成顶层任务完成证明。
-- 不因为写了 `handoff.md` 就自动写 `report.md`。
-- 不因为写了 `report.md` 就自动更新 `overview.md`。
 - 不把临时状态写入全局 `docs/`。
