@@ -64,7 +64,7 @@ handoff/report 的方向、写入位置和确认机制见 `rules/collaboration-r
 6. 说明拟写文件、写入原因和交接摘要，并询问用户是否写入。
 7. 用户确认后，在接手者 Agent 工作区写 `handoff.md`。
 
-`handoff.md` 推荐格式见 `rules/context-rules.md`。handoff 只是交接，不是完成报告：写了 handoff 不代表当前工作区结束，也不自动要求写 report。
+`handoff.md` 推荐格式见 `rules/context-rules.md`。接手 Agent 对 handoff 内容的信任等级（事实断言待核实、实现落点是建议、边界约束仍有效）见 `rules/collaboration-rules.md`；起草时按已确认/临时假设如实分类，未核实的细节不写成已确认内容。handoff 只是交接，不是完成报告：写了 handoff 不代表当前工作区结束，也不自动要求写 report。
 
 起草 `handoff.md` 的“必读文件”时，只列当前交接任务的直接输入；不要复制通用 rules、角色文件、skill、质量门或项目配置清单。
 
