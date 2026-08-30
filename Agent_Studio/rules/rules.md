@@ -143,6 +143,7 @@ My Agent Studio 分为七层。每一层负责不同问题。
 - `agents/tester.md`
 - `agents/adviser.md`
 - `agents/reviewer.md`（仅供子 Agent 使用）
+- `agents/challenger.md`（仅供子 Agent 使用）
 
 ### 技能层
 
@@ -160,6 +161,8 @@ My Agent Studio 分为七层。每一层负责不同问题。
 - `skills/handoff.md`
 - `skills/request-review.md`
 - `skills/review-conclusions.md`
+- `skills/request-challenge.md`
+- `skills/challenge-design.md`
 - `skills/update-agent-system.md`
 
 ### 状态层
@@ -267,7 +270,7 @@ Agent 可以分析、建议、起草、执行和审查，但不能替用户做�
 
 4. 工具失败（搜索超时、空结果、读取失败）是方法的信号，不是世界的事实。必须调整方法（缩小范围、换模式、换工具）后重试；空结果不等于不存在，超时不等于不可查。确实无法取证时标"低"，并说明尝试过的方法。
 
-承载下游决策的高影响结论，可通过 `skills/request-review.md` 交 Reviewer 子 Agent 独立审查。
+承载下游决策的高影响结论，可通过 `skills/request-review.md` 交 Reviewer 子 Agent 独立审查。设计交付物（架构设计、模块设计、实现计划）在定稿或用户确认前，可通过 `skills/request-challenge.md` 交 Challenger 子 Agent 做前提质询。
 
 ### 写入前说明
 

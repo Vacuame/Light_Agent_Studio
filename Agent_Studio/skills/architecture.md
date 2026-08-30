@@ -38,7 +38,7 @@
 3. 识别目标、约束、风险。
 4. 提出 2-3 个架构方案或调整方案。
 5. 用户选择。
-6. 起草架构更新。
+6. 起草架构更新，按 `skills/request-challenge.md` 送 Challenger 子 Agent 质询并处理质询意见（用户可单次豁免）。
 7. 读取 `rules/gates/architecture-gate.md`，通过架构门检查。
 8. 用户确认后更新正式产物。
 9. 需要交接或回报时，按 `skills/handoff.md` 执行。

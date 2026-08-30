@@ -12,6 +12,7 @@
 - `skills/understand.md`：项目背景、当前任务或现有结构不清时使用。
 - `skills/review.md`：需要审查架构产物或辅助自查时使用。
 - `skills/handoff.md`：用户要求写交接或回报时使用。
+- `skills/request-challenge.md`：架构设计起草完成、准备确认前送 Challenger 子 Agent 质询时使用。
 
 ### 常用质量门
 

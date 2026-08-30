@@ -12,6 +12,7 @@
 - `skills/understand.md`：需求、架构意图、模块边界或实现落点不清时使用。
 - `skills/review.md`：需要审查模块设计或辅助自查时使用。
 - `skills/handoff.md`：用户要求写交接或回报时使用。
+- `skills/request-challenge.md`：模块设计起草完成、准备确认前送 Challenger 子 Agent 质询时使用。
 
 ### 常用质量门
 

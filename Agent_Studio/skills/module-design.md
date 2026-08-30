@@ -43,7 +43,7 @@
 4. 判断模块边界和依赖。
 5. 读取相关源码入口和项目结构，定位现有职责 owner。
 6. 向用户确认不清楚的点。
-7. 起草模块设计，必须包含 `实现落点`。
+7. 起草模块设计，必须包含 `实现落点`，按 `skills/request-challenge.md` 送 Challenger 子 Agent 质询并处理质询意见（用户可单次豁免）。
 8. 读取 `rules/gates/module-gate.md`，通过模块门检查。
 9. 用户确认后写入 `docs/modules/<module-name>.md`。
 10. 需要交接或回报时，按 `skills/handoff.md` 执行。
